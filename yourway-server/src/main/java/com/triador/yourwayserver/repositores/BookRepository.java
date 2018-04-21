@@ -7,11 +7,11 @@ import java.util.List;
 
 public interface BookRepository extends Repository<Book, Integer> {
 
-    void delete();
+    void delete(Book book);
 
     List<Book> findAll();
 
-    Book findOne(int id);
+    Book findById(int id);
 
     Book save(Book book);
 }

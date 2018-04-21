@@ -12,7 +12,7 @@ public interface BookService {
 
     List<Book> findAll();
 
-    Book findById();
+    Book findById(int id);
 
-    Book update();
+    Book update(Book book);
 }
