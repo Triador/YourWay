@@ -42,10 +42,5 @@ public class BookServiceImpl implements BookService {
     public Book findById(int id) {
         return repository.findById(id);
     }
-
-    @Override
-    public Book update(Book book) {
-        return null;
-    }
 }
 
