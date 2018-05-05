@@ -12,7 +12,7 @@ export class BookService {
 
 	constructor(private http: HttpClient) {}
 
-	private bookUrl = 'http://localhost:8080/api'
+	private bookUrl = 'http://localhost:8080/books'
 
 	public getBooks() {
 		return this.http.get<Book[]>(this.bookUrl);

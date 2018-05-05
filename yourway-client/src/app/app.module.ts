@@ -8,12 +8,14 @@ import { AppRoutingModule } from './app.routing.module';
 import { BookService } from './book/book.service';
 import { HttpClientModule } from '@angular/common/http'
 import { AddBookComponent } from './book/add-book.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     BookComponent,
-    AddBookComponent
+    AddBookComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
