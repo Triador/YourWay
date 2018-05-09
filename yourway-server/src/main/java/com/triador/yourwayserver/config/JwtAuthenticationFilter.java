@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.util.Arrays;
 
 import static com.triador.yourwayserver.utils.Constants.HEADER_STRING;
+import static com.triador.yourwayserver.utils.Constants.SIGNUP;
 import static com.triador.yourwayserver.utils.Constants.TOKEN_PREFIX;
 
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
@@ -55,7 +56,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
             if (jwtTokenUtil.validateToken(authToken, userDetails)) {
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails,
-                        null, Arrays.asList(new SimpleGrantedAuthority("ROLE_ADMIN")));
+                        null, userDetails.getAuthorities());
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(req));
                 logger.info("authenticated user " + username + ", setting security context");
                 SecurityContextHolder.getContext().setAuthentication(authentication);

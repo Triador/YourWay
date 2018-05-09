@@ -9,14 +9,13 @@ import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
 @RestController
-@RequestMapping({"users"})
 public class UserController {
 
     @Autowired
     private UserService userService;
 
-    @PostMapping
-    public User create (@RequestBody User user) {
+    @PostMapping(value = "/signup")
+    public User create(@RequestBody User user) {
         return userService.save(user);
     }
 

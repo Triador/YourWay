@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Book } from '../models/book.model';
-import { BookService } from './book.service'
+import { BookService } from './book.service';
 
 @Component({
 	selector: 'app-add-book',
