@@ -5,7 +5,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 @Injectable()
 export class AuthService {
 
-  baseUrl: 'http://localhost:8080/';
+  baseUrl: 'http://localhost:8080/auth';
 
   constructor(private http: HttpClient) {
   }
