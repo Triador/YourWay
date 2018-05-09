@@ -3,11 +3,13 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { BookComponent } from '../book/book.component';
 import { LoginComponent } from '../login/login.component';
+import { SignupComponent} from '../signup/signup.component'
 
 const routes: Routes = [
 	{ path: 'books', component: BookComponent },
 	{ path: 'login', component: LoginComponent},
-	{ path : '', component : LoginComponent }
+	{ path: 'signup', component: SignupComponent},
+	{ path : '', redirectTo: '/login', pathMatch: 'full'}
 ];
 
 @NgModule({
