@@ -16,4 +16,5 @@ public interface UserRepository extends Repository<User, Integer> {
     User save(User user);
 
     User findByName(String name);
+
 }

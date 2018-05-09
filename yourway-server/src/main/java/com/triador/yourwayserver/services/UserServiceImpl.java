@@ -27,11 +27,11 @@ public class UserServiceImpl implements UserDetailsService, UserService {
         if(user == null){
             throw new UsernameNotFoundException("Invalid username or password.");
         }
-        return new org.springframework.security.core.userdetails.User(user.getName(), user.getPassword(), getAuthority());
+        return new org.springframework.security.core.userdetails.User(user.getName(), user.getPassword(), getAuthority(user));
     }
 
-    private List<SimpleGrantedAuthority> getAuthority() {
-        return Arrays.asList(new SimpleGrantedAuthority("ROLE_ADMIN"));
+    private List<SimpleGrantedAuthority> getAuthority(User user) {
+        return Arrays.asList(new SimpleGrantedAuthority(user.getRole()));
     }
 
     @Override
@@ -39,6 +39,7 @@ public class UserServiceImpl implements UserDetailsService, UserService {
         User newUser = new User();
         newUser.setName(user.getName());
         newUser.setPassword(bcryptEncoder.encode(user.getPassword()));
+        newUser.setRole("USER_ROLE");
         return repository.save(newUser);
     }
 

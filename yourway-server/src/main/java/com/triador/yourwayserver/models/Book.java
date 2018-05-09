@@ -25,7 +25,7 @@ public class Book {
         return name;
     }
 
-    public void setBookName(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 }
