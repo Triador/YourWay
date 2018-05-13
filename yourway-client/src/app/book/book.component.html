@@ -19,9 +19,7 @@
 		<ng-container matColumnDef="delete">
 			<mat-header-cell *matHeaderCellDef class="delete"> Delete </mat-header-cell>
 			<mat-cell *matCellDef="let element" class="delete">
-				<mat-card-actions>
 					<button mat-raised-button (click)="deleteBook(element)" color="primary">Delete Book</button>
-				</mat-card-actions>
 			</mat-cell>
 		</ng-container>
 
