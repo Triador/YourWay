@@ -18,6 +18,6 @@
   max-width: 500px;
 }
 
-.mat-column-delete {
-	text-align: right;
+.delete {
+	margin-left: 10%;
 }

@@ -5,7 +5,7 @@
 		<span class="example-spacer"></span>
 
 		<button mat-button>About</button>
-		<button mat-button click="">logout</button>
+		<button mat-button (click)="logout()">logout</button>
 	</mat-toolbar-row>
 </mat-toolbar>
 <div class="example-container mat-elevation-z8">
@@ -17,8 +17,8 @@
 		</ng-container>
 
 		<ng-container matColumnDef="delete">
-			<mat-header-cell *matHeaderCellDef> Delete </mat-header-cell>
-			<mat-cell *matCellDef="let element">
+			<mat-header-cell *matHeaderCellDef class="delete"> Delete </mat-header-cell>
+			<mat-cell *matCellDef="let element" class="delete">
 				<mat-card-actions>
 					<button mat-raised-button (click)="deleteBook(element)" color="primary">Delete Book</button>
 				</mat-card-actions>
@@ -29,3 +29,4 @@
 		<mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
 	</mat-table>
 </div>
+<app-add-book></app-add-book>
