@@ -35,7 +35,7 @@ import { SignupComponent } from './signup/signup.component';
     FormsModule
   ],
   entryComponents: [ErrorDialogComponent],
-  providers: [ErrorDialogComponent, BookService, AuthService, TokenStorage, SignUpService
+  providers: [ErrorDialogComponent, BookService, AuthService, TokenStorage, SignUpService,
     {provide: HTTP_INTERCEPTORS,
     useClass: Interceptor,
     multi : true}
