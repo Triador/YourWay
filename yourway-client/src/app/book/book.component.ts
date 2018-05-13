@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material';
+import { AuthService } from '../core/auth.service';
+import { TokenStorage } from '../core/token.storage';
 
 import { Book } from '../models/book.model';
 import { BookService } from './book.service';
@@ -14,7 +16,7 @@ export class BookComponent implements OnInit {
 	displayedColumns = ['name', 'delete'];
 	dataSource = new MatTableDataSource<Book>();
 
-	constructor(private router: Router, private bookService: BookService) {
+	constructor(private router: Router, private bookService: BookService, private authService: AuthService, private token: TokenStorage) {
 
 	}
 
@@ -31,4 +33,9 @@ export class BookComponent implements OnInit {
 				this.dataSource.data = this.dataSource.data.filter(b => b !== book);
 			})
 	};
+
+	logout() {
+		this.router.navigate(['login']);
+		this.token.signOut();
+	}
 }
