@@ -1,10 +1,8 @@
 <div>
-	<h2>Add Book</h2>
-	<form>
-		<div>
-			<label for="name">Book name:</label>
-			<input type="text" [(ngModel)]="book.name" placeholder="Name" name="name" id="name">
-		</div>
-		<button (click)="createBook()">Create</button>
+	<form class="example-form">
+		<mat-form-field class="example-full-width">
+			<input [(ngModel)]="book.name" matInput placeholder="title of the book" name="name">
+		</mat-form-field>
+		<button mat-raised-button (click)="createBook()" color="primary">Add</button>
 	</form>
 </div>
