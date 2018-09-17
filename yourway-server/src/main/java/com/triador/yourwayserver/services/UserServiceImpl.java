@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserDetailsService, UserService {
         User newUser = new User();
         newUser.setName(user.getName());
         newUser.setPassword(bcryptEncoder.encode(user.getPassword()));
-        newUser.setRole("USER_ROLE");
+        newUser.setRole("ROLE_USER");
         return repository.save(newUser);
     }
 
