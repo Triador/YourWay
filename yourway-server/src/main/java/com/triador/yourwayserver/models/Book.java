@@ -3,7 +3,8 @@ package com.triador.yourwayserver.models;
 public class Book {
 
     private int id;
-    private String title;
+    private String russianTitle;
+    private String originalTitle;
     private String author;
     private int pageAmount;
     private int publicationYear;
@@ -18,12 +19,20 @@ public class Book {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getRussianTitle() {
+        return russianTitle;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setRussianTitle(String russianTitle) {
+        this.russianTitle = russianTitle;
+    }
+
+    public String getOriginalTitle() {
+        return originalTitle;
+    }
+
+    public void setOriginalTitle(String originalTitle) {
+        this.originalTitle = originalTitle;
     }
 
     public String getAuthor() {
@@ -76,7 +85,7 @@ public class Book {
         if (id != book.id) return false;
         if (pageAmount != book.pageAmount) return false;
         if (publicationYear != book.publicationYear) return false;
-        if (title != null ? !title.equals(book.title) : book.title != null) return false;
+        if (russianTitle != null ? !russianTitle.equals(book.russianTitle) : book.russianTitle != null) return false;
         if (author != null ? !author.equals(book.author) : book.author != null) return false;
         if (isbns != null ? !isbns.equals(book.isbns) : book.isbns != null) return false;
         return description != null ? description.equals(book.description) : book.description == null;
@@ -85,7 +94,7 @@ public class Book {
     @Override
     public int hashCode() {
         int result = id;
-        result = 31 * result + (title != null ? title.hashCode() : 0);
+        result = 31 * result + (russianTitle != null ? russianTitle.hashCode() : 0);
         result = 31 * result + (author != null ? author.hashCode() : 0);
         result = 31 * result + pageAmount;
         result = 31 * result + publicationYear;
@@ -98,7 +107,8 @@ public class Book {
     public String toString() {
         return "Book{" +
                 "id=" + id +
-                ", title='" + title + '\'' +
+                ", russianTitle='" + russianTitle + '\'' +
+                ", originalTitle='" + originalTitle + '\'' +
                 ", author='" + author + '\'' +
                 ", pageAmount=" + pageAmount +
                 ", publicationYear=" + publicationYear +
