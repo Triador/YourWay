@@ -4,20 +4,20 @@ import com.triador.yourwayserver.models.Book;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
-public class HtmlOzonParser {
+public class OzonParser {
 
-    private WebDriver driver;
-
-    private void init() {
-        String exePath = "C:\\Users\\aandreev\\Downloads\\chromedriver.exe";
-        System.setProperty("webdriver.chrome.driver", exePath);
-        driver = new ChromeDriver();
-    }
+    private WebDriver driver = SeleniumUtils.getDriver();
 
     private void parse(List<String> urls) {
         for (String url : urls) {
@@ -55,7 +55,7 @@ public class HtmlOzonParser {
             System.out.println(++id + " -----------------------------------------------------------------------");
             Book book = getBook(bookUrl);
             try {
-                Thread.sleep(2000);
+                Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -67,17 +67,20 @@ public class HtmlOzonParser {
 
         ArrayList<String> tabs = openNewBookWindow(bookUrl);
 
-        if (isForeignBook()) {
-            driver.findElement(By.className("eItemProperties_all")).click();
-        }
+        Book book = null;
+        if (!isAudioBook()) {
+            if (isForeignBook()) {
+                driver.findElement(By.className("eItemProperties_all")).click();
+            }
 
-        List<WebElement> bookParametersValues = driver.findElements(By.className("eItemProperties_text"));
-        List<WebElement> bookParameters = driver.findElements(By.className("eItemProperties_name"));
-        Map<String, String> parametersMap = new HashMap<>();
-        for (int i = 0; i < bookParameters.size(); i++) {
-            parametersMap.put(bookParameters.get(i).getText(), bookParametersValues.get(i).getText());
+            List<WebElement> bookParametersValues = driver.findElements(By.className("eItemProperties_text"));
+            List<WebElement> bookParameters = driver.findElements(By.className("eItemProperties_name"));
+            Map<String, String> parametersMap = new HashMap<>();
+            for (int i = 0; i < bookParameters.size(); i++) {
+                parametersMap.put(bookParameters.get(i).getText(), bookParametersValues.get(i).getText());
+            }
+            book = mapBook(parametersMap);
         }
-        Book book = mapBook(parametersMap);
 
         driver.close();
         driver.switchTo().window(tabs.get(0));
@@ -114,6 +117,11 @@ public class HtmlOzonParser {
         ArrayList<String> tabs = new ArrayList<>(driver.getWindowHandles());
         driver.switchTo().window(tabs.get(1));
         driver.get("https://www.ozon.ru" + bookUrl);
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         return tabs;
     }
@@ -133,9 +141,33 @@ public class HtmlOzonParser {
         return description.substring(0, endIndex);
     }
 
+    private String getBookType() {
+        String type;
+        try {
+            type = driver.findElement(By.className("eFormat_Text")).getText();
+        } catch (NoSuchElementException e) {
+            type = driver.findElement(By.className("eSingleFormat_NameText")).getText();
+        }
+        System.out.println(type);
+        return type;
+    }
+
+    private boolean isAudioBook() {
+        String type = getBookType();
+        return "Аудиокнига".equals(type)
+                || "Цифровая аудиокнига".equals(type);
+    }
+
+    private void downloadBookImage(String url) {
+        try(InputStream in = new URL(url).openStream()){
+            Files.copy(in, Paths.get("C:/File/To/Save/To/image.jpg"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void main(String[] args) {
-        HtmlOzonParser htmlParser = new HtmlOzonParser();
-        htmlParser.init();
+        OzonParser htmlParser = new OzonParser();
 
         //todo вынести константы для озона в проперти файл
         List<String> urls = new ArrayList<>();
