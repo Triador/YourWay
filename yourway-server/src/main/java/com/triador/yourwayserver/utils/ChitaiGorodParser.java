@@ -3,6 +3,11 @@ package com.triador.yourwayserver.utils;
 import com.triador.yourwayserver.models.Book;
 import org.openqa.selenium.*;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -105,6 +110,9 @@ public class ChitaiGorodParser {
         ArrayList<String> tabs = new ArrayList<>(driver.getWindowHandles());
         driver.switchTo().window(tabs.get(1));
         driver.get(bookUrl);
+        String imageUrl = driver.findElement(By.cssSelector("img[itemprop='image']"))
+                .getAttribute("src");
+        downloadBookImage(imageUrl);
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
@@ -112,6 +120,14 @@ public class ChitaiGorodParser {
         }
 
         return tabs;
+    }
+
+    private void downloadBookImage(String url) {
+        try(InputStream in = new URL(url).openStream()){
+            Files.copy(in, Paths.get("C:\\Users\\aandreev\\Workspace\\images"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void main(String[] args) {
