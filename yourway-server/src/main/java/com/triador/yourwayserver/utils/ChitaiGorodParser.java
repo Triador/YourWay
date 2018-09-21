@@ -20,11 +20,22 @@ public class ChitaiGorodParser {
     private void parse(List<String> urls) {
         for (String url : urls) {
             driver.get(url);
+            sleep(5000);
             driver.manage().window().maximize();
             driver.findElement(By.className("toggle-cardview__item_port")).click();
             scrollDown();
-            List<WebElement> webElements = driver.findElements(By.className("product-card"));
-            saveBooks(webElements);
+            List<WebElement> books = driver.findElements(By.className("product-card"));
+            List<WebElement> smallBookImages = driver.findElements(By.cssSelector("img.lazy"));
+            List<WebElement> bookTitles = driver.findElements(By.className("product-card__title"));
+
+            for (int i = 0; i < smallBookImages.size(); i++) {
+                String imageUrl = smallBookImages.get(i).getAttribute("data-original");
+                String extension = getImageExtension(imageUrl);
+                String bookTitle = bookTitles.get(i).getText();
+                downloadBookImage(imageUrl, bookTitle + "_small", extension);
+            }
+
+            saveBooks(books);
             driver.close();
         }
     }
@@ -35,11 +46,7 @@ public class ChitaiGorodParser {
             String bookUrl = webElement.findElement(By.className("product-card__img")).getAttribute("href");
             System.out.println(++id + " -----------------------------------------------------------------------");
             Book book = getBook(bookUrl);
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            sleep(1000);
             System.out.println(book);
         }
     }
@@ -55,6 +62,12 @@ public class ChitaiGorodParser {
         }
         Book book = mapBook(parametersMap);
 
+        String imageUrl = driver.findElement(By.cssSelector("img[itemprop='image']"))
+                .getAttribute("src");
+        String extension = getImageExtension(imageUrl);
+
+        downloadBookImage(imageUrl, book.getRussianTitle() + "_big", extension);
+
         driver.close();
         driver.switchTo().window(tabs.get(0));
 
@@ -65,9 +78,9 @@ public class ChitaiGorodParser {
         String title = driver.findElement(By.className("product__title")).getText();
         String author = driver.findElement(By.className("product__author")).getText();
 
-        int publicationYear = Integer.parseInt(parametersMap.get("Год издания"));
-        int pageAmount = Integer.parseInt(parametersMap.get("Кол-во страниц"));
-        String isbns = parametersMap.get("ISBN");
+        int publicationYear = Integer.parseInt(parametersMap.getOrDefault("Год издания", "undefined"));
+        int pageAmount = Integer.parseInt(parametersMap.getOrDefault("Кол-во страниц", "undefined"));
+        String isbns = parametersMap.getOrDefault("ISBN", "undefined");
 
         String description = driver.findElement(By.cssSelector("div[itemprop='description']")).getText();
 
@@ -87,15 +100,9 @@ public class ChitaiGorodParser {
             ((JavascriptExecutor) driver)
                     .executeScript("window.scrollTo(0, document.body.scrollHeight)");
             try {
-//                Thread.sleep(1000);
-                try {
-                    driver.findElement(By.className("js__show-more-cards")).click();
-                } catch (ElementNotVisibleException ignored) {
-                }
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+                driver.findElement(By.className("js__show-more-cards")).click();
+            } catch (ElementNotVisibleException ignored) {}
+            sleep(1000);
         }
     }
 
@@ -110,30 +117,35 @@ public class ChitaiGorodParser {
         ArrayList<String> tabs = new ArrayList<>(driver.getWindowHandles());
         driver.switchTo().window(tabs.get(1));
         driver.get(bookUrl);
-        String imageUrl = driver.findElement(By.cssSelector("img[itemprop='image']"))
-                .getAttribute("src");
-        downloadBookImage(imageUrl);
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        sleep(1000);
 
         return tabs;
     }
 
-    private void downloadBookImage(String url) {
-        try(InputStream in = new URL(url).openStream()){
-            Files.copy(in, Paths.get("C:\\Users\\aandreev\\Workspace\\images"));
+    private void downloadBookImage(String url, String bookTitle, String extension) {
+        try (InputStream in = new URL(url).openStream()) {
+            Files.copy(in, Paths.get("/Users/antonandreev/Desktop/Photo/book_images/" + bookTitle + extension));
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    private void sleep(int milliseconds) {
+        try {
+            Thread.sleep(milliseconds);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private String getImageExtension(String imageUrl) {
+        return imageUrl.substring(imageUrl.lastIndexOf("."));
+    }
+
     public static void main(String[] args) {
         ChitaiGorodParser cgr = new ChitaiGorodParser();
 
-        //todo вынести константы для озона в проперти файл
+        //todo вынести константы для в проперти файл
         List<String> urls = new ArrayList<>();
         urls.add("https://www.chitai-gorod.ru/catalog/books/9657/");
 
