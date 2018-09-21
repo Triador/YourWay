@@ -76,7 +76,7 @@ public class ChitaiGorodParser {
         book.setAuthor(author);
         book.setPageAmount(pageAmount);
         book.setPublicationYear(publicationYear);
-        book.setIsbns(isbns);
+        book.setIsbn(isbns);
         book.setDescription(description);
 
         return book;
