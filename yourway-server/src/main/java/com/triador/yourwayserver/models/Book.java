@@ -1,15 +1,18 @@
 package com.triador.yourwayserver.models;
 
+import java.util.Objects;
+
 public class Book {
 
     private int id;
     private String russianTitle;
-    private String originalTitle;
+    private String originTitle;
     private String author;
     private int pageAmount;
     private int publicationYear;
-    private String isbns;
+    private String isbn;
     private String description;
+    private String imageLink;
 
     public int getId() {
         return id;
@@ -27,12 +30,12 @@ public class Book {
         this.russianTitle = russianTitle;
     }
 
-    public String getOriginalTitle() {
-        return originalTitle;
+    public String getOriginTitle() {
+        return originTitle;
     }
 
-    public void setOriginalTitle(String originalTitle) {
-        this.originalTitle = originalTitle;
+    public void setOriginTitle(String originTitle) {
+        this.originTitle = originTitle;
     }
 
     public String getAuthor() {
@@ -59,12 +62,12 @@ public class Book {
         this.publicationYear = publicationYear;
     }
 
-    public String getIsbns() {
-        return isbns;
+    public String getIsbn() {
+        return isbn;
     }
 
-    public void setIsbns(String isbns) {
-        this.isbns = isbns;
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
     }
 
     public String getDescription() {
@@ -75,32 +78,34 @@ public class Book {
         this.description = description;
     }
 
+    public String getImageLink() {
+        return imageLink;
+    }
+
+    public void setImageLink(String imageLink) {
+        this.imageLink = imageLink;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         Book book = (Book) o;
-
-        if (id != book.id) return false;
-        if (pageAmount != book.pageAmount) return false;
-        if (publicationYear != book.publicationYear) return false;
-        if (russianTitle != null ? !russianTitle.equals(book.russianTitle) : book.russianTitle != null) return false;
-        if (author != null ? !author.equals(book.author) : book.author != null) return false;
-        if (isbns != null ? !isbns.equals(book.isbns) : book.isbns != null) return false;
-        return description != null ? description.equals(book.description) : book.description == null;
+        return id == book.id &&
+                pageAmount == book.pageAmount &&
+                publicationYear == book.publicationYear &&
+                Objects.equals(russianTitle, book.russianTitle) &&
+                Objects.equals(originTitle, book.originTitle) &&
+                Objects.equals(author, book.author) &&
+                Objects.equals(isbn, book.isbn) &&
+                Objects.equals(description, book.description) &&
+                Objects.equals(imageLink, book.imageLink);
     }
 
     @Override
     public int hashCode() {
-        int result = id;
-        result = 31 * result + (russianTitle != null ? russianTitle.hashCode() : 0);
-        result = 31 * result + (author != null ? author.hashCode() : 0);
-        result = 31 * result + pageAmount;
-        result = 31 * result + publicationYear;
-        result = 31 * result + (isbns != null ? isbns.hashCode() : 0);
-        result = 31 * result + (description != null ? description.hashCode() : 0);
-        return result;
+
+        return Objects.hash(id, russianTitle, originTitle, author, pageAmount, publicationYear, isbn, description, imageLink);
     }
 
     @Override
@@ -108,12 +113,13 @@ public class Book {
         return "Book{" +
                 "id=" + id +
                 ", russianTitle='" + russianTitle + '\'' +
-                ", originalTitle='" + originalTitle + '\'' +
+                ", originTitle='" + originTitle + '\'' +
                 ", author='" + author + '\'' +
                 ", pageAmount=" + pageAmount +
                 ", publicationYear=" + publicationYear +
-                ", isbns='" + isbns + '\'' +
+                ", isbn='" + isbn + '\'' +
                 ", description='" + description + '\'' +
+                ", imageLink='" + imageLink + '\'' +
                 '}';
     }
 }
