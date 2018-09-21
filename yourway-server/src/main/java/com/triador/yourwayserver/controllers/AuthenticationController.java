@@ -1,9 +1,9 @@
 package com.triador.yourwayserver.controllers;
 
 import com.triador.yourwayserver.config.JwtTokenUtil;
-import com.triador.yourwayserver.models.AuthToken;
-import com.triador.yourwayserver.models.LoginUser;
-import com.triador.yourwayserver.models.User;
+import com.triador.yourwayserver.dao.model.AuthToken;
+import com.triador.yourwayserver.dao.model.LoginUser;
+import com.triador.yourwayserver.dao.model.User;
 import com.triador.yourwayserver.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,11 +12,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController

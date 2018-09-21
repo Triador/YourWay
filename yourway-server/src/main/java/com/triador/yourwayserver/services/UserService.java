@@ -1,6 +1,6 @@
 package com.triador.yourwayserver.services;
 
-import com.triador.yourwayserver.models.User;
+import com.triador.yourwayserver.dao.model.User;
 
 import java.util.List;
 

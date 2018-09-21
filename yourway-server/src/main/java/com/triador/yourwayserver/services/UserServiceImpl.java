@@ -1,6 +1,6 @@
 package com.triador.yourwayserver.services;
 
-import com.triador.yourwayserver.models.User;
+import com.triador.yourwayserver.dao.model.User;
 import com.triador.yourwayserver.repositores.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

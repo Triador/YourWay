@@ -1,6 +1,6 @@
 package com.triador.yourwayserver.controllers;
 
-import com.triador.yourwayserver.models.User;
+import com.triador.yourwayserver.dao.model.User;
 import com.triador.yourwayserver.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

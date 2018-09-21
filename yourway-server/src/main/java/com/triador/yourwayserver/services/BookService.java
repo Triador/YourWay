@@ -1,6 +1,6 @@
 package com.triador.yourwayserver.services;
 
-import com.triador.yourwayserver.models.Book;
+import com.triador.yourwayserver.dao.model.Book;
 
 import java.util.List;
 

@@ -1,17 +1,11 @@
 package com.triador.yourwayserver.services;
 
-import com.triador.yourwayserver.models.Book;
+import com.triador.yourwayserver.dao.model.Book;
 import com.triador.yourwayserver.repositores.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class BookServiceImpl implements BookService {

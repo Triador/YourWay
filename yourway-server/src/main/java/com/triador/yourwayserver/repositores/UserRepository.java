@@ -1,6 +1,6 @@
 package com.triador.yourwayserver.repositores;
 
-import com.triador.yourwayserver.models.User;
+import com.triador.yourwayserver.dao.model.User;
 import org.springframework.data.repository.Repository;
 
 import java.util.List;

@@ -1,6 +1,6 @@
 package com.triador.yourwayserver.utils;
 
-import com.triador.yourwayserver.models.Book;
+import com.triador.yourwayserver.dao.model.Book;
 import org.openqa.selenium.*;
 
 import java.io.IOException;

@@ -1,6 +1,6 @@
 package com.triador.yourwayserver.config;
 
-import com.triador.yourwayserver.models.User;
+import com.triador.yourwayserver.dao.model.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;

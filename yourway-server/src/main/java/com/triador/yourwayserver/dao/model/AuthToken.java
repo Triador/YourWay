@@ -1,4 +1,4 @@
-package com.triador.yourwayserver.models;
+package com.triador.yourwayserver.dao.model;
 
 public class AuthToken {
 
