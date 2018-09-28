@@ -12,10 +12,15 @@ export class BookService {
 
 	constructor(private http: HttpClient) {}
 
-	private bookUrl = 'http://localhost:8080/books'
+	private bookUrl = 'http://localhost:8080/books';
+	private bookSearchUrl = 'http://localhost:8080/books/search';
 
 	public getBooks() {
 		return this.http.get<Book[]>(this.bookUrl);
+	}
+
+	public getBookTitles(titlePiece) {
+		return this.http.get<string[]>(this.bookUrl);
 	}
 
 	public deleteBook(book) {

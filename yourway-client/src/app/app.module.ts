@@ -16,6 +16,7 @@ import { AuthService } from "./core/auth.service";
 import { Interceptor } from "./core/inteceptor";
 import { TokenStorage } from "./core/token.storage";
 import { SignupComponent } from './signup/signup.component';
+import { SearchHintComponent } from './search-hint/search-hint.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { SignupComponent } from './signup/signup.component';
     AddBookComponent,
     LoginComponent,
     ErrorDialogComponent,
-    SignupComponent
+    SignupComponent,
+    SearchHintComponent
   ],
   imports: [
     BrowserModule,
@@ -36,6 +38,7 @@ import { SignupComponent } from './signup/signup.component';
   ],
   entryComponents: [ErrorDialogComponent],
   providers: [ErrorDialogComponent, BookService, AuthService, TokenStorage, SignUpService,
+    SearchHintComponent,
     {provide: HTTP_INTERCEPTORS,
     useClass: Interceptor,
     multi : true}

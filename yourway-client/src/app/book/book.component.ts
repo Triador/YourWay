@@ -5,6 +5,7 @@ import { AuthService } from '../core/auth.service';
 import { TokenStorage } from '../core/token.storage';
 
 import { Book } from '../models/book.model';
+import { SearchHintComponent } from '../search-hint/search-hint.component';
 import { BookService } from './book.service';
 
 @Component({
@@ -15,9 +16,14 @@ import { BookService } from './book.service';
 export class BookComponent implements OnInit {
 	displayedColumns = ['name', 'delete'];
 	dataSource = new MatTableDataSource<Book>();
+	title: string = "";
+	displaySearchHint: boolean = false;
 
-	constructor(private router: Router, private bookService: BookService, private authService: AuthService, private token: TokenStorage) {
-
+	constructor(private router: Router, 
+		private bookService: BookService, 
+		private authService: AuthService, 
+		private token: TokenStorage,
+		private searchHintComponent: SearchHintComponent) {
 	}
 
 	ngOnInit() {
@@ -38,4 +44,10 @@ export class BookComponent implements OnInit {
 		this.router.navigate(['login']);
 		this.token.signOut();
 	}
+
+	displaySearchHintComponent(titlePiece: string): void {
+		this.searchHintComponent.saveDataToDataSource(this.bookService.getBookTitles(titlePiece));
+	}
+
+	d
 }
