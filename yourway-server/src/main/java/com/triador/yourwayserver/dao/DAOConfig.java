@@ -22,7 +22,7 @@ public class DAOConfig {
 
     @Bean
     public JdbcTemplate jdbcTemplate() {
-        return new JdbcTemplate();
+        return new JdbcTemplate(dataSource());
     }
 
     @Bean

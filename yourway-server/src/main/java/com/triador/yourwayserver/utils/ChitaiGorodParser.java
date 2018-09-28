@@ -1,23 +1,35 @@
 package com.triador.yourwayserver.utils;
 
+import com.triador.yourwayserver.dao.impl.BookDAO;
 import com.triador.yourwayserver.dao.model.Book;
 import org.openqa.selenium.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Component
 public class ChitaiGorodParser {
 
     private WebDriver driver = SeleniumUtils.getDriver();
+    private BookDAO bookDAO;
 
-    private void parse(List<String> urls) {
+    @Autowired
+    public ChitaiGorodParser(BookDAO bookDAO) {
+        this.bookDAO = bookDAO;
+    }
+
+    public void parse(List<String> urls) {
         for (String url : urls) {
             driver.get(url);
             sleep(5000);
@@ -32,7 +44,7 @@ public class ChitaiGorodParser {
                 String imageUrl = smallBookImages.get(i).getAttribute("data-original");
                 String extension = getImageExtension(imageUrl);
                 String bookTitle = bookTitles.get(i).getText();
-                downloadBookImage(imageUrl, bookTitle + "_small", extension);
+                downloadBookImage(imageUrl, "small_" + bookTitle, extension);
             }
 
             saveBooks(books);
@@ -47,7 +59,8 @@ public class ChitaiGorodParser {
             System.out.println(++id + " -----------------------------------------------------------------------");
             Book book = getBook(bookUrl);
             sleep(1000);
-            System.out.println(book);
+            bookDAO.saveBook(book);
+            System.out.println("book " + book.getRussianTitle() + " saved");
         }
     }
 
@@ -64,9 +77,12 @@ public class ChitaiGorodParser {
 
         String imageUrl = driver.findElement(By.cssSelector("img[itemprop='image']"))
                 .getAttribute("src");
-        String extension = getImageExtension(imageUrl);
+        if (!imageUrl.isEmpty()) {
+            String extension = getImageExtension(imageUrl);
+            book.setImageLink("/Users/antonandreev/Desktop/Photo/book_images/" + book.getRussianTitle() + extension);
 
-        downloadBookImage(imageUrl, book.getRussianTitle() + "_big", extension);
+            downloadBookImage(imageUrl, "big_" + book.getRussianTitle(), extension);
+        }
 
         driver.close();
         driver.switchTo().window(tabs.get(0));
@@ -78,8 +94,8 @@ public class ChitaiGorodParser {
         String title = driver.findElement(By.className("product__title")).getText();
         String author = driver.findElement(By.className("product__author")).getText();
 
-        int publicationYear = Integer.parseInt(parametersMap.getOrDefault("Год издания", "undefined"));
-        int pageAmount = Integer.parseInt(parametersMap.getOrDefault("Кол-во страниц", "undefined"));
+        int publicationYear = Integer.parseInt(parametersMap.getOrDefault("Год издания", "0"));
+        int pageAmount = Integer.parseInt(parametersMap.getOrDefault("Кол-во страниц", "0"));
         String isbns = parametersMap.getOrDefault("ISBN", "undefined");
 
         String description = driver.findElement(By.cssSelector("div[itemprop='description']")).getText();
@@ -125,6 +141,15 @@ public class ChitaiGorodParser {
     private void downloadBookImage(String url, String bookTitle, String extension) {
         try (InputStream in = new URL(url).openStream()) {
             Files.copy(in, Paths.get("/Users/antonandreev/Desktop/Photo/book_images/" + bookTitle + extension));
+        } catch (FileAlreadyExistsException e) {
+            System.out.println("this image has been already downloaded");
+        } catch (NoSuchFileException e) {
+            if (bookTitle.contains("/")) {
+                bookTitle = bookTitle.replace("/", "|");
+                downloadBookImage(url, bookTitle, extension);
+            } else {
+                System.out.println("NoSuchFile - " + url + bookTitle + extension);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -140,15 +165,5 @@ public class ChitaiGorodParser {
 
     private String getImageExtension(String imageUrl) {
         return imageUrl.substring(imageUrl.lastIndexOf("."));
-    }
-
-    public static void main(String[] args) {
-        ChitaiGorodParser cgr = new ChitaiGorodParser();
-
-        //todo вынести константы для в проперти файл
-        List<String> urls = new ArrayList<>();
-        urls.add("https://www.chitai-gorod.ru/catalog/books/9657/");
-
-        cgr.parse(urls);
     }
 }
