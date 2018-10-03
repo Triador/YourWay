@@ -16,7 +16,9 @@ import { AuthService } from "./core/auth.service";
 import { Interceptor } from "./core/inteceptor";
 import { TokenStorage } from "./core/token.storage";
 import { SignupComponent } from './signup/signup.component';
-import { SearchHintComponent } from './search-hint/search-hint.component';
+import { SearchComponent } from './search/search.component';
+import { MatListModule } from '@angular/material/list';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,8 @@ import { SearchHintComponent } from './search-hint/search-hint.component';
     LoginComponent,
     ErrorDialogComponent,
     SignupComponent,
-    SearchHintComponent
+    SearchComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -34,11 +37,12 @@ import { SearchHintComponent } from './search-hint/search-hint.component';
     CustomMaterialModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    MatListModule
   ],
   entryComponents: [ErrorDialogComponent],
   providers: [ErrorDialogComponent, BookService, AuthService, TokenStorage, SignUpService,
-    SearchHintComponent,
+    SearchComponent,
     {provide: HTTP_INTERCEPTORS,
     useClass: Interceptor,
     multi : true}

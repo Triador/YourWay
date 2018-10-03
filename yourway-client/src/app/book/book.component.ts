@@ -1,11 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material';
-import { AuthService } from '../core/auth.service';
-import { TokenStorage } from '../core/token.storage';
 
 import { Book } from '../models/book.model';
-import { SearchHintComponent } from '../search-hint/search-hint.component';
 import { BookService } from './book.service';
 
 @Component({
@@ -16,15 +12,8 @@ import { BookService } from './book.service';
 export class BookComponent implements OnInit {
 	displayedColumns = ['name', 'delete'];
 	dataSource = new MatTableDataSource<Book>();
-	title: string = "";
-	searchActive: boolean = false;
-	titles : string[] = [];
 
-	constructor(private router: Router, 
-		private bookService: BookService, 
-		private authService: AuthService, 
-		private token: TokenStorage,
-		private searchHintComponent: SearchHintComponent) {
+	constructor(private bookService: BookService) {
 	}
 
 	ngOnInit() {
@@ -40,31 +29,4 @@ export class BookComponent implements OnInit {
 			this.dataSource.data = this.dataSource.data.filter(b => b !== book);
 		})
 	};
-
-	logout() {
-		this.router.navigate(['login']);
-		this.token.signOut();
-	}
-
-	displaySearchHintComponent(titlePiece: string): void {
-		console.log("inside displaySearchHintComponent");
-		if (titlePiece) {
-			this.searchActive = true;
-			this.bookService.getBookTitles(titlePiece)
-			.subscribe( data => {
-				this.titles = data;
-				console.log(this.titles);
-			});
-		} else {
-			this.searchActive = false;
-		}
-	}
-
-	searchOn(): void {
-		this.searchActive = true;
-	}
-
-	searchOff(): void {
-		this.searchActive = false;
-	}
 }

@@ -18,6 +18,9 @@
 		<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 	</table>
 </div> -->
-<mat-list *ngIf="bookSearchActive">
-	<mat-list-item *ngFor="let title of bookTitles">{{title}}</mat-list-item>
+<mat-form-field>
+	<input matInput type="text" (input)="displaySearchHintComponent(title.value)" (focus)="searchOn()" (focusout)="searchOff()" #title placeholder="title">
+</mat-form-field>
+<mat-list *ngIf="searchActive">
+	<mat-list-item *ngFor="let title of titles">{{title}}</mat-list-item>
 </mat-list>
