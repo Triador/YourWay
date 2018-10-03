@@ -20,7 +20,8 @@ export class BookService {
 	}
 
 	public getBookTitles(titlePiece) {
-		return this.http.get<string[]>(this.bookUrl);
+		console.log("inside getBookTitles")
+		return this.http.get<string[]>(this.bookSearchUrl + "/" + titlePiece);
 	}
 
 	public deleteBook(book) {

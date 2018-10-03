@@ -1,4 +1,4 @@
-<!-- <mat-toolbar color="primary">
+<mat-toolbar color="primary">
 	<mat-toolbar-row>
 		<span><img src="./assets/logo.png"></span>
 		<span class="example-fill-remaining-space"></span>
@@ -8,7 +8,7 @@
 		<button mat-button (click)="logout()">logout</button>
 	</mat-toolbar-row>
 </mat-toolbar>
-<div class="example-container mat-elevation-z8">
+<!-- <div class="example-container mat-elevation-z8">
 	<mat-table #table [dataSource]="dataSource">
 		
 		<ng-container matColumnDef="name">
@@ -29,7 +29,6 @@
 </div>
 <app-add-book></app-add-book> -->
 <mat-form-field>
-	<input matInput type="text" (input)="displaySearchHintComponent(title.value)" #title placeholder="title">
+	<input matInput type="text" (input)="displaySearchHintComponent(title.value)" (focus)="searchOn()" (focusout)="searchOff()" #title placeholder="title">
 </mat-form-field>
-
-<app-search-hint *ngIf="displaySearchHint">
+<app-search-hint [bookTitles]="titles" [bookSearchActive]="searchActive">

@@ -17,17 +17,23 @@ public class BookController {
 
     @PostMapping
     public Book create(@RequestBody Book book) {
-        return bookService.create(book);
-    }
-
-    @GetMapping(path = {"/{id}"})
-    public Book findOne(@PathVariable("id") int id) {
+        int id =  bookService.create(book);
         return bookService.findById(id);
     }
+
+//    @GetMapping(path = {"/{id}"})
+//    public Book findOne(@PathVariable("id") int id) {
+//        return bookService.findById(id);
+//    }
 
     @DeleteMapping(path = {"/{id}"})
     public Book delete(@PathVariable("id") int id) {
         return bookService.delete(id);
+    }
+
+    @GetMapping(path = {"/search/{titlePiece}"})
+    public List<String> searchTitles(@PathVariable String titlePiece) {
+        return bookService.findMatchByTitlePiece(titlePiece);
     }
 
     @GetMapping

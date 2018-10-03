@@ -17,7 +17,8 @@ export class BookComponent implements OnInit {
 	displayedColumns = ['name', 'delete'];
 	dataSource = new MatTableDataSource<Book>();
 	title: string = "";
-	displaySearchHint: boolean = false;
+	searchActive: boolean = false;
+	titles : string[] = [];
 
 	constructor(private router: Router, 
 		private bookService: BookService, 
@@ -28,16 +29,16 @@ export class BookComponent implements OnInit {
 
 	ngOnInit() {
 		this.bookService.getBooks()
-			.subscribe( data => {
-				this.dataSource.data = data;
-			})
+		.subscribe( data => {
+			this.dataSource.data = data;
+		})
 	};
 
 	deleteBook(book: Book): void {
 		this.bookService.deleteBook(book)
-			.subscribe( data => {
-				this.dataSource.data = this.dataSource.data.filter(b => b !== book);
-			})
+		.subscribe( data => {
+			this.dataSource.data = this.dataSource.data.filter(b => b !== book);
+		})
 	};
 
 	logout() {
@@ -46,8 +47,24 @@ export class BookComponent implements OnInit {
 	}
 
 	displaySearchHintComponent(titlePiece: string): void {
-		this.searchHintComponent.saveDataToDataSource(this.bookService.getBookTitles(titlePiece));
+		console.log("inside displaySearchHintComponent");
+		if (titlePiece) {
+			this.searchActive = true;
+			this.bookService.getBookTitles(titlePiece)
+			.subscribe( data => {
+				this.titles = data;
+				console.log(this.titles);
+			});
+		} else {
+			this.searchActive = false;
+		}
 	}
 
-	d
+	searchOn(): void {
+		this.searchActive = true;
+	}
+
+	searchOff(): void {
+		this.searchActive = false;
+	}
 }

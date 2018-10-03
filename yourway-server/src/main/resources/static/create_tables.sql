@@ -10,3 +10,5 @@ isbn VARCHAR(255),
 description VARCHAR(4096),
 image_link VARCHAR(255)
 );
+
+CREATE INDEX russian_title_idx ON books (lower(russian_title) varchar_pattern_ops);

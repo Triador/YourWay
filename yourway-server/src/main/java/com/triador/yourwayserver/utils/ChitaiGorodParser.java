@@ -59,7 +59,7 @@ public class ChitaiGorodParser {
             System.out.println(++id + " -----------------------------------------------------------------------");
             Book book = getBook(bookUrl);
             sleep(1000);
-            bookDAO.saveBook(book);
+            bookDAO.save(book);
             System.out.println("book " + book.getRussianTitle() + " saved");
         }
     }

@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 import { Book } from '../models/book.model';
 
-import { MatTableDataSource } from '@angular/material';
+// import { MatListModule } from '@angular/material/list';
 
 @Component({
 	selector: 'app-search-hint',
@@ -10,17 +10,13 @@ import { MatTableDataSource } from '@angular/material';
 	styleUrls: ['./search-hint.component.css']
 })
 export class SearchHintComponent implements OnInit {
-	dataSource = new MatTableDataSource<string>();
+	displayedColumns = ["title"];
+	@Input() public bookTitles;
+	@Input() public bookSearchActive;
 
 	constructor() { }
 
 	ngOnInit() {
-	}
-
-	saveDataToDataSource(observable) {
-		observable.subscribe( data => {
-				this.dataSource.data = data;
-			})
 	}
 
 }
