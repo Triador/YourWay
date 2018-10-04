@@ -42,7 +42,7 @@ import { HeaderComponent } from './header/header.component';
   ],
   entryComponents: [ErrorDialogComponent],
   providers: [ErrorDialogComponent, BookService, AuthService, TokenStorage, SignUpService,
-    SearchComponent,
+    SearchComponent, HeaderComponent,
     {provide: HTTP_INTERCEPTORS,
     useClass: Interceptor,
     multi : true}

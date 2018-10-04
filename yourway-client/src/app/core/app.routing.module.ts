@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { BookComponent } from '../book/book.component';
 import { LoginComponent } from '../login/login.component';
 import { SignupComponent} from '../signup/signup.component'
-import { SearchComponent} from '../search/search.component.ts'
+import { SearchComponent} from '../search/search.component'
 
 const routes: Routes = [
 	{ path: 'books', component: BookComponent },

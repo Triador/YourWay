@@ -1,3 +1,29 @@
-<p>
-  header works!
-</p>
+<mat-toolbar color="primary">
+	<mat-toolbar-row>
+		<span><img src="./assets/logo.png"></span>
+		<span class="example-fill-remaining-space"></span>
+		<span class="example-spacer"></span>
+
+		<button mat-button>About</button>
+		<button *ngIf="userLoggedIn; else showSignUpOrLogin" mat-button (click)="logout()">logout</button>
+		<ng-template #showSignUpOrLogin>
+			<button *ngIf="signUp; else showLogin" mat-button (click)="signup()">Sign Up</button>
+		</ng-template>
+		<ng-template #showLogin>
+			<button mat-button (click)="login()">Login</button>
+		</ng-template>
+
+		<!-- <ng-container *ngIf="userLoggedIn; else showSignUpOrLogin">
+			<button mat-button (click)="logout()">logout</button>
+		</ng-container>
+		<ng-template #showSignUpOrLogin>
+    		<ng-container *ngIf="signUp; else showLogin">
+    			<button mat-button (click)="signup()">Sign Up</button>
+    		</ng-container>
+		</ng-template>
+		<ng-template #showLogin>
+			<button mat-button (click)="login()">Login</button>
+		</ng-template> -->
+
+	</mat-toolbar-row>
+</mat-toolbar>

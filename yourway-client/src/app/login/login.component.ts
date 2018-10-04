@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { AuthService } from '../core/auth.service';
 import { TokenStorage } from '../core/token.storage';
+import { HeaderComponent } from '../header/header.component'
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,8 @@ export class LoginComponent {
   constructor(private router: Router, 
     public dialog: MatDialog, 
     private authService: AuthService, 
-    private token: TokenStorage) { }
+    private token: TokenStorage,
+    private header: HeaderComponent) { }
 
   username: string;
   password: string;
@@ -24,12 +26,8 @@ export class LoginComponent {
       data => {
         this.token.saveToken(data.token);
         this.router.navigate(['books']);
-      }
-      );
-  }
-
-  signup(): void {
-  	this.router.navigate(['signup']);
+        this.header.userLoggedIn = true;
+      });
   }
 
 }

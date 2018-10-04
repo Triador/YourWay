@@ -79,7 +79,7 @@ public class ChitaiGorodParser {
                 .getAttribute("src");
         if (!imageUrl.isEmpty()) {
             String extension = getImageExtension(imageUrl);
-            book.setImageLink("/Users/antonandreev/Desktop/Photo/book_images/" + book.getRussianTitle() + extension);
+            book.setImageLink("C:\\Users\\aandreev\\Workspace\\images" + book.getRussianTitle() + extension);
 
             downloadBookImage(imageUrl, "big_" + book.getRussianTitle(), extension);
         }
@@ -140,7 +140,7 @@ public class ChitaiGorodParser {
 
     private void downloadBookImage(String url, String bookTitle, String extension) {
         try (InputStream in = new URL(url).openStream()) {
-            Files.copy(in, Paths.get("/Users/antonandreev/Desktop/Photo/book_images/" + bookTitle + extension));
+            Files.copy(in, Paths.get("C:\\Users\\aandreev\\Workspace\\images" + bookTitle + extension));
         } catch (FileAlreadyExistsException e) {
             System.out.println("this image has been already downloaded");
         } catch (NoSuchFileException e) {
