@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { MatDialog } from '@angular/material';
+// import { MatDialog } from '@angular/material';
 import { AuthService } from '../core/auth.service';
 import { TokenStorage } from '../core/token.storage';
 import { HeaderComponent } from '../header/header.component'
@@ -13,7 +13,7 @@ import { HeaderComponent } from '../header/header.component'
 export class LoginComponent {
 
   constructor(private router: Router, 
-    public dialog: MatDialog, 
+    // public dialog: MatDialog, 
     private authService: AuthService, 
     private token: TokenStorage,
     private header: HeaderComponent) { }

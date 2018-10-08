@@ -1,0 +1,24 @@
+.search {
+	position: relative;
+}
+.search-hint {
+	position: absolute;
+	z-index: 1;
+	border: 1px solid black;
+	background: white;
+}
+input[type="text"] {
+	line-height: 20px;
+	width: 250px;
+	border-radius: 3px;
+	border: 0px;
+}
+button.title {
+	display: block;
+	border: none;
+	width: 100%;
+	text-align: left;
+}
+button.title:hover {
+	background: #f5f4f7;
+}

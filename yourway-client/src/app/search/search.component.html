@@ -1,26 +1,6 @@
-<!-- <mat-table #table [dataSource]="dataSource" class="mat-elevation-z8">
-	<ng-container matColumnDef="title">
-		<mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
-		<mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
-	</ng-container>
-	<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-	<mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-</mat-table> -->
-
-<!-- <div class="mat-elevation-z8">
-	<table mat-table [dataSource]="dataSource">
-		<ng-container matColumnDef="title">
-			<th mat-header-cell *matHeaderCellDef> No. </th>
-			<td mat-cell *matCellDef="let element"> {{element}} </td>
-		</ng-container>
-
-		<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-		<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-	</table>
-</div> -->
-<mat-form-field>
-	<input matInput type="text" (input)="displaySearchHintComponent(title.value)" (focus)="searchOn()" (focusout)="searchOff()" #title placeholder="title">
-</mat-form-field>
-<mat-list *ngIf="searchActive">
-	<mat-list-item *ngFor="let title of titles">{{title}}</mat-list-item>
-</mat-list>
+<div class="search">
+	<input type="text" (input)="displaySearchHintComponent(title.value)" (focus)="searchOn()" (focusout)="searchOff()" #title height="60px">
+	<div *ngIf="searchActive" class="search-hint">
+		<button *ngFor="let title of titles" class="title">{{title}}</button>
+	</div>
+</div>
