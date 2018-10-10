@@ -3,3 +3,11 @@ body {
 	margin: 0px;
 	padding: 0px;
 }
+
+.global-color {
+	background: #3b4859;
+}
+
+.white-background {
+	color: white;
+}
