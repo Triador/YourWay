@@ -1,4 +1,4 @@
-<mat-toolbar class="global-color">
+<mat-toolbar class="global-color" color="primary">
 	<mat-toolbar-row>
 		<span><img src="./assets/logo.png"></span>
 		<!-- <span class="example-fill-remaining-space"></span> -->
@@ -7,7 +7,7 @@
 		<div class="search-container">   
 			<app-search class="search"></app-search>
 		</div>
-		<button mat-button class="white-color">About</button>
+		<button mat-button>About</button>
 		<button *ngIf="userLoggedIn; else showSignUpOrLogin" mat-button (click)="logout()" class="white-color">logout</button>
 		<ng-template #showSignUpOrLogin>
 			<button *ngIf="signUp; else showLogin" mat-button (click)="signup()" class="white-color">Sign Up</button>
