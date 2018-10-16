@@ -1,7 +1,13 @@
 <div class="search">
 	<input type="text" (input)="displaySearchHintComponent(title.value)" (focus)="searchOn()" (focusout)="searchOff()" #title height="60px">
+	<!-- <mat-list>
+		<mat-list-item></mat-list-item>
+	</mat-list> -->
 	<div *ngIf="searchActive" class="search-hint">
-		<button *ngFor="let title of titles" class="title">{{title}}</button>
+		<div *ngFor="let title of titles">
+			<button mat-button  class="title">{{title}}</button>
+			<mat-divider></mat-divider>
+		</div>
 	</div>
 	<img src="../../assets/search_button.png" class="search-button">
 </div>

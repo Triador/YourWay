@@ -4,8 +4,8 @@
 .search-hint {
 	position: absolute;
 	z-index: 1;
-	border: 1px solid black;
-	background: white;
+	margin-top: 5%;
+	background-color: white;
 }
 input[type="text"] {
 	width: 300px;
@@ -18,12 +18,9 @@ input[type="text"] {
 }
 button.title {
 	display: block;
-	border: none;
 	width: 100%;
 	text-align: left;
-}
-button.title:hover {
-	background: #f5f4f7;
+	color: black;
 }
 .search-button {
 	position: absolute;
