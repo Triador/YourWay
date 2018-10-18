@@ -38,10 +38,8 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<String> findMatchByTitlePiece(String titlePiece) {
-        List<String> test = bookDAO.findMatchByTitlePiece(titlePiece);
-        System.out.println(test);
-        return test;
+    public List<Book> findMatchByTitlePiece(String titlePiece) {
+       return bookDAO.findMatchByTitlePiece(titlePiece);
     }
 }
 

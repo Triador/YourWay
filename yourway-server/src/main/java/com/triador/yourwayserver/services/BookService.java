@@ -13,5 +13,5 @@ public interface BookService {
 
     Book findById(int id);
 
-    List<String> findMatchByTitlePiece(String titlePiece);
+    List<Book> findMatchByTitlePiece(String titlePiece);
 }

@@ -21,24 +21,20 @@ public class BookController {
         return bookService.findById(id);
     }
 
-//    @GetMapping(path = {"/{id}"})
-//    public Book findOne(@PathVariable("id") int id) {
-//        return bookService.findById(id);
-//    }
-
-    @DeleteMapping(path = {"/{id}"})
-    public Book delete(@PathVariable("id") int id) {
-        return bookService.delete(id);
-    }
-
-    @GetMapping(path = {"/search/{titlePiece}"})
-    public List<String> searchTitles(@PathVariable String titlePiece) {
-        return bookService.findMatchByTitlePiece(titlePiece);
-    }
-
     @GetMapping
     public List<Book> findAll() {
+        System.out.println("inside findAll");
         return bookService.findAll();
     }
 
+    @GetMapping(path = {"/{id}"})
+    public Book findOne(@PathVariable("id") int id) {
+        return bookService.findById(id);
+    }
+
+    @GetMapping(path = {"/search/{titlePiece}"})
+    public List<Book> searchTitles(@PathVariable("titlePiece") String titlePiece) {
+        System.out.println("inside searchTitles");
+        return bookService.findMatchByTitlePiece(titlePiece);
+    }
 }

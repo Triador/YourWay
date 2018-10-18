@@ -72,14 +72,14 @@ public class BookDAOImpl implements BookDAO {
     }
 
     @Override
-    public List<String> findMatchByTitlePiece(String titlePiece) {
-        String sql = "SELECT russian_title FROM books WHERE lower(russian_title) LIKE :piece";
+    public List<Book> findMatchByTitlePiece(String titlePiece) {
+        String sql = "SELECT * FROM books WHERE lower(russian_title) LIKE :piece";
         titlePiece = titlePiece.toLowerCase().trim() + "%";
         System.out.println(titlePiece);
 
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
         mapSqlParameterSource.addValue("piece", titlePiece);
 
-        return namedParameterJdbcTemplate.queryForList(sql, mapSqlParameterSource, String.class);
+        return namedParameterJdbcTemplate.query(sql, mapSqlParameterSource, BeanPropertyRowMapper.newInstance(Book.class));
     }
 }

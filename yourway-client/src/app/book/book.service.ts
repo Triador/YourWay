@@ -19,16 +19,19 @@ export class BookService {
 		return this.http.get<Book[]>(this.bookUrl);
 	}
 
-	public getBookTitles(titlePiece) {
-		console.log("inside getBookTitles")
-		return this.http.get<string[]>(this.bookSearchUrl + "/" + titlePiece);
+	public getBook(id: number) {
+		return this.http.get<Book>(this.bookUrl + "/" + id);
 	}
 
-	public deleteBook(book) {
+	public getBookTitles(titlePiece: string) {
+		return this.http.get<Book[]>(this.bookSearchUrl + "/" + titlePiece);
+	}
+
+	public deleteBook(book: Book) {
 		return this.http.delete(this.bookUrl + "/" + book.id);
 	}
 
-	public createBook(book) {
+	public createBook(book: Book) {
 		return this.http.post(this.bookUrl, book);
 	}
 }
