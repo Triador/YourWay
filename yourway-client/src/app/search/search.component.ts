@@ -13,7 +13,7 @@ import { BookService } from '../book/book.service';
 export class SearchComponent implements OnInit {
 	displayedColumns = ["title"];
 	searchActive: boolean = false;
-	books: Book[] = [];
+	titles: string[] = [];
 
 	constructor(private bookService: BookService) { }
 
@@ -24,11 +24,11 @@ export class SearchComponent implements OnInit {
 		if (titlePiece) {
 			this.bookService.getBookTitles(titlePiece)
 			.subscribe( data => {
-				this.books = data;
-				console.log(this.books);
+				this.titles = data;
+				console.log(this.titles);
 			});
 		} else {
-			this.books = [];
+			this.titles = [];
 		}
 	}
 
