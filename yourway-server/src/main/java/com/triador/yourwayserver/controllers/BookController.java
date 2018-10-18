@@ -15,20 +15,9 @@ public class BookController {
     @Autowired
     private BookService bookService;
 
-    @PostMapping
-    public Book create(@RequestBody Book book) {
-        int id =  bookService.create(book);
-        return bookService.findById(id);
-    }
-
-//    @GetMapping(path = {"/{id}"})
-//    public Book findOne(@PathVariable("id") int id) {
-//        return bookService.findById(id);
-//    }
-
-    @DeleteMapping(path = {"/{id}"})
-    public Book delete(@PathVariable("id") int id) {
-        return bookService.delete(id);
+    @GetMapping(path = {"/{russianTitle}"})
+    public Book findOne(@PathVariable("russianTitle") String russianTitle) {
+        return bookService.findByRussianTitle(russianTitle);
     }
 
     @GetMapping(path = {"/search/{titlePiece}"})

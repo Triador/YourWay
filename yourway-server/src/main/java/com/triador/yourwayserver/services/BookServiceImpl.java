@@ -19,29 +19,18 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Book delete(int id) {
-        Book book = findById(id);
-        if (book != null) {
-            bookDAO.delete(book);
-        }
-        return book;
-    }
-
-    @Override
     public List<Book> findAll() {
         return bookDAO.findAll();
     }
 
     @Override
-    public Book findById(int id) {
-        return bookDAO.findById(id);
+    public Book findByRussianTitle(String russianTitle) {
+        return bookDAO.findByRussianTitle(russianTitle);
     }
 
     @Override
     public List<String> findMatchByTitlePiece(String titlePiece) {
-        List<String> test = bookDAO.findMatchByTitlePiece(titlePiece);
-        System.out.println(test);
-        return test;
+        return bookDAO.findMatchByTitlePiece(titlePiece);
     }
 }
 

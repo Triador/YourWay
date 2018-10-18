@@ -7,11 +7,9 @@ import java.util.List;
 public interface BookService {
     int create(Book book);
 
-    Book delete(int id);
-
     List<Book> findAll();
 
-    Book findById(int id);
+    Book findByRussianTitle(String russianTitle);
 
     List<String> findMatchByTitlePiece(String titlePiece);
 }

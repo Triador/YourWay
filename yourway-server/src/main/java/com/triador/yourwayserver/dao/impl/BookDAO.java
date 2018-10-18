@@ -11,7 +11,7 @@ public interface BookDAO {
 
     List<Book> findAll();
 
-    Book findById(int id);
+    Book findByRussianTitle(String russianTitle);
 
     List<String> findMatchByTitlePiece(String titlePiece);
 }

@@ -65,10 +65,10 @@ public class BookDAOImpl implements BookDAO {
     }
 
     @Override
-    public Book findById(int id) {
-        String sql = "SELECT * FROM books WHERE id = ?";
+    public Book findByRussianTitle(String russianTitle) {
+        String sql = "SELECT * FROM books WHERE russianTitle = ?";
 
-        return jdbcTemplate.queryForObject(sql, new Object[]{id}, Book.class);
+        return jdbcTemplate.queryForObject(sql, new Object[]{russianTitle}, Book.class);
     }
 
     @Override
