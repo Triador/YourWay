@@ -66,7 +66,7 @@ public class BookDAOImpl implements BookDAO {
 
     @Override
     public Book findByRussianTitle(String russianTitle) {
-        String sql = "SELECT * FROM books WHERE russianTitle = ?";
+        String sql = "SELECT * FROM books WHERE russian_title = ?";
 
         return jdbcTemplate.queryForObject(sql, new Object[]{russianTitle}, Book.class);
     }
