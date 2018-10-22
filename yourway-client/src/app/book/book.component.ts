@@ -10,23 +10,12 @@ import { BookService } from './book.service';
 	styleUrls: ['./book.component.css']
 })
 export class BookComponent implements OnInit {
-	displayedColumns = ['name', 'delete'];
-	dataSource = new MatTableDataSource<Book>();
+
+	book: Book;
 
 	constructor(private bookService: BookService) {
 	}
 
 	ngOnInit() {
-		this.bookService.getBooks()
-		.subscribe( data => {
-			this.dataSource.data = data;
-		})
-	};
-
-	deleteBook(book: Book): void {
-		this.bookService.deleteBook(book)
-		.subscribe( data => {
-			this.dataSource.data = this.dataSource.data.filter(b => b !== book);
-		})
 	};
 }

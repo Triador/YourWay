@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 
 import { Book } from '../models/book.model';
+import { BookTitle } from '../models/book-title.model';
 
 const httpOptions = {
 	headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -25,7 +26,7 @@ export class BookService {
 
 	public getBookTitles(titlePiece) {
 		console.log("inside getBookTitles")
-		return this.http.get<string[]>(this.bookSearchUrl + "/" + titlePiece);
+		return this.http.get<BookTitle[]>(this.bookSearchUrl + "/" + titlePiece);
 	}
 
 	public deleteBook(book) {

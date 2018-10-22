@@ -1,4 +1,4 @@
-export class bookTitle {
+export class BookTitle {
 	id: number;
-	title: string;
+	value: string;
 }

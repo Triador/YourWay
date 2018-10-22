@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { Book } from '../models/book.model';
+import { BookTitle } from '../models/book-title.model';
 import { BookService } from '../book/book.service';
 
 // import { MatListModule } from '@angular/material/list';
@@ -13,7 +13,7 @@ import { BookService } from '../book/book.service';
 export class SearchComponent implements OnInit {
 	displayedColumns = ["title"];
 	searchActive: boolean = false;
-	titles: string[] = [];
+	titles: BookTitle[] = [];
 
 	constructor(private bookService: BookService) { }
 
@@ -38,6 +38,10 @@ export class SearchComponent implements OnInit {
 
 	searchOff(): void {
 		this.searchActive = false;
+	}
+
+	displayBook(title: string) {
+
 	}
 
 }
