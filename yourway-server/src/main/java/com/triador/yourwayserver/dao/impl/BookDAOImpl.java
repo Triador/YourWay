@@ -72,6 +72,13 @@ public class BookDAOImpl implements BookDAO {
     }
 
     @Override
+    public Book findById(int id) {
+        String sql = "SELECT * FROM books WHERE id = ?";
+
+        return jdbcTemplate.queryForObject(sql, new Object[]{id}, Book.class);
+    }
+
+    @Override
     public List<String> findMatchByTitlePiece(String titlePiece) {
         String sql = "SELECT russian_title FROM books WHERE lower(russian_title) LIKE :piece";
         titlePiece = titlePiece.toLowerCase().trim() + "%";

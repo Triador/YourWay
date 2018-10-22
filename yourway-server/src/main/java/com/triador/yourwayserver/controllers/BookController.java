@@ -15,9 +15,9 @@ public class BookController {
     @Autowired
     private BookService bookService;
 
-    @GetMapping(path = {"/{russianTitle}"})
-    public Book findOne(@PathVariable("russianTitle") String russianTitle) {
-        return bookService.findByRussianTitle(russianTitle);
+    @GetMapping(path = {"/{id}"})
+    public Book findOne(@PathVariable("russianTitle") int id) {
+        return bookService.findById(id);
     }
 
     @GetMapping(path = {"/search/{titlePiece}"})

@@ -11,5 +11,7 @@ public interface BookService {
 
     Book findByRussianTitle(String russianTitle);
 
+    Book findById(int id);
+
     List<String> findMatchByTitlePiece(String titlePiece);
 }

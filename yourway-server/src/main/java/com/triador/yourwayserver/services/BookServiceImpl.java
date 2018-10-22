@@ -29,6 +29,11 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    public Book findById(int id) {
+        return bookDAO.findById(id);
+    }
+
+    @Override
     public List<String> findMatchByTitlePiece(String titlePiece) {
         return bookDAO.findMatchByTitlePiece(titlePiece);
     }
