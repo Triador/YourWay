@@ -1,6 +1,7 @@
 package com.triador.yourwayserver.dao.impl;
 
 import com.triador.yourwayserver.dao.model.Book;
+import com.triador.yourwayserver.dao.model.BookTitle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -79,14 +80,19 @@ public class BookDAOImpl implements BookDAO {
     }
 
     @Override
-    public List<String> findMatchByTitlePiece(String titlePiece) {
-        String sql = "SELECT russian_title FROM books WHERE lower(russian_title) LIKE :piece";
+    public List<BookTitle> findMatchByTitlePiece(String titlePiece) {
+        String sql = "SELECT id, russian_title FROM books WHERE lower(russian_title) LIKE :piece";
         titlePiece = titlePiece.toLowerCase().trim() + "%";
         System.out.println(titlePiece);
 
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
         mapSqlParameterSource.addValue("piece", titlePiece);
 
-        return namedParameterJdbcTemplate.queryForList(sql, mapSqlParameterSource, String.class);
+        return namedParameterJdbcTemplate.query(sql, mapSqlParameterSource, (resultSet, i) -> {
+            BookTitle bookTitle = new BookTitle();
+            bookTitle.setId(resultSet.getInt("id"));
+            bookTitle.setValue(resultSet.getString("russian_title"));
+            return bookTitle;
+        });
     }
 }

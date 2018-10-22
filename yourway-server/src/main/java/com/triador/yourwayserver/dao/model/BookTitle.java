@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class BookTitle {
     private int id;
-    private String title;
+    private String value;
 
     public int getId() {
         return id;
@@ -14,12 +14,12 @@ public class BookTitle {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getValue() {
+        return value;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setValue(String value) {
+        this.value = value;
     }
 
     @Override
@@ -28,20 +28,20 @@ public class BookTitle {
         if (o == null || getClass() != o.getClass()) return false;
         BookTitle bookTitle = (BookTitle) o;
         return id == bookTitle.id &&
-                Objects.equals(title, bookTitle.title);
+                Objects.equals(value, bookTitle.value);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, title);
+        return Objects.hash(id, value);
     }
 
     @Override
     public String toString() {
         return "BookTitle{" +
                 "id=" + id +
-                ", title='" + title + '\'' +
+                ", value='" + value + '\'' +
                 '}';
     }
 }

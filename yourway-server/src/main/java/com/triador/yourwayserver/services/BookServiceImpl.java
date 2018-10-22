@@ -2,6 +2,7 @@ package com.triador.yourwayserver.services;
 
 import com.triador.yourwayserver.dao.impl.BookDAO;
 import com.triador.yourwayserver.dao.model.Book;
+import com.triador.yourwayserver.dao.model.BookTitle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,7 +35,8 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<String> findMatchByTitlePiece(String titlePiece) {
+    public List<BookTitle> findMatchByTitlePiece(String titlePiece) {
+        System.out.println(bookDAO.findMatchByTitlePiece(titlePiece));
         return bookDAO.findMatchByTitlePiece(titlePiece);
     }
 }

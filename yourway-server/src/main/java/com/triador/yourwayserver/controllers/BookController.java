@@ -1,6 +1,7 @@
 package com.triador.yourwayserver.controllers;
 
 import com.triador.yourwayserver.dao.model.Book;
+import com.triador.yourwayserver.dao.model.BookTitle;
 import com.triador.yourwayserver.services.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +22,7 @@ public class BookController {
     }
 
     @GetMapping(path = {"/search/{titlePiece}"})
-    public List<String> searchTitles(@PathVariable String titlePiece) {
+    public List<BookTitle> searchTitles(@PathVariable String titlePiece) {
         return bookService.findMatchByTitlePiece(titlePiece);
     }
 
