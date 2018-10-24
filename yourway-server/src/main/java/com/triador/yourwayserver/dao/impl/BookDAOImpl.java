@@ -76,7 +76,7 @@ public class BookDAOImpl implements BookDAO {
     public Book findById(int id) {
         String sql = "SELECT * FROM books WHERE id = ?";
 
-        return jdbcTemplate.queryForObject(sql, new Object[]{id}, Book.class);
+        return jdbcTemplate.queryForObject(sql, new Object[]{id}, BeanPropertyRowMapper.newInstance(Book.class));
     }
 
     @Override
