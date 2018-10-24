@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { BookTitle } from '../models/book-title.model';
 import { BookService } from '../book/book.service';
@@ -15,7 +16,8 @@ export class SearchComponent implements OnInit {
 	searchActive: boolean = false;
 	titles: BookTitle[] = [];
 
-	constructor(private bookService: BookService) { }
+	constructor(private bookService: BookService,
+		private router: Router) { }
 
 	ngOnInit() {
 	}
@@ -40,8 +42,8 @@ export class SearchComponent implements OnInit {
 		this.searchActive = false;
 	}
 
-	displayBook(title: string) {
-
+	displayBook(id: number): void {
+		this.router.navigate(['books/' + id]);
 	}
 
 }

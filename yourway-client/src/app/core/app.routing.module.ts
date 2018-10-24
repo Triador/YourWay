@@ -7,11 +7,11 @@ import { SignupComponent} from '../signup/signup.component'
 import { SearchComponent} from '../search/search.component'
 
 const routes: Routes = [
-	{ path: 'books', component: BookComponent },
-	{ path: 'login', component: LoginComponent},
-	{ path: 'signup', component: SignupComponent},
-	{ path: '', redirectTo: '/login', pathMatch: 'full'},
-	{ path: 'search', component: SearchComponent}
+	{ path: 'books/:id', component: BookComponent },
+	{ path: 'login', component: LoginComponent },
+	{ path: 'signup', component: SignupComponent },
+	{ path: '', redirectTo: '/login', pathMatch: 'full' },
+	{ path: 'search', component: SearchComponent }
 ];
 
 @NgModule({

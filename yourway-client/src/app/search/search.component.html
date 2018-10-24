@@ -5,7 +5,7 @@
 	</mat-list> -->
 	<div *ngIf="searchActive" class="search-hint">
 		<div *ngFor="let title of titles">
-			<button mat-button (click)="displayBook(title.value)" class="title">{{title.value}}</button>
+			<button mat-button (mousedown)="displayBook(title.id)" class="title">{{title.value}}</button>
 			<mat-divider></mat-divider>
 		</div>
 	</div>
