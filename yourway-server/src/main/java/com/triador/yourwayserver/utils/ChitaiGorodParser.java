@@ -11,7 +11,6 @@ import java.io.InputStream;
 import java.net.URL;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
-import java.nio.file.NoSuchFileException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,10 +22,12 @@ public class ChitaiGorodParser {
 
     private WebDriver driver = SeleniumUtils.getDriver();
     private BookDAO bookDAO;
+    private Converter converter;
 
     @Autowired
-    public ChitaiGorodParser(BookDAO bookDAO) {
+    public ChitaiGorodParser(BookDAO bookDAO, Converter converter) {
         this.bookDAO = bookDAO;
+        this.converter = converter;
     }
 
     public void parse(List<String> urls) {
@@ -44,7 +45,7 @@ public class ChitaiGorodParser {
                 String imageUrl = smallBookImages.get(i).getAttribute("data-original");
                 String extension = getImageExtension(imageUrl);
                 String bookTitle = bookTitles.get(i).getText();
-                downloadBookImage(imageUrl, "small_" + bookTitle, extension);
+                downloadBookImage(imageUrl, "small_" + converter.convert(bookTitle), extension);
             }
 
             saveBooks(books);
@@ -79,9 +80,9 @@ public class ChitaiGorodParser {
                 .getAttribute("src");
         if (!imageUrl.isEmpty()) {
             String extension = getImageExtension(imageUrl);
-            book.setImageLink("C:\\Users\\aandreev\\Workspace\\images" + book.getRussianTitle() + extension);
+            book.setImageLink("C:\\Users\\aandreev\\Workspace\\images\\" + converter.convert(book.getRussianTitle()) + extension);
 
-            downloadBookImage(imageUrl, "big_" + book.getRussianTitle(), extension);
+            downloadBookImage(imageUrl, "big_" + converter.convert(book.getRussianTitle()), extension);
         }
 
         driver.close();
@@ -140,16 +141,9 @@ public class ChitaiGorodParser {
 
     private void downloadBookImage(String url, String bookTitle, String extension) {
         try (InputStream in = new URL(url).openStream()) {
-            Files.copy(in, Paths.get("C:\\Users\\aandreev\\Workspace\\images" + bookTitle + extension));
+            Files.copy(in, Paths.get("C:\\Users\\aandreev\\Workspace\\images\\" + bookTitle + extension));
         } catch (FileAlreadyExistsException e) {
             System.out.println("this image has been already downloaded");
-        } catch (NoSuchFileException e) {
-            if (bookTitle.contains("/")) {
-                bookTitle = bookTitle.replace("/", "|");
-                downloadBookImage(url, bookTitle, extension);
-            } else {
-                System.out.println("NoSuchFile - " + url + bookTitle + extension);
-            }
         } catch (IOException e) {
             e.printStackTrace();
         }
