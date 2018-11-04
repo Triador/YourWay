@@ -34,7 +34,6 @@ public class ChitaiGorodParser {
         for (String url : urls) {
             driver.get(url);
             sleep(5000);
-            driver.manage().window().maximize();
             driver.findElement(By.className("toggle-cardview__item_port")).click();
             scrollDown();
             List<WebElement> books = driver.findElements(By.className("product-card"));
@@ -80,7 +79,7 @@ public class ChitaiGorodParser {
                 .getAttribute("src");
         if (!imageUrl.isEmpty()) {
             String extension = getImageExtension(imageUrl);
-            book.setImageLink("C:\\Users\\aandreev\\Workspace\\images\\" + converter.convert(book.getRussianTitle()) + extension);
+            book.setImageLink(converter.convert(book.getRussianTitle()) + extension);
 
             downloadBookImage(imageUrl, "big_" + converter.convert(book.getRussianTitle()), extension);
         }
@@ -141,7 +140,7 @@ public class ChitaiGorodParser {
 
     private void downloadBookImage(String url, String bookTitle, String extension) {
         try (InputStream in = new URL(url).openStream()) {
-            Files.copy(in, Paths.get("C:\\Users\\aandreev\\Workspace\\images\\" + bookTitle + extension));
+            Files.copy(in, Paths.get("/Users/antonandreev/Desktop/MyDev/Projects/YourWay/yourway-client/src/assets/book_images/" + bookTitle + extension));
         } catch (FileAlreadyExistsException e) {
             System.out.println("this image has been already downloaded");
         } catch (IOException e) {

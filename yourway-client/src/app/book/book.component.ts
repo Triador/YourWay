@@ -14,6 +14,7 @@ import { BookService } from './book.service';
 export class BookComponent implements OnInit {
 
 	book: Book = new Book();
+	columnsToDisplay = ["fieldNames"]
 
 	constructor(private bookService: BookService,
 		private route: ActivatedRoute,
@@ -25,6 +26,7 @@ export class BookComponent implements OnInit {
 				this.bookService.getBook(params.get('id')))	
 		).subscribe(data => {
 			console.log(data);
+			data.imageLink = "../../assets/book_images/small_" + data.imageLink;
 			this.book = data;
 		});
 	}
