@@ -1,24 +1,27 @@
 <app-header></app-header>
 
-<div class="book-description">
-	<img src="{{book.imageLink}}" width="300px" height="454px">
+<mat-card>
+	<div class="book-info">
+		<img src="{{book.imageLink}}" width="300px" height="454px">
 
-	<mat-list class="inline-block field-names">
-		<mat-list-item *ngIf="book.russianTitle">Название:</mat-list-item>
-		<mat-list-item *ngIf="book.originalTitle">Оригинальное название:</mat-list-item>
-		<mat-list-item *ngIf="book.author">Автор:</mat-list-item>
-		<mat-list-item *ngIf="book.pageAmount">Количество страниц:</mat-list-item>
-		<mat-list-item *ngIf="book.publicationYear">Год публикации:</mat-list-item>
-		<mat-list-item *ngIf="book.isbn">ISBN:</mat-list-item>
-	</mat-list>
+		<mat-list class="inline-block field-names">
+			<mat-list-item *ngIf="book.russianTitle">Название:</mat-list-item>
+			<mat-list-item *ngIf="book.originalTitle">Оригинальное название:</mat-list-item>
+			<mat-list-item *ngIf="book.author">Автор:</mat-list-item>
+			<mat-list-item *ngIf="book.pageAmount">Количество страниц:</mat-list-item>
+			<mat-list-item *ngIf="book.publicationYear">Год публикации:</mat-list-item>
+			<mat-list-item *ngIf="book.isbn">ISBN:</mat-list-item>
+		</mat-list>
 
-	<mat-list class="inline-block">
-		<mat-list-item *ngIf="book.russianTitle">{{book.russianTitle}}</mat-list-item>
-		<mat-list-item *ngIf="book.originalTitle">{{book.originalTitle}}</mat-list-item>
-		<mat-list-item *ngIf="book.author">{{book.author}}</mat-list-item>
-		<mat-list-item *ngIf="book.pageAmount">{{book.pageAmount}}</mat-list-item>
-		<mat-list-item *ngIf="book.publicationYear">{{book.publicationYear}}</mat-list-item>
-		<mat-list-item *ngIf="book.isbn">{{book.isbn}}</mat-list-item>
-	</mat-list>
-</div>
-<mat-card *ngIf="book.description">{{book.description}}</mat-card>
+		<mat-list class="inline-block">
+			<mat-list-item *ngIf="book.russianTitle">{{book.russianTitle}}</mat-list-item>
+			<mat-list-item *ngIf="book.originalTitle">{{book.originalTitle}}</mat-list-item>
+			<mat-list-item *ngIf="book.author">{{book.author}}</mat-list-item>
+			<mat-list-item *ngIf="book.pageAmount">{{book.pageAmount}}</mat-list-item>
+			<mat-list-item *ngIf="book.publicationYear">{{book.publicationYear}}</mat-list-item>
+			<mat-list-item *ngIf="book.isbn">{{book.isbn}}</mat-list-item>
+		</mat-list>
+	</div>
+
+	<div *ngIf="book.description" class="book-description">{{book.description}}</div>
+</mat-card>

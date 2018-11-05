@@ -7,21 +7,28 @@ import { BookService } from './book.service';
 import { BookComponent } from './book.component'
 
 @Component({
-	selector: 'app-add-book',
-	templateUrl: './add-book.component.html',
-	styleUrls: ['add-book.component.css']
+	selector: 'app-all-book',
+	templateUrl: './all-book.component.html',
+	styleUrls: ['all-book.component.css']
 })
-export class AddBookComponent {
-	book: Book = new Book();
+export class AllBookComponent {
+	books: Book[];
 
 	constructor(private router: Router, private bookService: BookService, private bookComponent: BookComponent) {
 
 	}
 
-	createBook(): void {
-		this.bookService.createBook(this.book)
+	ngOnInit() {
+		this.bookService.getBooks()
 			.subscribe( data => {
-				this.bookComponent.ngOnInit();
+				for (var i = 0; i < data.length; i++) {
+					data[i].imageLink = "../../assets/book_images/small_" + data[i].imageLink;
+				}
+				this.books = data;
 			});
-	};
+	}
+
+	openBook(id: number): void {
+		this.router.navigate(['books/' + id]);
+	}
 }

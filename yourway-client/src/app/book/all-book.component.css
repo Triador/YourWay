@@ -1,0 +1,21 @@
+mat-card {
+	display: inline-block;
+	margin: 2%;
+	text-align: center;
+	vertical-align: middle;
+}
+
+mat-card-content {
+	width: 190px; 
+	height: 250px;
+}
+
+.title {
+	width: 200px;
+	margin-bottom: 5%;
+	text-overflow: ellipsis;
+	word-wrap: break-word;
+	overflow: hidden;
+	max-height: 2.8em;
+	line-height: 1.4em;
+}

@@ -1,8 +1,5 @@
 <div class="search">
 	<input type="text" (input)="displaySearchHintComponent(title.value)" (focus)="searchOn()" (focusout)="searchOff()" #title height="60px">
-	<!-- <mat-list>
-		<mat-list-item></mat-list-item>
-	</mat-list> -->
 	<div *ngIf="searchActive" class="search-hint">
 		<div *ngFor="let title of titles">
 			<button mat-button (mousedown)="displayBook(title.id)" class="title">{{title.value}}</button>

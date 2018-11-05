@@ -13,7 +13,6 @@ import { HeaderComponent } from '../header/header.component'
 export class LoginComponent {
 
   constructor(private router: Router, 
-    // public dialog: MatDialog, 
     private authService: AuthService, 
     private token: TokenStorage,
     private header: HeaderComponent) { }

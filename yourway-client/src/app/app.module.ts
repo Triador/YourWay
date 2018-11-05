@@ -8,7 +8,7 @@ import { BookComponent } from './book/book.component';
 import { AppRoutingModule } from './core/app.routing.module';
 import { BookService } from './book/book.service';
 import { SignUpService } from './signup/signup.service';
-import { AddBookComponent } from './book/add-book.component';
+import { AllBookComponent } from './book/all-book.component';
 import { LoginComponent } from './login/login.component';
 import { ErrorDialogComponent } from './core/error-dialog.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
@@ -24,7 +24,7 @@ import { HeaderComponent } from './header/header.component';
   declarations: [
     AppComponent,
     BookComponent,
-    AddBookComponent,
+    AllBookComponent,
     LoginComponent,
     ErrorDialogComponent,
     SignupComponent,
@@ -42,7 +42,7 @@ import { HeaderComponent } from './header/header.component';
   ],
   entryComponents: [ErrorDialogComponent],
   providers: [ErrorDialogComponent, BookService, AuthService, TokenStorage, SignUpService,
-    SearchComponent, HeaderComponent,
+    SearchComponent, HeaderComponent, BookComponent,
     {provide: HTTP_INTERCEPTORS,
     useClass: Interceptor,
     multi : true}

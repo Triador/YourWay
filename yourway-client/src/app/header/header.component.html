@@ -1,19 +1,19 @@
-<mat-toolbar class="global-color" color="primary">
-	<mat-toolbar-row>
+<mat-toolbar color="primary">
+	<mat-toolbar-row class="white-color">
 		<span><img src="./assets/logo.png"></span>
 		<!-- <span class="example-fill-remaining-space"></span> -->
 		<span class="example-spacer"></span>
 		
-		<div class="search-container">   
+		<div *ngIf="userLoggedIn" class="search-container">   
 			<app-search class="search"></app-search>
 		</div>
 		<button mat-button>About</button>
-		<button *ngIf="userLoggedIn; else showSignUpOrLogin" mat-button (click)="logout()" class="white-color">logout</button>
+		<button *ngIf="userLoggedIn; else showSignUpOrLogin" mat-button (click)="logout()">logout</button>
 		<ng-template #showSignUpOrLogin>
-			<button *ngIf="signUp; else showLogin" mat-button (click)="signup()" class="white-color">Sign Up</button>
+			<button *ngIf="signUp; else showLogin" mat-button (click)="signup()">Sign Up</button>
 		</ng-template>
 		<ng-template #showLogin>
-			<button mat-button (click)="login()" class="white-color">Login</button>
+			<button mat-button (click)="login()">Login</button>
 		</ng-template>
 
 	</mat-toolbar-row>

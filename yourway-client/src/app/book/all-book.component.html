@@ -1,0 +1,8 @@
+<app-header></app-header>
+
+<mat-card *ngFor="let book of books" (click)="openBook(book.id)">
+	<mat-card-content>
+		<div *ngIf="book.russianTitle" class="title">{{book.russianTitle}}</div>
+		<img src="{{book.imageLink}}" width="125px" height="200px">
+	</mat-card-content>
+</mat-card>
