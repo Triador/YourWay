@@ -21,10 +21,9 @@ export class LoginComponent implements OnInit {
   password: string;
 
   ngOnInit() {
-    console.log("login ngOnInit invoke, the value of userLoggedIn is " + this.authService.getLoggedIn());
-    // if (this.authService.userLoggedIn) {
-    //   this.router.navigate(['books']);
-    // }
+    if (this.authService.getLoggedIn() === 'true') {
+      this.router.navigate(['books']);
+    }
   }
 
   login(): void {

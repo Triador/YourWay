@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material';
 import { Book } from '../models/book.model';
 import { BookService } from './book.service';
 import { BookComponent } from './book.component'
+import { AuthService } from '../core/auth.service';
 
 @Component({
 	selector: 'app-all-book',
@@ -14,9 +15,10 @@ import { BookComponent } from './book.component'
 export class AllBookComponent {
 	books: Book[];
 
-	constructor(private router: Router, private bookService: BookService, private bookComponent: BookComponent) {
-
-	}
+	constructor(private router: Router,
+	 private bookService: BookService, 
+	 private bookComponent: BookComponent,
+	 private authService: AuthService) {}
 
 	ngOnInit() {
 		this.bookService.getBooks()
