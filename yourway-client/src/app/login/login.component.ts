@@ -10,7 +10,7 @@ import { HeaderComponent } from '../header/header.component'
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
 
   constructor(private router: Router, 
     private authService: AuthService, 
@@ -20,12 +20,19 @@ export class LoginComponent {
   username: string;
   password: string;
 
+  ngOnInit() {
+    console.log("login ngOnInit invoke, the value of userLoggedIn is " + this.authService.getLoggedIn());
+    // if (this.authService.userLoggedIn) {
+    //   this.router.navigate(['books']);
+    // }
+  }
+
   login(): void {
     this.authService.attemptAuth(this.username, this.password).subscribe(
       data => {
         this.token.saveToken(data.token);
         this.router.navigate(['books']);
-        this.header.userLoggedIn = true;
+        this.authService.setLoggedIn('true');
       });
   }
 
