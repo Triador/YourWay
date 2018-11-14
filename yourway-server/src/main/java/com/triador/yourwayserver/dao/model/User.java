@@ -1,23 +1,13 @@
 package com.triador.yourwayserver.dao.model;
 
-import javax.persistence.*;
-
-@Entity
-@Table(name = "users")
 public class User {
 
-    @Id
-    @Column
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column
     private String name;
 
-    @Column
     private String password;
 
-    @Column
     private String role;
 
     public int getId() {

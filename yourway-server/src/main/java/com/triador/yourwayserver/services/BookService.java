@@ -6,7 +6,9 @@ import com.triador.yourwayserver.dao.model.BookTitle;
 import java.util.List;
 
 public interface BookService {
-    int create(Book book);
+    Book save(Book book);
+
+    int delete(int id);
 
     List<Book> findAll();
 

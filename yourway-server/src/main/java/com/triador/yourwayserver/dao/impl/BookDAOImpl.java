@@ -2,11 +2,15 @@ package com.triador.yourwayserver.dao.impl;
 
 import com.triador.yourwayserver.dao.model.Book;
 import com.triador.yourwayserver.dao.model.BookTitle;
+import com.triador.yourwayserver.dao.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -25,7 +29,7 @@ public class BookDAOImpl implements BookDAO {
     }
 
     @Override
-    public int save(Book book) {
+    public Book save(Book book) {
         String sql = "INSERT INTO books" +
                 "(russian_title, " +
                 "origin_title, " +
@@ -35,27 +39,41 @@ public class BookDAOImpl implements BookDAO {
                 "isbn, " +
                 "description, " +
                 "image_link) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?) " +
+                "VALUES ( " +
+                ":russian_title, " +
+                ":origin_title, " +
+                ":autor, " +
+                ":page_amount, " +
+                ":publication_year, " +
+                ":isbn, " +
+                ":description, " +
+                ":image_link) " +
                 "ON CONFLICT " +
                 "(russian_title) " +
                 "DO NOTHING";
 
-        return jdbcTemplate.update(sql,
-                book.getRussianTitle(),
-                book.getOriginTitle(),
-                book.getAuthor(),
-                book.getPageAmount(),
-                book.getPublicationYear(),
-                book.getIsbn(),
-                book.getDescription(),
-                book.getImageLink());
+        SqlParameterSource sqlParameterSource = new MapSqlParameterSource()
+                .addValue("russian_title", book.getRussianTitle())
+                .addValue("origin_title", book.getOriginTitle())
+                .addValue("author", book.getAuthor())
+                .addValue("page_amount", book.getPageAmount())
+                .addValue("publication_year", book.getPublicationYear())
+                .addValue("isbn", book.getIsbn())
+                .addValue("description", book.getDescription())
+                .addValue("image_link", book.getImageLink());
+
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+        namedParameterJdbcTemplate.update(sql, sqlParameterSource, keyHolder, new String[]{"id"});
+
+        book.setId(keyHolder.getKey().intValue());
+        return book;
     }
 
     @Override
-    public int delete(Book book) {
+    public int delete(int id) {
         String sql = "DELETE FROM books WHERE id = ?";
 
-        return jdbcTemplate.update(sql, book.getId());
+        return jdbcTemplate.update(sql, id);
     }
 
     @Override
