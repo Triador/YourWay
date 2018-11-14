@@ -21,6 +21,7 @@ export class LoginComponent implements OnInit {
   password: string;
 
   ngOnInit() {
+    this.authService.setSignUp("true");
     if (this.authService.getLoggedIn() === 'true') {
       this.router.navigate(['books']);
     }

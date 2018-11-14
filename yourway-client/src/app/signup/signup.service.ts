@@ -13,7 +13,7 @@ export class SignUpService {
 
 	constructor(private router: Router, private http: HttpClient) {}
 
-	private signupUrl = 'http://localhost:8080/signup'
+	private signupUrl = 'http://localhost:8080/users/signup'
 
 	public createUser(user) {
 		this.router.navigate(['login']);
