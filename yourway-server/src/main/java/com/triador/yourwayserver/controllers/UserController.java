@@ -16,17 +16,17 @@ public class UserController {
     private UserService userService;
 
     @PostMapping(value = "/signup")
-    public User create(@RequestBody User user) {
+    public User save(@RequestBody User user) {
         return userService.save(user);
     }
 
     @GetMapping(path = {"/{id}"})
-    public User findOne(@PathVariable("id") int id) {
+    public User findById(@PathVariable("id") int id) {
         return userService.findById(id);
     }
 
     @DeleteMapping(path = {"/{id}"})
-    public User delete(@PathVariable("id") int id) {
+    public int delete(@PathVariable("id") int id) {
         return userService.delete(id);
     }
 

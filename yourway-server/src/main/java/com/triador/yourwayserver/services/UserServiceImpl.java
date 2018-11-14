@@ -1,7 +1,7 @@
 package com.triador.yourwayserver.services;
 
+import com.triador.yourwayserver.dao.impl.UserDAO;
 import com.triador.yourwayserver.dao.model.User;
-import com.triador.yourwayserver.repositores.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,14 +16,17 @@ import java.util.List;
 @Service(value = "userService")
 public class UserServiceImpl implements UserDetailsService, UserService {
 
-    @Autowired
-    private UserRepository repository;
-
-    @Autowired
+    private UserDAO userDAO;
     private BCryptPasswordEncoder bcryptEncoder;
 
+    @Autowired
+    public UserServiceImpl(UserDAO userDAO, BCryptPasswordEncoder bcryptEncoder) {
+        this.userDAO = userDAO;
+        this.bcryptEncoder = bcryptEncoder;
+    }
+
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = repository.findByName(username);
+        User user = userDAO.findByName(username);
         if(user == null){
             throw new UsernameNotFoundException("Invalid username or password.");
         }
@@ -40,30 +43,26 @@ public class UserServiceImpl implements UserDetailsService, UserService {
         newUser.setName(user.getName());
         newUser.setPassword(bcryptEncoder.encode(user.getPassword()));
         newUser.setRole("ROLE_USER");
-        return repository.save(newUser);
+        return userDAO.save(newUser);
     }
 
     @Override
-    public User delete(int id) {
-        User user = findById(id);
-        if (user != null) {
-            repository.delete(user);
-        }
-        return user;
+    public int delete(int id) {
+        return userDAO.delete(id);
     }
 
     @Override
     public List<User> findAll() {
-        return repository.findAll();
+        return userDAO.findAll();
     }
 
     @Override
     public User findById(int id) {
-        return repository.findById(id);
+        return userDAO.findById(id);
     }
 
     @Override
-    public User findOne(String name) {
-        return repository.findByName(name);
+    public User findByName(String name) {
+        return userDAO.findByName(name);
     }
 }

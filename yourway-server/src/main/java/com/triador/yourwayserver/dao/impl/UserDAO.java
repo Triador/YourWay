@@ -1,11 +1,10 @@
-package com.triador.yourwayserver.services;
+package com.triador.yourwayserver.dao.impl;
 
 import com.triador.yourwayserver.dao.model.User;
 
 import java.util.List;
 
-public interface UserService {
-
+public interface UserDAO {
     User save(User user);
 
     int delete(int id);
