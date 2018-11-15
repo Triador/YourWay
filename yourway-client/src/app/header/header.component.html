@@ -1,17 +1,27 @@
 <mat-toolbar color="primary">
 	<mat-toolbar-row class="white-color">
+
 		<span><img src="./assets/logo.png"></span>
-		<!-- <span class="example-fill-remaining-space"></span> -->
-		<span class="example-spacer"></span>
 		
 		<div *ngIf="this.authService.getLoggedIn() === 'true'" class="search-container">   
 			<app-search class="search"></app-search>
 		</div>
+		<span class="example-spacer"></span>
+
 		<button mat-button>About</button>
-		<button *ngIf="this.authService.getLoggedIn() === 'true'; else showSignUpOrLogin" mat-button (click)="logout()">logout</button>
+
+		<button *ngIf="this.authService.getLoggedIn() === 'true'; else showSignUpOrLogin" mat-icon-button [matMenuTriggerFor]="profile">
+			<mat-icon>more_vert</mat-icon>
+		</button>
+		<mat-menu #profile="matMenu">
+			<button mat-menu-item>Profile</button>
+			<button mat-menu-item (click)="logout()">Sign Out</button>
+		</mat-menu>
+
 		<ng-template #showSignUpOrLogin>
 			<button *ngIf="this.authService.getSignUp() === 'true'; else showLogin" mat-button (click)="signup()">Sign Up</button>
 		</ng-template>
+
 		<ng-template #showLogin>
 			<button mat-button (click)="login()">Login</button>
 		</ng-template>

@@ -19,3 +19,8 @@ mat-card-content {
 	max-height: 2.8em;
 	line-height: 1.4em;
 }
+
+.books-container {
+	text-align: center;
+	margin: 0% 5% 0% 5%;
+}
