@@ -12,13 +12,15 @@ import { AllBookComponent } from './book/all-book.component';
 import { LoginComponent } from './login/login.component';
 import { ErrorDialogComponent } from './core/error-dialog.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
-import { AuthService } from "./core/auth.service";
-import { Interceptor } from "./core/inteceptor";
+import { AuthService } from './core/auth.service';
+import { ProfileService } from './profile/profile.service';
+import { Interceptor } from './core/inteceptor';
 import { TokenStorage } from "./core/token.storage";
 import { SignupComponent } from './signup/signup.component';
 import { SearchComponent } from './search/search.component';
 import { MatListModule } from '@angular/material/list';
 import { HeaderComponent } from './header/header.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,8 @@ import { HeaderComponent } from './header/header.component';
     ErrorDialogComponent,
     SignupComponent,
     SearchComponent,
-    HeaderComponent
+    HeaderComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +45,7 @@ import { HeaderComponent } from './header/header.component';
   ],
   entryComponents: [ErrorDialogComponent],
   providers: [ErrorDialogComponent, BookService, AuthService, TokenStorage, SignUpService,
-    SearchComponent, HeaderComponent, BookComponent,
+    SearchComponent, HeaderComponent, BookComponent, ProfileService,
     {provide: HTTP_INTERCEPTORS,
     useClass: Interceptor,
     multi : true}

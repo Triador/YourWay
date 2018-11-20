@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-const LOGGED_IN = 'LoggedIn';
-const SIGN_UP = 'signUp';
+const LOGGED_IN = 'LOGGED_IN';
+const SIGN_UP = 'SIGN_UP';
 
 @Injectable()
 export class AuthService {

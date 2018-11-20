@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-// import { MatDialog } from '@angular/material';
 import { AuthService } from '../core/auth.service';
+import { ProfileService } from '../profile/profile.service';
 import { TokenStorage } from '../core/token.storage';
 import { HeaderComponent } from '../header/header.component'
+
+import * as jwtDecode from 'jwt-decode';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +17,8 @@ export class LoginComponent implements OnInit {
   constructor(private router: Router, 
     private authService: AuthService, 
     private token: TokenStorage,
-    private header: HeaderComponent) { }
+    private header: HeaderComponent,
+    private profileService: ProfileService) { }
 
   username: string;
   password: string;
@@ -33,6 +36,11 @@ export class LoginComponent implements OnInit {
         this.token.saveToken(data.token);
         this.router.navigate(['books']);
         this.authService.setLoggedIn('true');
+
+        const decodedToken = jwtDecode(data.token);
+        console.log(JSON.stringify(decodedToken);
+
+        this.profileService.setUsername(this.username);
       });
   }
 

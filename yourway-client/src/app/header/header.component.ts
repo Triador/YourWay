@@ -15,7 +15,7 @@ export class HeaderComponent {
 		private router: Router,
 		private authService: AuthService) { }
 
-	logout() {
+	logout(): void {
 		this.router.navigate(['login']);
 		this.token.signOut();
 		this.authService.setLoggedIn('false');
@@ -29,5 +29,9 @@ export class HeaderComponent {
 	signup(): void {
   		this.router.navigate(['signup']);
   		this.authService.setSignUp('false');
+  	}
+
+  	profile(): void {
+  		this.router.navigate(['profile']);
   	}
 }
