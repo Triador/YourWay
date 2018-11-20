@@ -2,7 +2,6 @@ package com.triador.yourwayserver.dao.impl;
 
 import com.triador.yourwayserver.dao.model.Book;
 import com.triador.yourwayserver.dao.model.BookTitle;
-import com.triador.yourwayserver.dao.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -71,7 +70,7 @@ public class BookDAOImpl implements BookDAO {
 
     @Override
     public int delete(int id) {
-        String sql = "DELETE FROM books WHERE id = ?";
+        String sql = "DELETE FROM books WHERE books_id = ?";
 
         return jdbcTemplate.update(sql, id);
     }
@@ -92,14 +91,14 @@ public class BookDAOImpl implements BookDAO {
 
     @Override
     public Book findById(int id) {
-        String sql = "SELECT * FROM books WHERE id = ?";
+        String sql = "SELECT * FROM books WHERE books_id = ?";
 
         return jdbcTemplate.queryForObject(sql, new Object[]{id}, BeanPropertyRowMapper.newInstance(Book.class));
     }
 
     @Override
     public List<BookTitle> findMatchByTitlePiece(String titlePiece) {
-        String sql = "SELECT id, russian_title FROM books WHERE lower(russian_title) LIKE :piece";
+        String sql = "SELECT books_id, russian_title FROM books WHERE lower(russian_title) LIKE :piece";
         titlePiece = titlePiece.toLowerCase().trim() + "%";
         System.out.println(titlePiece);
 
