@@ -1,6 +1,7 @@
 package com.triador.yourwayserver.config;
 
 import com.triador.yourwayserver.dao.model.User;
+import com.triador.yourwayserver.dao.model.UserId;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -47,7 +48,8 @@ public class JwtTokenUtil implements Serializable {
     public String generateToken(User user) {
 
         Claims claims = Jwts.claims().setSubject(user.getName());
-        claims.put("scopes", Arrays.asList(new SimpleGrantedAuthority("ROLE_ADMIN"), user.getId()));
+        claims.put("scopes", Arrays.asList(new SimpleGrantedAuthority("ROLE_ADMIN")));
+        claims.put("userId", user.getId());
 
         return Jwts.builder()
                 .setClaims(claims)

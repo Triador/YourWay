@@ -38,10 +38,8 @@ export class LoginComponent implements OnInit {
         this.authService.setLoggedIn('true');
 
         const decodedToken = jwtDecode(data.token);
-        console.log(JSON.stringify(decodedToken);
 
-        this.profileService.setUsername(this.username);
+        this.profileService.setUserId(decodedToken.userId);
       });
   }
-
 }
