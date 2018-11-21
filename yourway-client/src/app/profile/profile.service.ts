@@ -14,15 +14,13 @@ export class ProfileService {
 	}
 
 	getUserId() {
-		window.localStorage.getItem(USER_ID);
+		return window.localStorage.getItem(USER_ID);
 	}
 
 	addBookToProfile(bookId: number) {
 		const userId = this.getUserId();
-		const params = new HttpParams()
-			.set('userId', userId)
-			.set('bookId', bookId);
+		const body = {userId: userId, bookId: bookId.toString()};
 
-		this.http.post(profileUrl, {params}).subscribe(response => console.log(response));
+		this.http.post(profileUrl, body).subscribe(response => console.log(response));
 	}
 }

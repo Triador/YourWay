@@ -1,5 +1,6 @@
 package com.triador.yourwayserver.controllers;
 
+import com.triador.yourwayserver.dao.model.UserBook;
 import com.triador.yourwayserver.services.ProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -17,9 +18,7 @@ public class ProfileController {
     }
 
     @PostMapping()
-    public void addBookToProfile(
-            @RequestBody int userId,
-            @RequestBody int bookId) {
-        profileService.save(userId, bookId);
+    public void addBookToProfile(@RequestBody UserBook userBook) {
+        profileService.save(userBook.getUserId(), userBook.getBookId());
     }
 }

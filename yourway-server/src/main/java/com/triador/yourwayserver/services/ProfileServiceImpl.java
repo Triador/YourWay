@@ -16,6 +16,6 @@ public class ProfileServiceImpl implements ProfileService {
 
     @Override
     public void save(int userId, int bookId) {
-
+        profileDAO.save(userId, bookId);
     }
 }

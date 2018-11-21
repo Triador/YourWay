@@ -107,7 +107,7 @@ public class BookDAOImpl implements BookDAO {
 
         return namedParameterJdbcTemplate.query(sql, mapSqlParameterSource, (resultSet, i) -> {
             BookTitle bookTitle = new BookTitle();
-            bookTitle.setId(resultSet.getInt("books_id"));
+            bookTitle.setId(resultSet.getInt("book_id"));
             bookTitle.setValue(resultSet.getString("russian_title"));
             return bookTitle;
         });
