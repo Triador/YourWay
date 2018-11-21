@@ -41,7 +41,7 @@ public class UserDAOImpl implements UserDAO {
         KeyHolder keyHolder = new GeneratedKeyHolder();
         namedParameterJdbcTemplate.update(sql, sqlParameterSource, keyHolder, new String[]{"id"});
 
-        user.setId(keyHolder.getKey().intValue());
+        user.setUsersId(keyHolder.getKey().intValue());
         return user;
     }
 
