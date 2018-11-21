@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http'
 
 import { Book } from '../models/book.model';
 import { BookTitle } from '../models/book-title.model';
+import { ShortBookDescription } from '../models/short-book-description.model';
 
 @Injectable()
 export class BookService {
@@ -18,7 +19,7 @@ export class BookService {
 	}
 
 	public getBooks() {
-		return this.http.get<Book[]>(this.bookUrl);
+		return this.http.get<ShortBookDescription[]>(this.bookUrl);
 	}
 
 	public getBookTitles(titlePiece) {

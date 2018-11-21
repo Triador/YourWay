@@ -19,6 +19,11 @@ public class ProfileController {
 
     @PostMapping()
     public void addBookToProfile(@RequestBody UserBook userBook) {
-        profileService.save(userBook.getUserId(), userBook.getBookId());
+        profileService.save(userBook);
+    }
+
+    @GetMapping()
+    public UserBook getUserBook(@RequestBody UserBook userBook) {
+        return profileService.findByIds(userBook);
     }
 }

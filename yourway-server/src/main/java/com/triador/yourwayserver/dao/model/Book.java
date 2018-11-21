@@ -5,14 +5,14 @@ import java.util.Objects;
 public class Book {
 
     private int bookId;
-    private String russianTitle;
-    private String originTitle;
+    private String title;
     private String author;
     private int pageAmount;
     private int publicationYear;
     private String isbn;
     private String description;
     private String imageLink;
+    private boolean disable;
 
     public int getBookId() {
         return bookId;
@@ -22,20 +22,12 @@ public class Book {
         this.bookId = bookId;
     }
 
-    public String getRussianTitle() {
-        return russianTitle;
+    public String getTitle() {
+        return title;
     }
 
-    public void setRussianTitle(String russianTitle) {
-        this.russianTitle = russianTitle;
-    }
-
-    public String getOriginTitle() {
-        return originTitle;
-    }
-
-    public void setOriginTitle(String originTitle) {
-        this.originTitle = originTitle;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getAuthor() {
@@ -86,6 +78,14 @@ public class Book {
         this.imageLink = imageLink;
     }
 
+    public boolean isDisable() {
+        return disable;
+    }
+
+    public void setDisable(boolean disable) {
+        this.disable = disable;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -94,8 +94,8 @@ public class Book {
         return bookId == book.bookId &&
                 pageAmount == book.pageAmount &&
                 publicationYear == book.publicationYear &&
-                Objects.equals(russianTitle, book.russianTitle) &&
-                Objects.equals(originTitle, book.originTitle) &&
+                disable == book.disable &&
+                Objects.equals(title, book.title) &&
                 Objects.equals(author, book.author) &&
                 Objects.equals(isbn, book.isbn) &&
                 Objects.equals(description, book.description) &&
@@ -105,21 +105,21 @@ public class Book {
     @Override
     public int hashCode() {
 
-        return Objects.hash(bookId, russianTitle, originTitle, author, pageAmount, publicationYear, isbn, description, imageLink);
+        return Objects.hash(bookId, title, author, pageAmount, publicationYear, isbn, description, imageLink, disable);
     }
 
     @Override
     public String toString() {
         return "Book{" +
                 "bookId=" + bookId +
-                ", russianTitle='" + russianTitle + '\'' +
-                ", originTitle='" + originTitle + '\'' +
+                ", title='" + title + '\'' +
                 ", author='" + author + '\'' +
                 ", pageAmount=" + pageAmount +
                 ", publicationYear=" + publicationYear +
                 ", isbn='" + isbn + '\'' +
                 ", description='" + description + '\'' +
                 ", imageLink='" + imageLink + '\'' +
+                ", disable=" + disable +
                 '}';
     }
 }

@@ -2,6 +2,7 @@ package com.triador.yourwayserver.controllers;
 
 import com.triador.yourwayserver.dao.model.Book;
 import com.triador.yourwayserver.dao.model.BookTitle;
+import com.triador.yourwayserver.dao.model.ShortBookDescription;
 import com.triador.yourwayserver.services.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -31,7 +32,7 @@ public class BookController {
     }
 
     @GetMapping
-    public List<Book> findAll() {
+    public List<ShortBookDescription> findAll() {
         return bookService.findAll();
     }
 

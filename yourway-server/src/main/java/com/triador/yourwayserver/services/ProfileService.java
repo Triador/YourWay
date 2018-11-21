@@ -1,5 +1,8 @@
 package com.triador.yourwayserver.services;
 
+import com.triador.yourwayserver.dao.model.UserBook;
+
 public interface ProfileService {
-    void save(int userId, int bookId);
+    void save(UserBook userBook);
+    UserBook findByIds(UserBook userBook)
 }

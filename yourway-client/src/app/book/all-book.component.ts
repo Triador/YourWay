@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material';
 
-import { Book } from '../models/book.model';
+import { ShortBookDescription } from '../models/short-book-description.model';
 import { BookService } from './book.service';
 import { BookComponent } from './book.component'
 import { AuthService } from '../core/auth.service';
@@ -13,7 +13,7 @@ import { AuthService } from '../core/auth.service';
 	styleUrls: ['all-book.component.css']
 })
 export class AllBookComponent {
-	books: Book[];
+	books: ShortBookDescription[];
 
 	constructor(private router: Router,
 	 private bookService: BookService, 

@@ -18,9 +18,7 @@ export class ProfileService {
 	}
 
 	addBookToProfile(bookId: number) {
-		const userId = this.getUserId();
-		const body = {userId: userId, bookId: bookId.toString()};
-
+		const body = {userId: this.getUserId(), bookId: bookId};
 		this.http.post(profileUrl, body).subscribe(response => console.log(response));
 	}
 }

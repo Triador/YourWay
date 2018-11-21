@@ -2,6 +2,7 @@ package com.triador.yourwayserver.services;
 
 import com.triador.yourwayserver.dao.model.Book;
 import com.triador.yourwayserver.dao.model.BookTitle;
+import com.triador.yourwayserver.dao.model.ShortBookDescription;
 
 import java.util.List;
 
@@ -10,7 +11,7 @@ public interface BookService {
 
     int delete(int id);
 
-    List<Book> findAll();
+    List<ShortBookDescription> findAll();
 
     Book findByRussianTitle(String russianTitle);
 

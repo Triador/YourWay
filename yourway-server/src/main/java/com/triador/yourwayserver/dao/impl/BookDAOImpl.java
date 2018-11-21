@@ -1,7 +1,9 @@
 package com.triador.yourwayserver.dao.impl;
 
+import com.triador.yourwayserver.dao.mapper.BookRowMapper;
 import com.triador.yourwayserver.dao.model.Book;
 import com.triador.yourwayserver.dao.model.BookTitle;
+import com.triador.yourwayserver.dao.model.ShortBookDescription;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -12,26 +14,30 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Component
 public class BookDAOImpl implements BookDAO {
 
     private JdbcTemplate jdbcTemplate;
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+    private ProfileDAO profileDAO;
 
     @Autowired
     public BookDAOImpl(JdbcTemplate jdbcTemplate,
-                       NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
+                       NamedParameterJdbcTemplate namedParameterJdbcTemplate,
+                       ProfileDAO profileDAO) {
         this.jdbcTemplate = jdbcTemplate;
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
+        this.profileDAO = profileDAO;
     }
 
     @Override
     public Book save(Book book) {
         String sql = "INSERT INTO books" +
-                "(russian_title, " +
-                "origin_title, " +
+                "(title, " +
                 "author, " +
                 "page_amount, " +
                 "publication_year, " +
@@ -40,7 +46,6 @@ public class BookDAOImpl implements BookDAO {
                 "image_link) " +
                 "VALUES ( " +
                 ":russian_title, " +
-                ":origin_title, " +
                 ":autor, " +
                 ":page_amount, " +
                 ":publication_year, " +
@@ -48,12 +53,11 @@ public class BookDAOImpl implements BookDAO {
                 ":description, " +
                 ":image_link) " +
                 "ON CONFLICT " +
-                "(russian_title) " +
+                "(title) " +
                 "DO NOTHING";
 
         SqlParameterSource sqlParameterSource = new MapSqlParameterSource()
-                .addValue("russian_title", book.getRussianTitle())
-                .addValue("origin_title", book.getOriginTitle())
+                .addValue("russian_title", book.getTitle())
                 .addValue("author", book.getAuthor())
                 .addValue("page_amount", book.getPageAmount())
                 .addValue("publication_year", book.getPublicationYear())
@@ -76,24 +80,34 @@ public class BookDAOImpl implements BookDAO {
     }
 
     @Override
-    public List<Book> findAll() {
+    public List<ShortBookDescription> findAll() {
         String sql = "SELECT * FROM books";
 
-        return jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Book.class));
+        List<ShortBookDescription> books = new ArrayList<>();
+        List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
+        for (Map row : rows) {
+            ShortBookDescription book = new ShortBookDescription();
+            book.setBookId((int)row.get("book_id"));
+            book.setTitle((String)row.get("title"));
+            book.setImageLink((String)row.get("image_link"));
+            books.add(book);
+        }
+
+        return books;
     }
 
     @Override
     public Book findByRussianTitle(String russianTitle) {
-        String sql = "SELECT * FROM books WHERE russian_title = ?";
+        String sql = "SELECT * FROM books WHERE title = ?";
 
-        return jdbcTemplate.queryForObject(sql, new Object[]{russianTitle}, Book.class);
+        Book book = (Book) jdbcTemplate.queryForObject(sql, new Object[]{russianTitle}, new BookRowMapper());
     }
 
     @Override
     public Book findById(int id) {
         String sql = "SELECT * FROM books WHERE book_id = ?";
 
-        return jdbcTemplate.queryForObject(sql, new Object[]{id}, BeanPropertyRowMapper.newInstance(Book.class));
+        Book book =  (Book) jdbcTemplate.queryForObject(sql, new Object[]{id}, new BookRowMapper());
     }
 
     @Override

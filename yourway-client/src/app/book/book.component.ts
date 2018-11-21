@@ -15,7 +15,8 @@ import { ProfileService } from '../profile/profile.service';
 export class BookComponent implements OnInit {
 
 	book: Book = new Book();
-	columnsToDisplay = ["fieldNames"]
+	columnsToDisplay = ["fieldNames"];
+	isDisabled: boolean = false;
 
 	constructor(private bookService: BookService,
 		private route: ActivatedRoute,
@@ -34,6 +35,7 @@ export class BookComponent implements OnInit {
 	}
 
 	addBookToProfile() {
+		this.isDisabled = true;
 		this.profileService.addBookToProfile(this.book.bookId);
 	}
 }
