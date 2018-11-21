@@ -4,6 +4,7 @@ import com.triador.yourwayserver.dao.impl.BookDAO;
 import com.triador.yourwayserver.dao.model.Book;
 import org.openqa.selenium.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -18,6 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 @Component
+@Lazy
 public class ChitaiGorodParser {
 
     private WebDriver driver = SeleniumUtils.getDriver();
@@ -140,7 +142,7 @@ public class ChitaiGorodParser {
 
     private void downloadBookImage(String url, String bookTitle, String extension) {
         try (InputStream in = new URL(url).openStream()) {
-            Files.copy(in, Paths.get("/Users/antonandreev/Desktop/MyDev/Projects/YourWay/yourway-client/src/assets/book_images/" + bookTitle + extension));
+            Files.copy(in, Paths.get("C:\\Users\\aandreev\\Workspace\\YourWay\\yourway-client\\src\\assets\\book_images\\" + bookTitle + extension));
         } catch (FileAlreadyExistsException e) {
             System.out.println("this image has been already downloaded");
         } catch (IOException e) {
