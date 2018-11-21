@@ -16,8 +16,9 @@ export class BookService {
 	private bookUrl = 'http://localhost:8080/books';
 	private bookSearchUrl = 'http://localhost:8080/books/search';
 
-	public getBook(russianTitle: string) {
-		return this.http.get<Book>(this.bookUrl + "/" + russianTitle);
+	public getBook(id: string) {
+		console.log(id);
+		return this.http.get<Book>(this.bookUrl + "/" + id);
 	}
 
 	public getBooks() {

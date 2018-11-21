@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class Book {
 
-    private int id;
+    private int booksId;
     private String russianTitle;
     private String originTitle;
     private String author;
@@ -14,12 +14,12 @@ public class Book {
     private String description;
     private String imageLink;
 
-    public int getId() {
-        return id;
+    public int getBooksId() {
+        return booksId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setBooksId(int booksId) {
+        this.booksId = booksId;
     }
 
     public String getRussianTitle() {
@@ -91,7 +91,7 @@ public class Book {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Book book = (Book) o;
-        return id == book.id &&
+        return booksId == book.booksId &&
                 pageAmount == book.pageAmount &&
                 publicationYear == book.publicationYear &&
                 Objects.equals(russianTitle, book.russianTitle) &&
@@ -105,13 +105,13 @@ public class Book {
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, russianTitle, originTitle, author, pageAmount, publicationYear, isbn, description, imageLink);
+        return Objects.hash(booksId, russianTitle, originTitle, author, pageAmount, publicationYear, isbn, description, imageLink);
     }
 
     @Override
     public String toString() {
         return "Book{" +
-                "id=" + id +
+                "booksId=" + booksId +
                 ", russianTitle='" + russianTitle + '\'' +
                 ", originTitle='" + originTitle + '\'' +
                 ", author='" + author + '\'' +

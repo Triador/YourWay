@@ -64,7 +64,7 @@ public class BookDAOImpl implements BookDAO {
         KeyHolder keyHolder = new GeneratedKeyHolder();
         namedParameterJdbcTemplate.update(sql, sqlParameterSource, keyHolder, new String[]{"id"});
 
-        book.setId(keyHolder.getKey().intValue());
+        book.setBooksId(keyHolder.getKey().intValue());
         return book;
     }
 
@@ -107,7 +107,7 @@ public class BookDAOImpl implements BookDAO {
 
         return namedParameterJdbcTemplate.query(sql, mapSqlParameterSource, (resultSet, i) -> {
             BookTitle bookTitle = new BookTitle();
-            bookTitle.setId(resultSet.getInt("id"));
+            bookTitle.setId(resultSet.getInt("books_id"));
             bookTitle.setValue(resultSet.getString("russian_title"));
             return bookTitle;
         });
