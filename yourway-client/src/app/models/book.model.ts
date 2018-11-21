@@ -1,5 +1,5 @@
 export class Book {
-	id: number;
+	bookId: number;
     russianTitle: string;
     originTitle: string;
     author: string;

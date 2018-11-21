@@ -22,6 +22,8 @@
 			<mat-list-item *ngIf="book.isbn">{{book.isbn}}</mat-list-item>
 		</mat-list>
 	</div>
+	
+	<button #add mat-raised-button (click)="addBookToProfile()" color="primary">add</button>
 
 	<div *ngIf="book.description" class="book-description">{{book.description}}</div>
 </mat-card>

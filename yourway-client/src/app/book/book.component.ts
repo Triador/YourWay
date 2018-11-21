@@ -5,6 +5,7 @@ import { switchMap } from 'rxjs/operators';
 
 import { Book } from '../models/book.model';
 import { BookService } from './book.service';
+import { ProfileService } from '../profile/profile.service';
 
 @Component({
 	selector: 'app-book',
@@ -18,7 +19,8 @@ export class BookComponent implements OnInit {
 
 	constructor(private bookService: BookService,
 		private route: ActivatedRoute,
-		private router: Router) {}
+		private router: Router,
+		private profileService: ProfileService) {}
 
 	ngOnInit() {
 		this.route.paramMap.pipe(
@@ -29,5 +31,9 @@ export class BookComponent implements OnInit {
 			data.imageLink = "../../assets/book_images/small_" + data.imageLink;
 			this.book = data;
 		});
+	}
+
+	addBookToProfile() {
+		this.profileService.addBookToProfile(this.book.bookId);
 	}
 }
