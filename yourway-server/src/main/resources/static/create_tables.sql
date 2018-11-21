@@ -1,6 +1,6 @@
 CREATE TABLE books
 (
-  books_id SERIAL PRIMARY KEY,
+  book_id SERIAL PRIMARY KEY,
   russian_title VARCHAR(255) UNIQUE NOT NULL,
   origin_title VARCHAR(255),
   author VARCHAR(255),
@@ -13,7 +13,7 @@ CREATE TABLE books
 
 CREATE TABLE users
 (
-  users_id SERIAL PRIMARY KEY,
+  user_id SERIAL PRIMARY KEY,
   password VARCHAR(255),
   name VARCHAR(255),
   role VARCHAR(255)
@@ -21,8 +21,8 @@ CREATE TABLE users
 
 CREATE TABLE users_books
 (
-  users_id int REFERENCES users (users_id) ON UPDATE CASCADE ON DELETE CASCADE,
-  books_id int REFERENCES books (books_id) ON UPDATE CASCADE ON DELETE CASCADE,
-  CONSTRAINT users_books_pkey PRIMARY KEY (users_id, books_id)
+  user_id int REFERENCES users (user_id) ON UPDATE CASCADE ON DELETE CASCADE,
+  book_id int REFERENCES books (book_id) ON UPDATE CASCADE ON DELETE CASCADE,
+  CONSTRAINT users_books_pkey PRIMARY KEY (user_id, book_id)
 );
 

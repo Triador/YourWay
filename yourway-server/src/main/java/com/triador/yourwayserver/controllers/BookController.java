@@ -13,8 +13,12 @@ import java.util.List;
 @RequestMapping({"books"})
 public class BookController {
 
-    @Autowired
     private BookService bookService;
+
+    @Autowired
+    public BookController(BookService bookService) {
+        this.bookService = bookService;
+    }
 
     @GetMapping(path = {"/{id}"})
     public Book findById(@PathVariable("id") int id) {

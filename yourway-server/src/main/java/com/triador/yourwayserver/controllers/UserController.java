@@ -12,8 +12,12 @@ import java.util.List;
 @RequestMapping({"users"})
 public class UserController {
 
-    @Autowired
     private UserService userService;
+
+    @Autowired
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 
     @PostMapping(value = "/signup")
     public User save(@RequestBody User user) {

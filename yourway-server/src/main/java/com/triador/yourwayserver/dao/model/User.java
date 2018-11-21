@@ -2,7 +2,7 @@ package com.triador.yourwayserver.dao.model;
 
 public class User {
 
-    private int usersId;
+    private int userId;
 
     private String name;
 
@@ -10,12 +10,12 @@ public class User {
 
     private String role;
 
-    public int getUsersId() {
-        return usersId;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setUsersId(int usersId) {
-        this.usersId = usersId;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public String getName() {

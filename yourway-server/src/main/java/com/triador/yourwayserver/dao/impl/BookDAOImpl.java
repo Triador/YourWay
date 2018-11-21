@@ -62,15 +62,15 @@ public class BookDAOImpl implements BookDAO {
                 .addValue("image_link", book.getImageLink());
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
-        namedParameterJdbcTemplate.update(sql, sqlParameterSource, keyHolder, new String[]{"id"});
+        namedParameterJdbcTemplate.update(sql, sqlParameterSource, keyHolder, new String[]{"book_id"});
 
-        book.setBooksId(keyHolder.getKey().intValue());
+        book.setBookId(keyHolder.getKey().intValue());
         return book;
     }
 
     @Override
     public int delete(int id) {
-        String sql = "DELETE FROM books WHERE books_id = ?";
+        String sql = "DELETE FROM books WHERE book_id = ?";
 
         return jdbcTemplate.update(sql, id);
     }
@@ -91,14 +91,14 @@ public class BookDAOImpl implements BookDAO {
 
     @Override
     public Book findById(int id) {
-        String sql = "SELECT * FROM books WHERE books_id = ?";
+        String sql = "SELECT * FROM books WHERE book_id = ?";
 
         return jdbcTemplate.queryForObject(sql, new Object[]{id}, BeanPropertyRowMapper.newInstance(Book.class));
     }
 
     @Override
     public List<BookTitle> findMatchByTitlePiece(String titlePiece) {
-        String sql = "SELECT books_id, russian_title FROM books WHERE lower(russian_title) LIKE :piece";
+        String sql = "SELECT book_id, russian_title FROM books WHERE lower(russian_title) LIKE :piece";
         titlePiece = titlePiece.toLowerCase().trim() + "%";
         System.out.println(titlePiece);
 

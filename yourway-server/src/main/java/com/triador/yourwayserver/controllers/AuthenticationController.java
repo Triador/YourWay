@@ -19,14 +19,18 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/token")
 public class AuthenticationController {
 
-    @Autowired
     private AuthenticationManager authenticationManager;
-
-    @Autowired
     private JwtTokenUtil jwtTokenUtil;
+    private UserService userService;
 
     @Autowired
-    private UserService userService;
+    public AuthenticationController(AuthenticationManager authenticationManager,
+                                    JwtTokenUtil jwtTokenUtil,
+                                    UserService userService) {
+        this.authenticationManager = authenticationManager;
+        this.jwtTokenUtil = jwtTokenUtil;
+        this.userService = userService;
+    }
 
     @RequestMapping(value = "/generate-token", method = RequestMethod.POST)
     public ResponseEntity<?> register(@RequestBody LoginUser loginUser) throws AuthenticationException {
