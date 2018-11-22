@@ -25,12 +25,13 @@ export class BookComponent implements OnInit {
 
 	ngOnInit() {
 		this.route.paramMap.pipe(
-			switchMap((params: ParamMap) =>
+			switchMap((params: ParamMap) => 
 				this.bookService.getBook(params.get('id')))
 		).subscribe(data => {
 			console.log(data);
 			data.imageLink = "../../assets/book_images/small_" + data.imageLink;
 			this.book = data;
+			this.isDisabled = data.disable;
 		});
 	}
 

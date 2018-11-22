@@ -4,8 +4,8 @@ import com.triador.yourwayserver.dao.mapper.BookRowMapper;
 import com.triador.yourwayserver.dao.model.Book;
 import com.triador.yourwayserver.dao.model.BookTitle;
 import com.triador.yourwayserver.dao.model.ShortBookDescription;
+import com.triador.yourwayserver.dao.model.UserBook;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -45,7 +45,7 @@ public class BookDAOImpl implements BookDAO {
                 "description, " +
                 "image_link) " +
                 "VALUES ( " +
-                ":russian_title, " +
+                ":title, " +
                 ":autor, " +
                 ":page_amount, " +
                 ":publication_year, " +
@@ -57,7 +57,7 @@ public class BookDAOImpl implements BookDAO {
                 "DO NOTHING";
 
         SqlParameterSource sqlParameterSource = new MapSqlParameterSource()
-                .addValue("russian_title", book.getTitle())
+                .addValue("title", book.getTitle())
                 .addValue("author", book.getAuthor())
                 .addValue("page_amount", book.getPageAmount())
                 .addValue("publication_year", book.getPublicationYear())
@@ -70,13 +70,6 @@ public class BookDAOImpl implements BookDAO {
 
         book.setBookId(keyHolder.getKey().intValue());
         return book;
-    }
-
-    @Override
-    public int delete(int id) {
-        String sql = "DELETE FROM books WHERE book_id = ?";
-
-        return jdbcTemplate.update(sql, id);
     }
 
     @Override
@@ -97,22 +90,19 @@ public class BookDAOImpl implements BookDAO {
     }
 
     @Override
-    public Book findByRussianTitle(String russianTitle) {
-        String sql = "SELECT * FROM books WHERE title = ?";
-
-        Book book = (Book) jdbcTemplate.queryForObject(sql, new Object[]{russianTitle}, new BookRowMapper());
-    }
-
-    @Override
-    public Book findById(int id) {
+    public Book findById(UserBook userBook) {
         String sql = "SELECT * FROM books WHERE book_id = ?";
+        int bookId = userBook.getBookId();
 
-        Book book =  (Book) jdbcTemplate.queryForObject(sql, new Object[]{id}, new BookRowMapper());
+        Book book = (Book) jdbcTemplate.queryForObject(sql, new Object[]{bookId}, new BookRowMapper());
+        setDisable(book, userBook);
+
+        return book;
     }
 
     @Override
     public List<BookTitle> findMatchByTitlePiece(String titlePiece) {
-        String sql = "SELECT book_id, russian_title FROM books WHERE lower(russian_title) LIKE :piece";
+        String sql = "SELECT book_id, title FROM books WHERE lower(title) LIKE :piece";
         titlePiece = titlePiece.toLowerCase().trim() + "%";
         System.out.println(titlePiece);
 
@@ -122,8 +112,22 @@ public class BookDAOImpl implements BookDAO {
         return namedParameterJdbcTemplate.query(sql, mapSqlParameterSource, (resultSet, i) -> {
             BookTitle bookTitle = new BookTitle();
             bookTitle.setId(resultSet.getInt("book_id"));
-            bookTitle.setValue(resultSet.getString("russian_title"));
+            bookTitle.setValue(resultSet.getString("title"));
             return bookTitle;
         });
+    }
+
+    private void setDisable(Book book, UserBook userBook) {
+
+        if (userBook.getUserId() == 0) {
+            book.setDisable(true);
+            return;
+        }
+
+        UserBook dbUserBook = profileDAO.findByIds(userBook);
+        if (book != null) {
+            boolean disable = dbUserBook != null;
+            book.setDisable(disable);
+        }
     }
 }

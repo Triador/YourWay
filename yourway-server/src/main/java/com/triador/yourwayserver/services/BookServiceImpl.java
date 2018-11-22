@@ -4,6 +4,7 @@ import com.triador.yourwayserver.dao.impl.BookDAO;
 import com.triador.yourwayserver.dao.model.Book;
 import com.triador.yourwayserver.dao.model.BookTitle;
 import com.triador.yourwayserver.dao.model.ShortBookDescription;
+import com.triador.yourwayserver.dao.model.UserBook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,23 +22,14 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public int delete(int id) {
-        return bookDAO.delete(id);
-    }
-
-    @Override
     public List<ShortBookDescription> findAll() {
         return bookDAO.findAll();
     }
 
     @Override
-    public Book findByRussianTitle(String russianTitle) {
-        return bookDAO.findByRussianTitle(russianTitle);
-    }
-
-    @Override
-    public Book findById(int id) {
-        return bookDAO.findById(id);
+    public Book findById(int bookId, int userId) {
+        UserBook userBook = new UserBook(userId, bookId);
+        return bookDAO.findById(userBook);
     }
 
     @Override

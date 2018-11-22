@@ -4,6 +4,13 @@ public class UserBook {
     int userId;
     int bookId;
 
+    public UserBook(){}
+
+    public UserBook(int userId, int bookId) {
+        this.userId = userId;
+        this.bookId = bookId;
+    }
+
     public int getUserId() {
         return userId;
     }

@@ -2,6 +2,7 @@ package com.triador.yourwayserver.dao.impl;
 
 import com.triador.yourwayserver.dao.model.UserBook;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
@@ -29,10 +30,14 @@ public class ProfileDAOimpl implements ProfileDAO {
     public UserBook findByIds(UserBook userBook) {
         String sql = "SELECT * FROM users_books WHERE user_id = ? AND book_id = ?";
 
-        String userId = String.valueOf(userBook.getUserId());
-        String bookId = String.valueOf(userBook.getBookId());
+        int userId = userBook.getUserId();
+        int bookId = userBook.getBookId();
 
-        return jdbcTemplate.queryForObject(sql, new Object[]{userId, bookId},
-                BeanPropertyRowMapper.newInstance(UserBook.class));
+        try {
+            return jdbcTemplate.queryForObject(sql, new Object[]{userId, bookId},
+                    BeanPropertyRowMapper.newInstance(UserBook.class));
+        } catch (EmptyResultDataAccessException ex) {
+            return null;
+        }
     }
 }

@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 
+import { UserBook } from '../models/user-book.model';
+
 const USER_ID = 'USER_ID';
 const profileUrl = 'http://localhost:8080/profiles';
 
@@ -18,7 +20,9 @@ export class ProfileService {
 	}
 
 	addBookToProfile(bookId: number) {
-		const body = {userId: this.getUserId(), bookId: bookId};
-		this.http.post(profileUrl, body).subscribe(response => console.log(response));
+		const userBook: UserBook = new UserBook();
+		userBook.userId = this.getUserId();
+		userBook.bookId = bookId;
+		this.http.post(profileUrl, userBook).subscribe(response => console.log(response));
 	}
 }

@@ -62,7 +62,7 @@ public class ChitaiGorodParser {
             Book book = getBook(bookUrl);
             sleep(1000);
             bookDAO.save(book);
-            System.out.println("book " + book.getRussianTitle() + " saved");
+            System.out.println("book " + book.getTitle() + " saved");
         }
     }
 
@@ -81,9 +81,9 @@ public class ChitaiGorodParser {
                 .getAttribute("src");
         if (!imageUrl.isEmpty()) {
             String extension = getImageExtension(imageUrl);
-            book.setImageLink(converter.convert(book.getRussianTitle()) + extension);
+            book.setImageLink(converter.convert(book.getTitle()) + extension);
 
-            downloadBookImage(imageUrl, "big_" + converter.convert(book.getRussianTitle()), extension);
+            downloadBookImage(imageUrl, "big_" + converter.convert(book.getTitle()), extension);
         }
 
         driver.close();
@@ -103,7 +103,7 @@ public class ChitaiGorodParser {
         String description = driver.findElement(By.cssSelector("div[itemprop='description']")).getText();
 
         Book book = new Book();
-        book.setRussianTitle(title);
+        book.setTitle(title);
         book.setAuthor(author);
         book.setPageAmount(pageAmount);
         book.setPublicationYear(publicationYear);

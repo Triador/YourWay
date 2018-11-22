@@ -1,22 +1,30 @@
 import { Injectable } from '@angular/core'
-import { HttpClient } from '@angular/common/http'
+import { HttpClient, HttpParams } from '@angular/common/http'
 
 import { Book } from '../models/book.model';
 import { BookTitle } from '../models/book-title.model';
+import { UserBook } from '../models/user-book.model';
 import { ShortBookDescription } from '../models/short-book-description.model';
+
+import { ProfileService } from '../profile/profile.service';
 
 @Injectable()
 export class BookService {
 
-	constructor(private http: HttpClient) {}
+	constructor(private http: HttpClient,
+		private profileService: ProfileService) {}
 
 	private bookUrl = 'http://localhost:8080/books';
 	private bookSearchUrl = 'http://localhost:8080/books/search';
 
-	public getBook(id: string) {
-		console.log(id);
-		return this.http.get<Book>(this.bookUrl + "/" + id);
+	public getBook(bookId: number) {
+		const userId: number = this.profileService.getUserId();
+		return this.http.get<Book>(this.bookUrl + "/" + bookId, { 
+			params: new HttpParams().set('userId', userId)
+		});
 	}
+
+	public 
 
 	public getBooks() {
 		return this.http.get<ShortBookDescription[]>(this.bookUrl);
@@ -28,7 +36,7 @@ export class BookService {
 	}
 
 	public deleteBook(book) {
-		return this.http.delete(this.bookUrl + "/" + book.id);
+		return this.http.delete(this.bookUrl + "/" + book.bookId);
 	}
 
 	public createBook(book) {

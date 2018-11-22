@@ -3,6 +3,7 @@ package com.triador.yourwayserver.controllers;
 import com.triador.yourwayserver.dao.model.Book;
 import com.triador.yourwayserver.dao.model.BookTitle;
 import com.triador.yourwayserver.dao.model.ShortBookDescription;
+import com.triador.yourwayserver.dao.model.UserBook;
 import com.triador.yourwayserver.services.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -21,9 +22,10 @@ public class BookController {
         this.bookService = bookService;
     }
 
-    @GetMapping(path = {"/{id}"})
-    public Book findById(@PathVariable("id") int id) {
-        return bookService.findById(id);
+    @GetMapping(path = {"/{bookId}"})
+    public Book findById(@PathVariable("bookId") int bookId,
+                         @RequestParam("userId") int userId) {
+        return bookService.findById(bookId, userId);
     }
 
     @GetMapping(path = {"/search/{titlePiece}"})

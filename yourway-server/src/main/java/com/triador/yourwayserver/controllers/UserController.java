@@ -29,14 +29,4 @@ public class UserController {
         return userService.findById(id);
     }
 
-    @DeleteMapping(path = {"/{id}"})
-    public int delete(@PathVariable("id") int id) {
-        return userService.delete(id);
-    }
-
-    @GetMapping
-    public List<User> findAll() {
-        return userService.findAll();
-    }
-
 }
