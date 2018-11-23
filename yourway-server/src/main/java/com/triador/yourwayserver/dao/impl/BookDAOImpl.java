@@ -5,6 +5,7 @@ import com.triador.yourwayserver.dao.model.Book;
 import com.triador.yourwayserver.dao.model.BookTitle;
 import com.triador.yourwayserver.dao.model.ShortBookDescription;
 import com.triador.yourwayserver.dao.model.UserBook;
+import com.triador.yourwayserver.services.ProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -23,15 +24,15 @@ public class BookDAOImpl implements BookDAO {
 
     private JdbcTemplate jdbcTemplate;
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
-    private ProfileDAO profileDAO;
+    private ProfileService profileService;
 
     @Autowired
     public BookDAOImpl(JdbcTemplate jdbcTemplate,
                        NamedParameterJdbcTemplate namedParameterJdbcTemplate,
-                       ProfileDAO profileDAO) {
+                       ProfileService profileService) {
         this.jdbcTemplate = jdbcTemplate;
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
-        this.profileDAO = profileDAO;
+        this.profileService = profileService;
     }
 
     @Override
@@ -124,7 +125,7 @@ public class BookDAOImpl implements BookDAO {
             return;
         }
 
-        UserBook dbUserBook = profileDAO.findByIds(userBook);
+        UserBook dbUserBook = profileService.findByIds(userBook);
         if (book != null) {
             boolean disable = dbUserBook != null;
             book.setDisable(disable);

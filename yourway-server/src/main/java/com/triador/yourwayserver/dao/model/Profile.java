@@ -2,16 +2,26 @@ package com.triador.yourwayserver.dao.model;
 
 public class Profile {
 
-    private User user;
+    private String username;
+
+    private String imageLink;
 
     private Book[] books;
 
-    public User getUser() {
-        return user;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getImageLink() {
+        return imageLink;
+    }
+
+    public void setImageLink(String imageLink) {
+        this.imageLink = imageLink;
     }
 
     public Book[] getBooks() {

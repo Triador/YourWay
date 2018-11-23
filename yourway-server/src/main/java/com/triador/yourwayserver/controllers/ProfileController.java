@@ -22,8 +22,4 @@ public class ProfileController {
         profileService.save(userBook);
     }
 
-    @GetMapping()
-    public UserBook getUserBook(@RequestBody UserBook userBook) {
-        return profileService.findByIds(userBook);
-    }
 }

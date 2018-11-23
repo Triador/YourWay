@@ -16,7 +16,7 @@ export class ProfileService {
 	}
 
 	getUserId(): number {
-		return Number(window.localStorage.getItem(USER_ID));
+		return Number(window.localStorage.getItem(USER_ID);
 	}
 
 	addBookToProfile(bookId: number) {

@@ -31,7 +31,7 @@ export class HeaderComponent {
   		this.authService.setSignUp('false');
   	}
 
-  	profile(): void {
+  	openProfile(): void {
   		this.router.navigate(['profile']);
   	}
 }
