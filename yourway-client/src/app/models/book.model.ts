@@ -7,4 +7,5 @@ export class Book {
     isbn: string;
     description: string;
     imageLink: string;
+    disable: boolean;
 }
