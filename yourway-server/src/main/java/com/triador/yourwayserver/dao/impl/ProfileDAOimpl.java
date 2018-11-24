@@ -1,5 +1,7 @@
 package com.triador.yourwayserver.dao.impl;
 
+import com.triador.yourwayserver.dao.mapper.BookRowMapper;
+import com.triador.yourwayserver.dao.model.Book;
 import com.triador.yourwayserver.dao.model.Profile;
 import com.triador.yourwayserver.dao.model.UserBook;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 public class ProfileDAOimpl implements ProfileDAO {
@@ -33,7 +37,7 @@ public class ProfileDAOimpl implements ProfileDAO {
     }
 
     @Override
-    public UserBook findByIds(UserBook userBook) {
+    public UserBook findUserBookRelationship(UserBook userBook) {
         String sql = "SELECT * FROM users_books WHERE user_id = ? AND book_id = ?";
 
         int userId = userBook.getUserId();
@@ -49,14 +53,11 @@ public class ProfileDAOimpl implements ProfileDAO {
 
     @Override
     public Profile buildProfile(int userId) {
-        String usersSql = "SELECT name, image_link FROM users WHERE user_id = :userId";
+        String usersSql = "SELECT name, image_link FROM users WHERE user_id = ?";
         String booksSql = "SELECT * FROM books " +
                 "INNER JOIN users_books " +
                 "ON users_books.book_id = books.book_id " +
                 "WHERE users_books.user_id = ?";
-
-        MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
-        mapSqlParameterSource.addValue("userId", userId);
 
         Profile profile = jdbcTemplate.queryForObject(usersSql, new Object[]{userId}, (resultSet, i) -> {
             Profile tempProfile = new Profile();
@@ -64,5 +65,13 @@ public class ProfileDAOimpl implements ProfileDAO {
             tempProfile.setImageLink(resultSet.getString("image_link"));
             return tempProfile;
         });
+
+        List<Book> books = jdbcTemplate.query(booksSql, new Object[]{userId}, new BookRowMapper());
+
+        if (profile != null) {
+            profile.setBooks(books);
+        }
+
+        return profile;
     }
 }

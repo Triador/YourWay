@@ -1,12 +1,14 @@
 package com.triador.yourwayserver.dao.model;
 
+import java.util.List;
+
 public class Profile {
 
     private String username;
 
     private String imageLink;
 
-    private Book[] books;
+    private List<Book> books;
 
     public String getUsername() {
         return username;
@@ -24,11 +26,11 @@ public class Profile {
         this.imageLink = imageLink;
     }
 
-    public Book[] getBooks() {
+    public List<Book> getBooks() {
         return books;
     }
 
-    public void setBooks(Book[] books) {
+    public void setBooks(List<Book> books) {
         this.books = books;
     }
 }

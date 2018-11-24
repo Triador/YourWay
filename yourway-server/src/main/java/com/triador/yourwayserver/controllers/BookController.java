@@ -23,7 +23,7 @@ public class BookController {
     }
 
     @GetMapping(path = {"/{bookId}"})
-    public Book findById(@PathVariable("bookId") int bookId,
+    public Book getBook(@PathVariable("bookId") int bookId,
                          @RequestParam("userId") int userId) {
         return bookService.findById(bookId, userId);
     }
@@ -34,7 +34,7 @@ public class BookController {
     }
 
     @GetMapping
-    public List<ShortBookDescription> findAll() {
+    public List<ShortBookDescription> getBooks() {
         return bookService.findAll();
     }
 

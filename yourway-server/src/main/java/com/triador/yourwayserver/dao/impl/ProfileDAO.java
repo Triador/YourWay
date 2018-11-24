@@ -5,6 +5,6 @@ import com.triador.yourwayserver.dao.model.UserBook;
 
 public interface ProfileDAO {
     void save(UserBook userBook);
-    UserBook findByIds(UserBook userBook);
+    UserBook findUserBookRelationship(UserBook userBook);
     Profile buildProfile(int userId);
 }

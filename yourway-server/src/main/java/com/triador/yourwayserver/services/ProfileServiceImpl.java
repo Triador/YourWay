@@ -1,6 +1,7 @@
 package com.triador.yourwayserver.services;
 
 import com.triador.yourwayserver.dao.impl.ProfileDAO;
+import com.triador.yourwayserver.dao.model.Profile;
 import com.triador.yourwayserver.dao.model.UserBook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +22,12 @@ public class ProfileServiceImpl implements ProfileService {
     }
 
     @Override
-    public UserBook findByIds(UserBook userBook) {
-        return profileDAO.findByIds(userBook);
+    public UserBook findUserBookRelationship(UserBook userBook) {
+        return profileDAO.findUserBookRelationship(userBook);
+    }
+
+    @Override
+    public Profile findById(int userId) {
+        return profileDAO.buildProfile(userId);
     }
 }

@@ -125,7 +125,7 @@ public class BookDAOImpl implements BookDAO {
             return;
         }
 
-        UserBook dbUserBook = profileService.findByIds(userBook);
+        UserBook dbUserBook = profileService.findUserBookRelationship(userBook);
         if (book != null) {
             boolean disable = dbUserBook != null;
             book.setDisable(disable);

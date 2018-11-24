@@ -20,12 +20,12 @@ public class UserController {
     }
 
     @PostMapping(value = "/signup")
-    public User save(@RequestBody User user) {
+    public User createUser(@RequestBody User user) {
         return userService.save(user);
     }
 
     @GetMapping(path = {"/{id}"})
-    public User findById(@PathVariable("id") int id) {
+    public User getUser(@PathVariable("id") int id) {
         return userService.findById(id);
     }
 

@@ -1,5 +1,6 @@
 package com.triador.yourwayserver.controllers;
 
+import com.triador.yourwayserver.dao.model.Profile;
 import com.triador.yourwayserver.dao.model.UserBook;
 import com.triador.yourwayserver.services.ProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,4 +23,8 @@ public class ProfileController {
         profileService.save(userBook);
     }
 
+    @GetMapping(path = {"/{bookId}"})
+    public Profile getProfile(@PathVariable String bookId) {
+        return profileService.findById(Integer.parseInt(bookId));
+    }
 }
