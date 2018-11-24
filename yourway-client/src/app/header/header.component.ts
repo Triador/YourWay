@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 
 import { TokenStorage } from '../core/token.storage';
 import { AuthService } from '../core/auth.service';
+import { ProfileService } from '../profile/profile.service';
 
 @Component({
 	selector: 'app-header',
@@ -13,7 +14,8 @@ export class HeaderComponent {
 
 	constructor(private token: TokenStorage,
 		private router: Router,
-		private authService: AuthService) { }
+		private authService: AuthService,
+		private profileService: ProfileService) { }
 
 	logout(): void {
 		this.router.navigate(['login']);
@@ -32,6 +34,7 @@ export class HeaderComponent {
   	}
 
   	openProfile(): void {
-  		this.router.navigate(['profile']);
+  		const userId = this.profileService.getUserId();
+  		this.router.navigate(['profile/' + userId]);
   	}
 }

@@ -24,8 +24,6 @@ export class BookService {
 		});
 	}
 
-	public 
-
 	public getBooks() {
 		return this.http.get<ShortBookDescription[]>(this.bookUrl);
 	}
