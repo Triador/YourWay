@@ -1,0 +1,10 @@
+.test {
+	margin: 0 auto;
+}
+mat-toolbar {
+	position: relative;
+}
+mat-toolbar-row {
+	position: sticky;
+	bottom: 0;
+}

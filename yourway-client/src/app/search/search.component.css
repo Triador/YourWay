@@ -3,7 +3,7 @@
 }
 .search-hint {
 	position: absolute;
-	z-index: 1;
+	z-index: 100;
 	margin-top: 5%;
 	background-color: white;
 }

@@ -1,5 +1,5 @@
-<app-header></app-header>
 <div class="books-container">
+	<!-- <mat-spinner mode="indeterminate"></mat-spinner> -->
 	<mat-card *ngFor="let book of books" (click)="openBook(book.bookId)">
 		<mat-card-content>
 			<div *ngIf="book.title" class="title">{{book.title}}</div>

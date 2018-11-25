@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CustomMaterialModule } from './core/material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { AppComponent } from './app.component';
 import { BookComponent } from './book/book.component';
 import { AppRoutingModule } from './core/app.routing.module';
@@ -20,9 +21,8 @@ import { SignupComponent } from './signup/signup.component';
 import { SearchComponent } from './search/search.component';
 import { MatListModule } from '@angular/material/list';
 import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
 import { ProfileComponent } from './profile/profile.component';
-
-import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 
 @NgModule({
   declarations: [
@@ -34,7 +34,8 @@ import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
     SignupComponent,
     SearchComponent,
     HeaderComponent,
-    ProfileComponent
+    FooterComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,7 +44,8 @@ import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    MatListModule
+    MatListModule,
+    FlexLayoutModule
   ],
   entryComponents: [ErrorDialogComponent],
   providers: [ErrorDialogComponent, BookService, AuthService, TokenStorage, SignUpService,
@@ -55,5 +57,3 @@ import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
-
-platformBrowserDynamic().bootstrapModule(AppModule);
