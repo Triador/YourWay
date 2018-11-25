@@ -20,10 +20,11 @@ export class ProfileService {
 		return Number(window.localStorage.getItem(USER_ID));
 	}
 
-	addBookToProfile(bookId: number) {
+	addBookToProfile(bookId: number, bookStatus: string) {
 		const userBook: UserBook = new UserBook();
 		userBook.userId = this.getUserId();
 		userBook.bookId = bookId;
+		userBook.bookStatus = bookStatus;
 		this.http.post(profileUrl, userBook).subscribe(response => console.log(response));
 	}
 

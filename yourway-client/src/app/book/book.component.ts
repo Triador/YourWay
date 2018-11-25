@@ -35,8 +35,8 @@ export class BookComponent implements OnInit {
 		});
 	}
 
-	addBookToProfile() {
+	addBookToProfile(bookStatus: string) {
 		this.isDisabled = true;
-		this.profileService.addBookToProfile(this.book.bookId);
+		this.profileService.addBookToProfile(this.book.bookId, bookStatus);
 	}
 }

@@ -1,3 +1,5 @@
+import '../../polyfills';
+
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
@@ -9,7 +11,8 @@ import {
   MatToolbarModule, 
   MatProgressSpinnerModule,
   MatMenuModule,
-  MatIconModule
+  MatIconModule,
+  MatTabsModule
 } from '@angular/material';
 
 @NgModule({
@@ -22,7 +25,8 @@ import {
   MatTableModule, 
   MatProgressSpinnerModule,
   MatMenuModule,
-  MatIconModule],
+  MatIconModule,
+  MatTabsModule],
   exports: [CommonModule, 
   MatToolbarModule, 
   MatButtonModule, 
@@ -32,6 +36,7 @@ import {
   MatTableModule, 
   MatProgressSpinnerModule,
   MatMenuModule,
-  MatIconModule],
+  MatIconModule,
+  MatTabsModule],
 })
 export class CustomMaterialModule { }

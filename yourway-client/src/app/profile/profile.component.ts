@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 import { switchMap } from 'rxjs/operators';
 
@@ -26,8 +27,14 @@ export class ProfileComponent implements OnInit {
 				this.profileService.getProfile(Number(params.get('id'))))
 			).subscribe(data => {
 				this.profile = data;
-				for (var i = 0; i < this.profile.books.length; i++) {
-					this.profile.books[i].imageLink = "../../assets/book_images/small_" + this.profile.books[i].imageLink;
+				for (var i = 0; i < this.profile.progressBooks.length; i++) {
+					this.profile.progressBooks[i].imageLink = "../../assets/book_images/small_" + this.profile.progressBooks[i].imageLink;
+				}
+				for (var i = 0; i < this.profile.futureBooks.length; i++) {
+					this.profile.futureBooks[i].imageLink = "../../assets/book_images/small_" + this.profile.futureBooks[i].imageLink;
+				}
+				for (var i = 0; i < this.profile.finishedBooks.length; i++) {
+					this.profile.finishedBooks[i].imageLink = "../../assets/book_images/small_" + this.profile.finishedBooks[i].imageLink;
 				}
 			})
 	}
