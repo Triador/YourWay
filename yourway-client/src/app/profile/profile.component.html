@@ -1,11 +1,11 @@
 <mat-tab-group mat-align-tabs="center" animationDuration="4000ms">
 	<mat-tab label="Book in progress">
 		<div class="books-container">
-			<mat-card *ngFor="let book of profile.progressBooks" (click)="openBook(book.bookId)">
-				<button mat-icon-button class="delete-button">
+			<mat-card *ngFor="let book of profile.progressBooks; let i = index">
+				<button mat-icon-button class="delete-button" (click)="deleteBook(book.bookId, 'PROGRESS', i)">
 					<mat-icon>cancel</mat-icon>
 				</button>
-				<mat-card-content>
+				<mat-card-content (click)="openBook(book.bookId)">
 					<div *ngIf="book.title" class="title">{{book.title}}</div>
 					<img src="{{book.imageLink}}" width="125px" height="200px">
 				</mat-card-content>
@@ -15,11 +15,11 @@
 
 	<mat-tab label="Future books">
 		<div class="books-container">
-			<mat-card *ngFor="let book of profile.futureBooks" (click)="openBook(book.bookId)">
-				<button mat-icon-button class="delete-button">
+			<mat-card *ngFor="let book of profile.futureBooks; let i = index">
+				<button mat-icon-button class="delete-button" (click)="deleteBook(book.bookId, 'FUTURE', i)">
 					<mat-icon>cancel</mat-icon>
 				</button>
-				<mat-card-content>
+				<mat-card-content (click)="openBook(book.bookId)">
 					<div *ngIf="book.title" class="title">{{book.title}}</div>
 					<img src="{{book.imageLink}}" width="125px" height="200px">
 				</mat-card-content>
@@ -29,11 +29,11 @@
 
 	<mat-tab label="Finished books">
 		<div class="books-container">
-			<mat-card *ngFor="let book of profile.finishedBooks" (click)="openBook(book.bookId)">
-				<button mat-icon-button class="delete-button">
+			<mat-card *ngFor="let book of profile.finishedBooks; let i = index">
+				<button mat-icon-button class="delete-button" (click)="deleteBook(book.bookId, 'FINISHED', i)">
 					<mat-icon>cancel</mat-icon>
 				</button>
-				<mat-card-content>
+				<mat-card-content (click)="openBook(book.bookId)">
 					<div *ngIf="book.title" class="title">{{book.title}}</div>
 					<img src="{{book.imageLink}}" width="125px" height="200px">
 				</mat-card-content>

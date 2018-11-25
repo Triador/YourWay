@@ -31,4 +31,13 @@ export class ProfileService {
 	getProfile(userId: number) {
 		return this.http.get<Profile>(profileUrl + '/' + userId);
 	}
+
+	deleteBook(bookId: number) {
+		const userId: number = this.getUserId();
+		return this.http.request('delete', profileUrl, { 
+			params: new HttpParams()
+				.set('userId', userId.toString())
+				.set('bookId', bookId)
+		});
+	}
 }

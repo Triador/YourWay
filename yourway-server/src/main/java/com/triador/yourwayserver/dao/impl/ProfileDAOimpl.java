@@ -93,4 +93,12 @@ public class ProfileDAOimpl implements ProfileDAO {
 
         return profile;
     }
+
+    @Override
+    public int deleteBook(int userId, int bookId) {
+        String sql = "DELETE FROM users_books " +
+                "WHERE user_id = ? AND book_id = ?";
+
+        return jdbcTemplate.update(sql, userId, bookId);
+    }
 }

@@ -27,4 +27,10 @@ public class ProfileController {
     public Profile getProfile(@PathVariable String bookId) {
         return profileService.findById(Integer.parseInt(bookId));
     }
+
+    @DeleteMapping()
+    public int deleteBook(@RequestParam("userId") String userId,
+                           @RequestParam("bookId") String bookId) {
+        return profileService.deleteBook(Integer.parseInt(userId), Integer.parseInt(bookId));
+    }
 }

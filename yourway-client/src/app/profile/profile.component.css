@@ -13,4 +13,5 @@ mat-card {
 	top: -6%;
 	right: -7%;
 	color: #778899;
+	z-index: 101;
 }

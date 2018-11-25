@@ -10,4 +10,6 @@ public interface ProfileService {
     UserBook findUserBookRelationship(UserBook userBook);
 
     Profile findById(int userId);
+
+    int deleteBook(int userId, int bookId);
 }

@@ -37,9 +37,34 @@ export class ProfileComponent implements OnInit {
 					this.profile.finishedBooks[i].imageLink = "../../assets/book_images/small_" + this.profile.finishedBooks[i].imageLink;
 				}
 			})
-	}
+		}
 
-	openBook(id: number): void {
-		this.router.navigate(['books/' + id]);
+		openBook(id: number): void {
+			this.router.navigate(['books/' + id]);
+		}
+
+		deleteBook(id: number, status: string, index: number) {
+			this.profileService.deleteBook(id)
+			.subscribe(data => {
+				if (data !== 0) {
+					this.deleteBookFromProfile(status, index);
+				}
+			});
+		}
+
+		deleteBookFromProfile(status: string, index: number) {
+			switch(status) {
+				case 'PROGRESS': {
+					this.profile.progressBooks.splice(index, 1);
+					break;
+				}
+				case 'FUTURE': {
+					this.profile.futureBooks.splice(index, 1);
+					break;
+				}
+				case 'FINISHED': {
+					this.profile.finishedBooks.splice(index, 1);
+				}
+			}
+		}
 	}
-}

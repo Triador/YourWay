@@ -30,4 +30,9 @@ public class ProfileServiceImpl implements ProfileService {
     public Profile findById(int userId) {
         return profileDAO.buildProfile(userId);
     }
+
+    @Override
+    public int deleteBook(int userId, int bookId) {
+        return profileDAO.deleteBook(userId, bookId);
+    }
 }
