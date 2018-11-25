@@ -1,8 +1,16 @@
 mat-card {
 	display: inline;
+	position: relative;
 }
 
 .section-title {
 	text-align: center;
 	margin-top: 1%;
+}
+
+.delete-button {
+	position: absolute;
+	top: -6%;
+	right: -7%;
+	color: #778899;
 }

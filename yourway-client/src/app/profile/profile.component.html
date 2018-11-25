@@ -2,6 +2,9 @@
 	<mat-tab label="Book in progress">
 		<div class="books-container">
 			<mat-card *ngFor="let book of profile.progressBooks" (click)="openBook(book.bookId)">
+				<button mat-icon-button class="delete-button">
+					<mat-icon>cancel</mat-icon>
+				</button>
 				<mat-card-content>
 					<div *ngIf="book.title" class="title">{{book.title}}</div>
 					<img src="{{book.imageLink}}" width="125px" height="200px">
@@ -13,6 +16,9 @@
 	<mat-tab label="Future books">
 		<div class="books-container">
 			<mat-card *ngFor="let book of profile.futureBooks" (click)="openBook(book.bookId)">
+				<button mat-icon-button class="delete-button">
+					<mat-icon>cancel</mat-icon>
+				</button>
 				<mat-card-content>
 					<div *ngIf="book.title" class="title">{{book.title}}</div>
 					<img src="{{book.imageLink}}" width="125px" height="200px">
@@ -24,6 +30,9 @@
 	<mat-tab label="Finished books">
 		<div class="books-container">
 			<mat-card *ngFor="let book of profile.finishedBooks" (click)="openBook(book.bookId)">
+				<button mat-icon-button class="delete-button">
+					<mat-icon>cancel</mat-icon>
+				</button>
 				<mat-card-content>
 					<div *ngIf="book.title" class="title">{{book.title}}</div>
 					<img src="{{book.imageLink}}" width="125px" height="200px">
