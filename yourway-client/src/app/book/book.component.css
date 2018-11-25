@@ -1,17 +1,18 @@
 .inline-block {
 	display: inline-block;
 	padding: 0%;
+	vertical-align: top;
 }
 
 .field-names {
 	margin: 0% 0% 0% 2%;
 }
 
-.book-info {
-	display: flex;
-	align-items: top; /* align vertical */
-}
-
 .book-description {
 	margin: 2% 0% 2% 0%;
+}
+
+.add-book {
+	width: 150px;
+	margin-top: 70%;
 }
