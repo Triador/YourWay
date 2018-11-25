@@ -1,7 +1,5 @@
 package com.triador.yourwayserver.dao.model;
 
-import java.util.Objects;
-
 public class Book {
 
     private int bookId;
@@ -13,6 +11,7 @@ public class Book {
     private String description;
     private String imageLink;
     private boolean disable;
+    private BookStatus status;
 
     public int getBookId() {
         return bookId;
@@ -86,26 +85,12 @@ public class Book {
         this.disable = disable;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Book book = (Book) o;
-        return bookId == book.bookId &&
-                pageAmount == book.pageAmount &&
-                publicationYear == book.publicationYear &&
-                disable == book.disable &&
-                Objects.equals(title, book.title) &&
-                Objects.equals(author, book.author) &&
-                Objects.equals(isbn, book.isbn) &&
-                Objects.equals(description, book.description) &&
-                Objects.equals(imageLink, book.imageLink);
+    public BookStatus getStatus() {
+        return status;
     }
 
-    @Override
-    public int hashCode() {
-
-        return Objects.hash(bookId, title, author, pageAmount, publicationYear, isbn, description, imageLink, disable);
+    public void setStatus(BookStatus status) {
+        this.status = status;
     }
 
     @Override
@@ -120,6 +105,41 @@ public class Book {
                 ", description='" + description + '\'' +
                 ", imageLink='" + imageLink + '\'' +
                 ", disable=" + disable +
+                ", status=" + status +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Book book = (Book) o;
+
+        if (bookId != book.bookId) return false;
+        if (pageAmount != book.pageAmount) return false;
+        if (publicationYear != book.publicationYear) return false;
+        if (disable != book.disable) return false;
+        if (title != null ? !title.equals(book.title) : book.title != null) return false;
+        if (author != null ? !author.equals(book.author) : book.author != null) return false;
+        if (isbn != null ? !isbn.equals(book.isbn) : book.isbn != null) return false;
+        if (description != null ? !description.equals(book.description) : book.description != null) return false;
+        if (imageLink != null ? !imageLink.equals(book.imageLink) : book.imageLink != null) return false;
+        return status == book.status;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = bookId;
+        result = 31 * result + (title != null ? title.hashCode() : 0);
+        result = 31 * result + (author != null ? author.hashCode() : 0);
+        result = 31 * result + pageAmount;
+        result = 31 * result + publicationYear;
+        result = 31 * result + (isbn != null ? isbn.hashCode() : 0);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (imageLink != null ? imageLink.hashCode() : 0);
+        result = 31 * result + (disable ? 1 : 0);
+        result = 31 * result + (status != null ? status.hashCode() : 0);
+        return result;
     }
 }

@@ -8,32 +8,29 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
 public class ProfileDAOimpl implements ProfileDAO {
 
     private JdbcTemplate jdbcTemplate;
-    private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     @Autowired
-    public ProfileDAOimpl(JdbcTemplate jdbcTemplate,
-                          NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
+    public ProfileDAOimpl(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
-        this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
     }
 
     @Override
     public void save(UserBook userBook) {
-        String sql = "INSERT INTO users_books VALUES(?, ?)";
+        String sql = "INSERT INTO users_books VALUES(?, ?, ?)";
 
         jdbcTemplate.update(sql,
                 userBook.getUserId(),
-                userBook.getBookId());
+                userBook.getBookId(),
+                userBook.getBookStatus().name());
     }
 
     @Override
@@ -68,8 +65,30 @@ public class ProfileDAOimpl implements ProfileDAO {
 
         List<Book> books = jdbcTemplate.query(booksSql, new Object[]{userId}, new BookRowMapper());
 
+        List<Book> progressBooks = new ArrayList<>();
+        List<Book> futureBooks = new ArrayList<>();
+        List<Book> readedBooks = new ArrayList<>();
+
         if (profile != null) {
-            profile.setBooks(books);
+            for (Book book: books) {
+                switch (book.getStatus()) {
+                    case PROGRESS: {
+                        progressBooks.add(book);
+                        break;
+                    }
+                    case FUTURE: {
+                        futureBooks.add(book);
+                        break;
+                    }
+                    case FINISHED: {
+                        readedBooks.add(book);
+                    }
+                }
+            }
+
+            profile.setProgressBooks(progressBooks);
+            profile.setFutureBooks(futureBooks);
+            profile.setFinishedBooks(readedBooks);
         }
 
         return profile;

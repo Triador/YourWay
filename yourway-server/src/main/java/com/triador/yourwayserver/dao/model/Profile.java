@@ -8,7 +8,11 @@ public class Profile {
 
     private String imageLink;
 
-    private List<Book> books;
+    private List<Book> progressBooks;
+
+    private List<Book> futureBooks;
+
+    private List<Book> finishedBooks;
 
     public String getUsername() {
         return username;
@@ -26,11 +30,27 @@ public class Profile {
         this.imageLink = imageLink;
     }
 
-    public List<Book> getBooks() {
-        return books;
+    public List<Book> getProgressBooks() {
+        return progressBooks;
     }
 
-    public void setBooks(List<Book> books) {
-        this.books = books;
+    public void setProgressBooks(List<Book> progressBooks) {
+        this.progressBooks = progressBooks;
+    }
+
+    public List<Book> getFutureBooks() {
+        return futureBooks;
+    }
+
+    public void setFutureBooks(List<Book> futureBooks) {
+        this.futureBooks = futureBooks;
+    }
+
+    public List<Book> getFinishedBooks() {
+        return finishedBooks;
+    }
+
+    public void setFinishedBooks(List<Book> finishedBooks) {
+        this.finishedBooks = finishedBooks;
     }
 }

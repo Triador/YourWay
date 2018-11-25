@@ -24,15 +24,12 @@ public class BookDAOImpl implements BookDAO {
 
     private JdbcTemplate jdbcTemplate;
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
-    private ProfileService profileService;
 
     @Autowired
     public BookDAOImpl(JdbcTemplate jdbcTemplate,
-                       NamedParameterJdbcTemplate namedParameterJdbcTemplate,
-                       ProfileService profileService) {
+                       NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
-        this.profileService = profileService;
     }
 
     @Override
@@ -92,13 +89,15 @@ public class BookDAOImpl implements BookDAO {
 
     @Override
     public Book findById(UserBook userBook) {
-        String sql = "SELECT * FROM books WHERE book_id = ?";
+        String sql = "SELECT * FROM books " +
+                "LEFT JOIN users_books " +
+                "ON books.book_id = users_books.book_id " +
+                "AND users_books.user_id = ? " +
+                "WHERE books.book_id = ?";
         int bookId = userBook.getBookId();
+        int userId = userBook.getUserId();
 
-        Book book = (Book) jdbcTemplate.queryForObject(sql, new Object[]{bookId}, new BookRowMapper());
-        setDisable(book, userBook);
-
-        return book;
+        return (Book) jdbcTemplate.queryForObject(sql, new Object[]{userId, bookId}, new BookRowMapper());
     }
 
     @Override
@@ -116,19 +115,5 @@ public class BookDAOImpl implements BookDAO {
             bookTitle.setValue(resultSet.getString("title"));
             return bookTitle;
         });
-    }
-
-    private void setDisable(Book book, UserBook userBook) {
-
-        if (userBook.getUserId() == 0) {
-            book.setDisable(true);
-            return;
-        }
-
-        UserBook dbUserBook = profileService.findUserBookRelationship(userBook);
-        if (book != null) {
-            boolean disable = dbUserBook != null;
-            book.setDisable(disable);
-        }
     }
 }
