@@ -26,7 +26,7 @@ export class BookComponent implements OnInit {
 	ngOnInit() {
 		this.route.paramMap.pipe(
 			switchMap((params: ParamMap) => 
-				this.bookService.getBook(params.get('id')))
+				this.bookService.getBook(Number(params.get('id'))))
 		).subscribe(data => {
 			console.log(data);
 			data.imageLink = "../../assets/book_images/small_" + data.imageLink;
@@ -35,8 +35,8 @@ export class BookComponent implements OnInit {
 		});
 	}
 
-	addBookToProfile() {
+	addBookToProfile(bookStatus: string) {
 		this.isDisabled = true;
-		this.profileService.addBookToProfile(this.book.bookId);
+		this.profileService.addBookToProfile(this.book.bookId, bookStatus);
 	}
 }

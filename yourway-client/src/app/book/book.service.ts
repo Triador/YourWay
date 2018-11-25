@@ -17,14 +17,12 @@ export class BookService {
 	private bookUrl = 'http://localhost:8080/books';
 	private bookSearchUrl = 'http://localhost:8080/books/search';
 
-	public getBook(bookId: string) {
+	public getBook(bookId: number) {
 		const userId: number = this.profileService.getUserId();
 		return this.http.get<Book>(this.bookUrl + "/" + bookId, { 
 			params: new HttpParams().set('userId', userId.toString())
 		});
 	}
-
-	public 
 
 	public getBooks() {
 		return this.http.get<ShortBookDescription[]>(this.bookUrl);

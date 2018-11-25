@@ -22,6 +22,8 @@ import { MatListModule } from '@angular/material/list';
 import { HeaderComponent } from './header/header.component';
 import { ProfileComponent } from './profile/profile.component';
 
+import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -53,3 +55,5 @@ import { ProfileComponent } from './profile/profile.component';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+platformBrowserDynamic().bootstrapModule(AppModule);

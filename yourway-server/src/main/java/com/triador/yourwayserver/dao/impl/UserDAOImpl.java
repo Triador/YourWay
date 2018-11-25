@@ -30,13 +30,19 @@ public class UserDAOImpl implements UserDAO {
         String sql = "INSERT INTO users(" +
                 "name, " +
                 "password, " +
-                "role) " +
-                "VALUES(:name, :password, :role)";
+                "role, " +
+                "image_link) " +
+                "VALUES(" +
+                ":name, " +
+                ":password, " +
+                ":role, " +
+                ":image_link)";
 
         SqlParameterSource sqlParameterSource = new MapSqlParameterSource()
                 .addValue("name", user.getName())
                 .addValue("password", user.getPassword())
-                .addValue("role", user.getRole());
+                .addValue("role", user.getRole())
+                .addValue("image_link", user.getImageLink());
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
         namedParameterJdbcTemplate.update(sql, sqlParameterSource, keyHolder, new String[]{"user_id"});

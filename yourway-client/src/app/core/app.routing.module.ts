@@ -4,8 +4,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { AllBookComponent } from '../book/all-book.component';
 import { BookComponent } from '../book/book.component';
 import { LoginComponent } from '../login/login.component';
-import { SignupComponent} from '../signup/signup.component'
-import { SearchComponent} from '../search/search.component'
+import { SignupComponent} from '../signup/signup.component';
+import { SearchComponent} from '../search/search.component';
+import { ProfileComponent } from '../profile/profile.component';
 
 const routes: Routes = [
 	{ path: 'books', component: AllBookComponent },
@@ -13,7 +14,8 @@ const routes: Routes = [
 	{ path: 'login', component: LoginComponent },
 	{ path: 'signup', component: SignupComponent },
 	{ path: '', redirectTo: '/login', pathMatch: 'full' },
-	{ path: 'search', component: SearchComponent }
+	{ path: 'search', component: SearchComponent },
+	{ path: 'profile/:id', component: ProfileComponent }
 ];
 
 @NgModule({

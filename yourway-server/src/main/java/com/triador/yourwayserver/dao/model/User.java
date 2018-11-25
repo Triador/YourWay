@@ -10,6 +10,8 @@ public class User {
 
     private String role;
 
+    private String imageLink;
+
     public int getUserId() {
         return userId;
     }
@@ -40,5 +42,13 @@ public class User {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public String getImageLink() {
+        return imageLink;
+    }
+
+    public void setImageLink(String imageLink) {
+        this.imageLink = imageLink;
     }
 }

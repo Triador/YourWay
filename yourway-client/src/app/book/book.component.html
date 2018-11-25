@@ -21,7 +21,9 @@
 		</mat-list>
 	</div>
 	
-	<button #add mat-raised-button (click)="addBookToProfile()" color="primary" [disabled]="isDisabled">add</button>
+	<button #add1 mat-raised-button (click)="addBookToProfile('PROGRESS')" color="primary" [disabled]="isDisabled">Reading</button>
+	<button #add2 mat-raised-button (click)="addBookToProfile('FUTURE')" color="primary" [disabled]="isDisabled">Want to read</button>
+	<button #add3 mat-raised-button (click)="addBookToProfile('FINISHED')" color="primary" [disabled]="isDisabled">Readed</button>
 
 	<div *ngIf="book.description" class="book-description">{{book.description}}</div>
 </mat-card>

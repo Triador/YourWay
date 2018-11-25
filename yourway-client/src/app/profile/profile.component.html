@@ -1,3 +1,36 @@
-<p>
-  profile works!
-</p>
+<app-header></app-header>
+
+<mat-tab-group mat-align-tabs="center" animationDuration="4000ms">
+	<mat-tab label="Book in progress">
+		<div class="books-container">
+			<mat-card *ngFor="let book of profile.progressBooks" (click)="openBook(book.bookId)">
+				<mat-card-content>
+					<div *ngIf="book.title" class="title">{{book.title}}</div>
+					<img src="{{book.imageLink}}" width="125px" height="200px">
+				</mat-card-content>
+			</mat-card>
+		</div>
+	</mat-tab>
+
+	<mat-tab label="Future books">
+		<div class="books-container">
+			<mat-card *ngFor="let book of profile.futureBooks" (click)="openBook(book.bookId)">
+				<mat-card-content>
+					<div *ngIf="book.title" class="title">{{book.title}}</div>
+					<img src="{{book.imageLink}}" width="125px" height="200px">
+				</mat-card-content>
+			</mat-card>
+		</div>
+	</mat-tab>
+
+	<mat-tab label="Finished books">
+		<div class="books-container">
+			<mat-card *ngFor="let book of profile.finishedBooks" (click)="openBook(book.bookId)">
+				<mat-card-content>
+					<div *ngIf="book.title" class="title">{{book.title}}</div>
+					<img src="{{book.imageLink}}" width="125px" height="200px">
+				</mat-card-content>
+			</mat-card>
+		</div>
+	</mat-tab>
+</mat-tab-group>

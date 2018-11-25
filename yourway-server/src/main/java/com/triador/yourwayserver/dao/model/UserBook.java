@@ -1,8 +1,9 @@
 package com.triador.yourwayserver.dao.model;
 
 public class UserBook {
-    int userId;
-    int bookId;
+    private int userId;
+    private int bookId;
+    private BookStatus bookStatus;
 
     public UserBook(){}
 
@@ -25,5 +26,13 @@ public class UserBook {
 
     public void setBookId(int bookId) {
         this.bookId = bookId;
+    }
+
+    public BookStatus getBookStatus() {
+        return bookStatus;
+    }
+
+    public void setBookStatus(BookStatus bookStatus) {
+        this.bookStatus = bookStatus;
     }
 }

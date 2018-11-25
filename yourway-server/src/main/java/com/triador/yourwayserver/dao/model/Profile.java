@@ -1,24 +1,56 @@
 package com.triador.yourwayserver.dao.model;
 
+import java.util.List;
+
 public class Profile {
 
-    private User user;
+    private String username;
 
-    private Book[] books;
+    private String imageLink;
 
-    public User getUser() {
-        return user;
+    private List<Book> progressBooks;
+
+    private List<Book> futureBooks;
+
+    private List<Book> finishedBooks;
+
+    public String getUsername() {
+        return username;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public Book[] getBooks() {
-        return books;
+    public String getImageLink() {
+        return imageLink;
     }
 
-    public void setBooks(Book[] books) {
-        this.books = books;
+    public void setImageLink(String imageLink) {
+        this.imageLink = imageLink;
+    }
+
+    public List<Book> getProgressBooks() {
+        return progressBooks;
+    }
+
+    public void setProgressBooks(List<Book> progressBooks) {
+        this.progressBooks = progressBooks;
+    }
+
+    public List<Book> getFutureBooks() {
+        return futureBooks;
+    }
+
+    public void setFutureBooks(List<Book> futureBooks) {
+        this.futureBooks = futureBooks;
+    }
+
+    public List<Book> getFinishedBooks() {
+        return finishedBooks;
+    }
+
+    public void setFinishedBooks(List<Book> finishedBooks) {
+        this.finishedBooks = finishedBooks;
     }
 }
