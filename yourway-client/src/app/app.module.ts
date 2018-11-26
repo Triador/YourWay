@@ -23,6 +23,7 @@ import { MatListModule } from '@angular/material/list';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { ProfileComponent } from './profile/profile.component';
+import { AddNoteDialogComponent } from './add-note-dialog/add-note-dialog.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { ProfileComponent } from './profile/profile.component';
     HeaderComponent,
     FooterComponent,
     ProfileComponent,
+    AddNoteDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -47,9 +49,9 @@ import { ProfileComponent } from './profile/profile.component';
     MatListModule,
     FlexLayoutModule
   ],
-  entryComponents: [ErrorDialogComponent],
+  entryComponents: [ErrorDialogComponent, AddNoteDialogComponent],
   providers: [ErrorDialogComponent, BookService, AuthService, TokenStorage, SignUpService,
-    SearchComponent, HeaderComponent, BookComponent, ProfileService,
+    SearchComponent, HeaderComponent, BookComponent, ProfileService, AddNoteDialogComponent,
     {provide: HTTP_INTERCEPTORS,
     useClass: Interceptor,
     multi : true}

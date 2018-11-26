@@ -8,13 +8,16 @@
 		<mat-list-item *ngIf="book.publicationYear">Год публикации:</mat-list-item>
 		<mat-list-item *ngIf="book.isbn">ISBN:</mat-list-item>
 		<mat-list-item>
-			<button #add1 mat-raised-button (click)="addBookToProfile('PROGRESS')" color="primary" [disabled]="isDisabled" class="add-book">In propgress</button>
+			<button mat-raised-button (click)="addBookToProfile('PROGRESS')" color="primary" [disabled]="isDisabled" class="button-width">In propgress</button>
 		</mat-list-item>
 		<mat-list-item>
-			<button #add2 mat-raised-button (click)="addBookToProfile('FUTURE')" color="primary" [disabled]="isDisabled" class="add-book">Want to read</button>
+			<button mat-raised-button (click)="addBookToProfile('FUTURE')" color="primary" [disabled]="isDisabled" class="button-width">Want to read</button>
 		</mat-list-item>
 		<mat-list-item>
-			<button #add3 mat-raised-button (click)="addBookToProfile('FINISHED')" color="primary" [disabled]="isDisabled" class="add-book">Finished</button>
+			<button mat-raised-button (click)="addBookToProfile('FINISHED')" color="primary" [disabled]="isDisabled" class="button-width">Finished</button>
+		</mat-list-item>
+		<mat-list-item>
+			<button mat-raised-button (click)="addNote()" color="primary" class="add-note button-width">Add note</button>
 		</mat-list-item>
 	</mat-list>
 

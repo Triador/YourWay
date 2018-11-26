@@ -13,7 +13,7 @@ import {
   MatMenuModule,
   MatIconModule,
   MatTabsModule,
-  MatProgressBarModule
+  MatProgressBarModule,
 } from '@angular/material';
 
 @NgModule({

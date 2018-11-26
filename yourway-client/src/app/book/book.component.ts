@@ -6,6 +6,7 @@ import { switchMap } from 'rxjs/operators';
 import { Book } from '../models/book.model';
 import { BookService } from './book.service';
 import { ProfileService } from '../profile/profile.service';
+import { AddNoteDialogComponent } from '../add-note-dialog/add-note-dialog.component';
 
 @Component({
 	selector: 'app-book',
@@ -21,7 +22,8 @@ export class BookComponent implements OnInit {
 	constructor(private bookService: BookService,
 		private route: ActivatedRoute,
 		private router: Router,
-		private profileService: ProfileService) {}
+		private profileService: ProfileService,
+		private addNoteDialog: AddNoteDialogComponent) {}
 
 	ngOnInit() {
 		this.route.paramMap.pipe(
@@ -38,5 +40,10 @@ export class BookComponent implements OnInit {
 	addBookToProfile(bookStatus: string) {
 		this.isDisabled = true;
 		this.profileService.addBookToProfile(this.book.bookId, bookStatus);
+	}
+
+	addNote() {
+		console.log('kyky')
+		this.addNoteDialog.openDialog();
 	}
 }

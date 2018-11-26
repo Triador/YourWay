@@ -12,7 +12,10 @@
 	margin: 2% 0% 2% 0%;
 }
 
-.add-book {
+.button-width {
 	width: 150px;
-	margin-top: 70%;
+}
+
+.add-note {
+	margin-top: 25%;
 }
