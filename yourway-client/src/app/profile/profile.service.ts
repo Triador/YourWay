@@ -37,7 +37,7 @@ export class ProfileService {
 		return this.http.request('delete', profileUrl, { 
 			params: new HttpParams()
 				.set('userId', userId.toString())
-				.set('bookId', bookId)
+				.set('bookId', bookId.toString())
 		});
 	}
 }
