@@ -23,6 +23,11 @@ CREATE TABLE users_books
 (
   user_id int REFERENCES users (user_id) ON UPDATE CASCADE ON DELETE CASCADE,
   book_id int REFERENCES books (book_id) ON UPDATE CASCADE ON DELETE CASCADE,
+  status VARCHAR(255),
   CONSTRAINT users_books_pkey PRIMARY KEY (user_id, book_id)
 );
 
+CREATE TABLE notes
+(
+  
+)

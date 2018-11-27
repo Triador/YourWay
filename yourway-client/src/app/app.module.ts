@@ -51,7 +51,7 @@ import { AddNoteDialogComponent } from './add-note-dialog/add-note-dialog.compon
   ],
   entryComponents: [ErrorDialogComponent, AddNoteDialogComponent],
   providers: [ErrorDialogComponent, BookService, AuthService, TokenStorage, SignUpService,
-    SearchComponent, HeaderComponent, BookComponent, ProfileService, AddNoteDialogComponent,
+    SearchComponent, HeaderComponent, BookComponent, ProfileService, AddNoteDialogComponent
     {provide: HTTP_INTERCEPTORS,
     useClass: Interceptor,
     multi : true}

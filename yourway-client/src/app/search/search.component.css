@@ -27,5 +27,6 @@ button.title {
 	width: 22px;
 	height: 22px;
 	top: 6px;
-	right: 4px;
+	right: 2px;
+	z-index: 152;
 }

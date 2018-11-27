@@ -1,3 +1,8 @@
-<p>
-  add-note-dialog works!
-</p>
+<h2 mat-dialog-title>Note</h2>
+
+<textarea matInput rows="20" cols="80" [(ngModel)]="data"></textarea>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Add</button>
+</mat-dialog-actions>

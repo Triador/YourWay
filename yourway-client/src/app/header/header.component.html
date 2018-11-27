@@ -8,7 +8,9 @@
 		</div>
 		<span class="example-spacer"></span>
 
-		<button mat-button>About</button>
+		<button mat-button>
+			<mat-icon>help</mat-icon>
+		</button>
 
 		<button *ngIf="this.authService.getLoggedIn() === 'true'; else showSignUpOrLogin" mat-icon-button [matMenuTriggerFor]="profile">
 			<mat-icon>more_vert</mat-icon>

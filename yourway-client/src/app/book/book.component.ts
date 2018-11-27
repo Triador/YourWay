@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatTableDataSource } from '@angular/material';
+import { MatTableDataSource, MatDialog } from '@angular/material';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 
@@ -22,28 +22,31 @@ export class BookComponent implements OnInit {
 	constructor(private bookService: BookService,
 		private route: ActivatedRoute,
 		private router: Router,
-		private profileService: ProfileService,
-		private addNoteDialog: AddNoteDialogComponent) {}
+		private profileService: ProfileService
+		private dialog: MatDialog) {}
 
 	ngOnInit() {
 		this.route.paramMap.pipe(
 			switchMap((params: ParamMap) => 
 				this.bookService.getBook(Number(params.get('id'))))
-		).subscribe(data => {
-			console.log(data);
-			data.imageLink = "../../assets/book_images/small_" + data.imageLink;
-			this.book = data;
-			this.isDisabled = data.disable;
-		});
-	}
+			).subscribe(data => {
+				console.log(data);
+				data.imageLink = "../../assets/book_images/small_" + data.imageLink;
+				this.book = data;
+				this.isDisabled = data.disable;
+			});
+		}
 
-	addBookToProfile(bookStatus: string) {
-		this.isDisabled = true;
-		this.profileService.addBookToProfile(this.book.bookId, bookStatus);
-	}
+		addBookToProfile(bookStatus: string) {
+			this.isDisabled = true;
+			this.profileService.addBookToProfile(this.book.bookId, bookStatus);
+		}
 
-	addNote() {
-		console.log('kyky')
-		this.addNoteDialog.openDialog();
+		openNoteDialog() {
+			const dialogRef = this.dialog.open(AddNoteDialogComponent);
+
+			dialogRef.afterClosed().subscribe(result => {
+				console.log('result = ' + result);
+			})
+		}
 	}
-}
