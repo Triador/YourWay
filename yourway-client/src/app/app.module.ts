@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { BookComponent } from './book/book.component';
 import { AppRoutingModule } from './core/app.routing.module';
 import { BookService } from './book/book.service';
+import { NoteService } from './book/note.service';
 import { SignUpService } from './signup/signup.service';
 import { AllBookComponent } from './book/all-book.component';
 import { LoginComponent } from './login/login.component';
@@ -51,7 +52,8 @@ import { AddNoteDialogComponent } from './add-note-dialog/add-note-dialog.compon
   ],
   entryComponents: [ErrorDialogComponent, AddNoteDialogComponent],
   providers: [ErrorDialogComponent, BookService, AuthService, TokenStorage, SignUpService,
-    SearchComponent, HeaderComponent, BookComponent, ProfileService, AddNoteDialogComponent
+    SearchComponent, HeaderComponent, BookComponent, ProfileService, AddNoteDialogComponent,
+    NoteService,
     {provide: HTTP_INTERCEPTORS,
     useClass: Interceptor,
     multi : true}

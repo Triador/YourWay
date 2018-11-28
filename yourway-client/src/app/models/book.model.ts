@@ -1,3 +1,5 @@
+import { Note } from '../models/note.model';
+
 export class Book {
 	bookId: number;
     title: string;
@@ -8,4 +10,5 @@ export class Book {
     description: string;
     imageLink: string;
     disable: boolean;
+    notes: Note[];
 }

@@ -31,3 +31,10 @@
 
 	<div *ngIf="book.description" class="book-description">{{book.description}}</div>
 </mat-card>
+
+<mat-card *ngFor="let note of book.notes">
+	<mat-card-header>notes</mat-card-header>
+	<mat-card-content>
+		{{note.text}}
+	</mat-card-content>
+</mat-card>

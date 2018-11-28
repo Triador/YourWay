@@ -37,5 +37,4 @@ public class BookController {
     public List<ShortBookDescription> getBooks() {
         return bookService.findAll();
     }
-
 }

@@ -5,7 +5,9 @@ import { switchMap } from 'rxjs/operators';
 
 import { Book } from '../models/book.model';
 import { BookService } from './book.service';
+import { Note } from '../models/note.model';
 import { ProfileService } from '../profile/profile.service';
+import { NoteService } from '../book/note.service';
 import { AddNoteDialogComponent } from '../add-note-dialog/add-note-dialog.component';
 
 @Component({
@@ -22,7 +24,8 @@ export class BookComponent implements OnInit {
 	constructor(private bookService: BookService,
 		private route: ActivatedRoute,
 		private router: Router,
-		private profileService: ProfileService
+		private profileService: ProfileService,
+		private noteService: NoteService,
 		private dialog: MatDialog) {}
 
 	ngOnInit() {
@@ -33,20 +36,31 @@ export class BookComponent implements OnInit {
 				console.log(data);
 				data.imageLink = "../../assets/book_images/small_" + data.imageLink;
 				this.book = data;
+				this.book.notes = [];
 				this.isDisabled = data.disable;
 			});
-		}
+	}
 
-		addBookToProfile(bookStatus: string) {
+	addBookToProfile(bookStatus: string) {
 			this.isDisabled = true;
 			this.profileService.addBookToProfile(this.book.bookId, bookStatus);
-		}
+	}
 
-		openNoteDialog() {
+	openNoteDialog() {
 			const dialogRef = this.dialog.open(AddNoteDialogComponent);
 
-			dialogRef.afterClosed().subscribe(result => {
-				console.log('result = ' + result);
+			dialogRef.afterClosed().subscribe(noteText => {
+				this.saveNote(noteText)
 			})
-		}
 	}
+
+	saveNote(noteText: string) {
+		const note: Note = new Note();
+		note.bookId = this.book.bookId;
+		note.text = noteText;
+		this.noteService.saveNote(note)
+			.subscribe(data => {
+				this.book.notes.push(data);
+			});
+	}
+}

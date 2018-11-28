@@ -4,6 +4,8 @@ import com.triador.yourwayserver.dao.model.Profile;
 import com.triador.yourwayserver.dao.model.UserBook;
 import com.triador.yourwayserver.services.ProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
@@ -29,8 +31,8 @@ public class ProfileController {
     }
 
     @DeleteMapping()
-    public int deleteBook(@RequestParam("userId") String userId,
-                           @RequestParam("bookId") String bookId) {
-        return profileService.deleteBook(Integer.parseInt(userId), Integer.parseInt(bookId));
+    public void deleteBook(@RequestParam("userId") String userId,
+                                     @RequestParam("bookId") String bookId) {
+        profileService.deleteBook(Integer.parseInt(userId), Integer.parseInt(bookId));
     }
 }

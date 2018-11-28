@@ -8,6 +8,7 @@ import com.triador.yourwayserver.dao.model.UserBook;
 import java.util.List;
 
 public interface BookDAO {
+
     Book save(Book book);
 
     List<ShortBookDescription> findAll();

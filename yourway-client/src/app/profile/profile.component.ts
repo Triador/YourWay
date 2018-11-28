@@ -46,9 +46,7 @@ export class ProfileComponent implements OnInit {
 		deleteBook(id: number, status: string, index: number) {
 			this.profileService.deleteBook(id)
 			.subscribe(data => {
-				if (data !== 0) {
-					this.deleteBookFromProfile(status, index);
-				}
+				this.deleteBookFromProfile(status, index);
 			});
 		}
 
