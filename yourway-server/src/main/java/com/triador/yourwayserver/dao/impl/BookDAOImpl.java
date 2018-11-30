@@ -1,11 +1,9 @@
 package com.triador.yourwayserver.dao.impl;
 
 import com.triador.yourwayserver.dao.mapper.BookRowMapper;
-import com.triador.yourwayserver.dao.model.Book;
-import com.triador.yourwayserver.dao.model.BookTitle;
-import com.triador.yourwayserver.dao.model.ShortBookDescription;
-import com.triador.yourwayserver.dao.model.UserBook;
-import com.triador.yourwayserver.services.ProfileService;
+import com.triador.yourwayserver.dao.mapper.NoteRowMapper;
+import com.triador.yourwayserver.dao.mapper.ShortBookDescriptionRowMapper;
+import com.triador.yourwayserver.dao.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -74,22 +72,12 @@ public class BookDAOImpl implements BookDAO {
     public List<ShortBookDescription> findAll() {
         String sql = "SELECT * FROM books";
 
-        List<ShortBookDescription> books = new ArrayList<>();
-        List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
-        for (Map row : rows) {
-            ShortBookDescription book = new ShortBookDescription();
-            book.setBookId((int)row.get("book_id"));
-            book.setTitle((String)row.get("title"));
-            book.setImageLink((String)row.get("image_link"));
-            books.add(book);
-        }
-
-        return books;
+        return jdbcTemplate.query(sql, new ShortBookDescriptionRowMapper());
     }
 
     @Override
     public Book findById(UserBook userBook) {
-        String sql = "SELECT * FROM books " +
+        String mainSql = "SELECT * FROM books " +
                 "LEFT JOIN users_books " +
                 "ON books.book_id = users_books.book_id " +
                 "AND users_books.user_id = ? " +
@@ -97,7 +85,17 @@ public class BookDAOImpl implements BookDAO {
         int bookId = userBook.getBookId();
         int userId = userBook.getUserId();
 
-        return (Book) jdbcTemplate.queryForObject(sql, new Object[]{userId, bookId}, new BookRowMapper());
+        Book book = (Book) jdbcTemplate.queryForObject(mainSql, new Object[]{userId, bookId}, new BookRowMapper());
+
+        String noteSql = "SELECT * FROM notes WHERE book_id = ?";
+
+        List<Note> notes = jdbcTemplate.query(noteSql, new Object[]{bookId}, new NoteRowMapper());
+
+        if (book != null) {
+            book.setNotes(notes);
+        }
+
+        return book;
     }
 
     @Override

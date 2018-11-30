@@ -36,7 +36,6 @@ export class BookComponent implements OnInit {
 				console.log(data);
 				data.imageLink = "../../assets/book_images/small_" + data.imageLink;
 				this.book = data;
-				this.book.notes = [];
 				this.isDisabled = data.disable;
 			});
 	}

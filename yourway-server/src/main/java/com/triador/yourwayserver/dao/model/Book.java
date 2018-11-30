@@ -1,5 +1,7 @@
 package com.triador.yourwayserver.dao.model;
 
+import java.util.List;
+
 public class Book {
 
     private int bookId;
@@ -12,6 +14,7 @@ public class Book {
     private String imageLink;
     private boolean disable;
     private BookStatus status;
+    private List<Note> notes;
 
     public int getBookId() {
         return bookId;
@@ -93,20 +96,12 @@ public class Book {
         this.status = status;
     }
 
-    @Override
-    public String toString() {
-        return "Book{" +
-                "bookId=" + bookId +
-                ", title='" + title + '\'' +
-                ", author='" + author + '\'' +
-                ", pageAmount=" + pageAmount +
-                ", publicationYear=" + publicationYear +
-                ", isbn='" + isbn + '\'' +
-                ", description='" + description + '\'' +
-                ", imageLink='" + imageLink + '\'' +
-                ", disable=" + disable +
-                ", status=" + status +
-                '}';
+    public List<Note> getNotes() {
+        return notes;
+    }
+
+    public void setNotes(List<Note> notes) {
+        this.notes = notes;
     }
 
     @Override
@@ -125,7 +120,8 @@ public class Book {
         if (isbn != null ? !isbn.equals(book.isbn) : book.isbn != null) return false;
         if (description != null ? !description.equals(book.description) : book.description != null) return false;
         if (imageLink != null ? !imageLink.equals(book.imageLink) : book.imageLink != null) return false;
-        return status == book.status;
+        if (status != book.status) return false;
+        return notes != null ? notes.equals(book.notes) : book.notes == null;
     }
 
     @Override
@@ -140,6 +136,24 @@ public class Book {
         result = 31 * result + (imageLink != null ? imageLink.hashCode() : 0);
         result = 31 * result + (disable ? 1 : 0);
         result = 31 * result + (status != null ? status.hashCode() : 0);
+        result = 31 * result + (notes != null ? notes.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "bookId=" + bookId +
+                ", title='" + title + '\'' +
+                ", author='" + author + '\'' +
+                ", pageAmount=" + pageAmount +
+                ", publicationYear=" + publicationYear +
+                ", isbn='" + isbn + '\'' +
+                ", description='" + description + '\'' +
+                ", imageLink='" + imageLink + '\'' +
+                ", disable=" + disable +
+                ", status=" + status +
+                ", notes=" + notes +
+                '}';
     }
 }
