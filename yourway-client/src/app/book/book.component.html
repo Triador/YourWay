@@ -1,40 +1,42 @@
-<mat-card>
-	<img src="{{book.imageLink}}" width="300px" height="454px">
+<div class="book-container">
+	<mat-card>
+		<img src="{{book.imageLink}}" width="300px" height="454px">
 
-	<mat-list class="inline-block field-names">
-		<mat-list-item *ngIf="book.title">Название:</mat-list-item>
-		<mat-list-item *ngIf="book.author">Автор:</mat-list-item>
-		<mat-list-item *ngIf="book.pageAmount">Количество страниц:</mat-list-item>
-		<mat-list-item *ngIf="book.publicationYear">Год публикации:</mat-list-item>
-		<mat-list-item *ngIf="book.isbn">ISBN:</mat-list-item>
-		<mat-list-item>
-			<button mat-raised-button (click)="addBookToProfile('PROGRESS')" color="primary" [disabled]="isDisabled" class="button-width">In propgress</button>
-		</mat-list-item>
-		<mat-list-item>
-			<button mat-raised-button (click)="addBookToProfile('FUTURE')" color="primary" [disabled]="isDisabled" class="button-width">Want to read</button>
-		</mat-list-item>
-		<mat-list-item>
-			<button mat-raised-button (click)="addBookToProfile('FINISHED')" color="primary" [disabled]="isDisabled" class="button-width">Finished</button>
-		</mat-list-item>
-		<mat-list-item>
-			<button mat-raised-button (click)="openNoteDialog()" color="primary" class="add-note button-width">Add note</button>
-		</mat-list-item>
-	</mat-list>
+		<mat-list class="inline-block field-names">
+			<mat-list-item *ngIf="book.title">Название:</mat-list-item>
+			<mat-list-item *ngIf="book.author">Автор:</mat-list-item>
+			<mat-list-item *ngIf="book.pageAmount">Количество страниц:</mat-list-item>
+			<mat-list-item *ngIf="book.publicationYear">Год публикации:</mat-list-item>
+			<mat-list-item *ngIf="book.isbn">ISBN:</mat-list-item>
+			<mat-list-item>
+				<button mat-raised-button (click)="addBookToProfile('PROGRESS')" color="primary" [disabled]="isDisabled" class="button-width">In propgress</button>
+			</mat-list-item>
+			<mat-list-item>
+				<button mat-raised-button (click)="addBookToProfile('FUTURE')" color="primary" [disabled]="isDisabled" class="button-width">Want to read</button>
+			</mat-list-item>
+			<mat-list-item>
+				<button mat-raised-button (click)="addBookToProfile('FINISHED')" color="primary" [disabled]="isDisabled" class="button-width">Finished</button>
+			</mat-list-item>
+			<mat-list-item>
+				<button mat-raised-button (click)="openNoteDialog()" color="primary" class="add-note button-width">Add note</button>
+			</mat-list-item>
+		</mat-list>
 
-	<mat-list class="inline-block">
-		<mat-list-item *ngIf="book.title">{{book.title}}</mat-list-item>
-		<mat-list-item *ngIf="book.author">{{book.author}}</mat-list-item>
-		<mat-list-item *ngIf="book.pageAmount">{{book.pageAmount}}</mat-list-item>
-		<mat-list-item *ngIf="book.publicationYear">{{book.publicationYear}}</mat-list-item>
-		<mat-list-item *ngIf="book.isbn">{{book.isbn}}</mat-list-item>
-	</mat-list>
+		<mat-list class="inline-block">
+			<mat-list-item *ngIf="book.title">{{book.title}}</mat-list-item>
+			<mat-list-item *ngIf="book.author">{{book.author}}</mat-list-item>
+			<mat-list-item *ngIf="book.pageAmount">{{book.pageAmount}}</mat-list-item>
+			<mat-list-item *ngIf="book.publicationYear">{{book.publicationYear}}</mat-list-item>
+			<mat-list-item *ngIf="book.isbn">{{book.isbn}}</mat-list-item>
+		</mat-list>
 
-	<div *ngIf="book.description" class="book-description">{{book.description}}</div>
-</mat-card>
+		<div *ngIf="book.description" class="book-description">{{book.description}}</div>
+	</mat-card>
 
-<mat-card *ngFor="let note of book.notes">
-	<mat-card-header>notes</mat-card-header>
-	<mat-card-content>
-		{{note.text}}
-	</mat-card-content>
-</mat-card>
+	<mat-card *ngFor="let note of book.notes; let i = index" class="note">
+		<mat-card-title class="note-title">note # {{i}}</mat-card-title>
+		<mat-card-content>
+			<p class="note-text">{{note.text}}</p>
+		</mat-card-content>
+	</mat-card>
+</div>

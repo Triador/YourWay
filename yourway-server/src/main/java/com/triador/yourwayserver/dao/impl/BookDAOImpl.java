@@ -5,6 +5,8 @@ import com.triador.yourwayserver.dao.mapper.NoteRowMapper;
 import com.triador.yourwayserver.dao.mapper.ShortBookDescriptionRowMapper;
 import com.triador.yourwayserver.dao.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -77,21 +79,29 @@ public class BookDAOImpl implements BookDAO {
 
     @Override
     public Book findById(UserBook userBook) {
-        String mainSql = "SELECT * FROM books " +
-                "LEFT JOIN users_books " +
-                "ON books.book_id = users_books.book_id " +
-                "AND users_books.user_id = ? " +
-                "WHERE books.book_id = ?";
+        String bookSql = "SELECT * FROM books WHERE book_id = ?";
+
         int bookId = userBook.getBookId();
         int userId = userBook.getUserId();
 
-        Book book = (Book) jdbcTemplate.queryForObject(mainSql, new Object[]{userId, bookId}, new BookRowMapper());
-
-        String noteSql = "SELECT * FROM notes WHERE book_id = ?";
-
-        List<Note> notes = jdbcTemplate.query(noteSql, new Object[]{bookId}, new NoteRowMapper());
+        Book book = (Book) jdbcTemplate.queryForObject(bookSql, new Object[]{bookId}, new BookRowMapper());
 
         if (book != null) {
+
+            String userBookSql = "SELECT * FROM users_books WHERE book_id = ? AND user_id = ?";
+
+            UserBook dbUserBook;
+            try {
+                dbUserBook = jdbcTemplate.queryForObject(userBookSql, new Object[]{bookId, userId},
+                        BeanPropertyRowMapper.newInstance(UserBook.class));
+                book.setStatus(dbUserBook.getBookStatus());
+            } catch (EmptyResultDataAccessException ex) {
+                book.setStatus(BookStatus.UNLOCK);
+            }
+
+            String noteSql = "SELECT * FROM notes WHERE book_id = ? AND user_id = ?";
+
+            List<Note> notes = jdbcTemplate.query(noteSql, new Object[]{bookId, userId}, new NoteRowMapper());
             book.setNotes(notes);
         }
 
@@ -102,7 +112,6 @@ public class BookDAOImpl implements BookDAO {
     public List<BookTitle> findMatchByTitlePiece(String titlePiece) {
         String sql = "SELECT book_id, title FROM books WHERE lower(title) LIKE :piece";
         titlePiece = titlePiece.toLowerCase().trim() + "%";
-        System.out.println(titlePiece);
 
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
         mapSqlParameterSource.addValue("piece", titlePiece);

@@ -25,10 +25,11 @@ public class NoteDAOImpl implements NoteDAO {
 
     @Override
     public Note saveNote(Note note) {
-        String sql = "INSERT INTO notes(book_id, text) VALUES(:book_id, :text)";
+        String sql = "INSERT INTO notes(book_id, user_id, text) VALUES(:book_id, :user_id, :text)";
 
         SqlParameterSource sqlParameterSource = new MapSqlParameterSource()
                 .addValue("book_id", note.getBookId())
+                .addValue("user_id", note.getUserId())
                 .addValue("text", note.getText());
 
         KeyHolder keyHolder = new GeneratedKeyHolder();

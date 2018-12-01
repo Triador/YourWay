@@ -4,6 +4,7 @@ public class Note {
 
     private int id;
     private int bookId;
+    private int userId;
     private String text;
 
     public int getId() {
@@ -20,6 +21,14 @@ public class Note {
 
     public void setBookId(int bookId) {
         this.bookId = bookId;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public String getText() {

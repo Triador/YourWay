@@ -31,5 +31,6 @@ CREATE TABLE notes
 (
   note_id SERIAL PRIMARY KEY,
   book_id int REFERENCES books (book_id) ON UPDATE CASCADE ON DELETE CASCADE,
+  user_id int REFERENCES users (user_id) ON UPDATE CASCADE ON DELETE CASCADE,
   text VARCHAR(255)
 );

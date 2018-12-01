@@ -14,6 +14,7 @@ public class NoteRowMapper implements RowMapper {
         Note note = new Note();
         note.setId(rs.getInt("note_id"));
         note.setBookId(rs.getInt("book_id"));
+        note.setUserId(rs.getInt("user_id"));
         note.setText(rs.getString("text"));
         return note;
     }

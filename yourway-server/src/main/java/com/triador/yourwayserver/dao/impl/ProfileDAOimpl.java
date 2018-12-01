@@ -1,6 +1,6 @@
 package com.triador.yourwayserver.dao.impl;
 
-import com.triador.yourwayserver.dao.mapper.BookRowMapper;
+import com.triador.yourwayserver.dao.mapper.BookFullRowMapper;
 import com.triador.yourwayserver.dao.model.Book;
 import com.triador.yourwayserver.dao.model.Profile;
 import com.triador.yourwayserver.dao.model.UserBook;
@@ -63,7 +63,7 @@ public class ProfileDAOimpl implements ProfileDAO {
             return tempProfile;
         });
 
-        List<Book> books = jdbcTemplate.query(booksSql, new Object[]{userId}, new BookRowMapper());
+        List<Book> books = jdbcTemplate.query(booksSql, new Object[]{userId}, new BookFullRowMapper());
 
         List<Book> progressBooks = new ArrayList<>();
         List<Book> futureBooks = new ArrayList<>();

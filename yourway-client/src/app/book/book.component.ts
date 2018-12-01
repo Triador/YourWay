@@ -56,6 +56,7 @@ export class BookComponent implements OnInit {
 	saveNote(noteText: string) {
 		const note: Note = new Note();
 		note.bookId = this.book.bookId;
+		note.userId = this.profileService.getUserId();
 		note.text = noteText;
 		this.noteService.saveNote(note)
 			.subscribe(data => {

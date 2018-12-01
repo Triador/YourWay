@@ -12,5 +12,5 @@ export class NoteService {
 
 	saveNote(note: Note) {
 		return this.http.post<Note>(bookUrl + note.bookId + '/notes', note);
-	} 
+	}
 }
