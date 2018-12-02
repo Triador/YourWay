@@ -16,7 +16,12 @@ public class NoteServiceImpl implements NoteService {
     }
 
     @Override
-    public Note saveNote(Note note) {
-        return noteDAO.saveNote(note);
+    public Note save(Note note) {
+        return noteDAO.save(note);
+    }
+
+    @Override
+    public int delete(int noteId, int bookId) {
+        return noteDAO.delete(noteId, bookId);
     }
 }

@@ -19,7 +19,12 @@ public class NoteController {
 
     @PostMapping()
     public Note saveNote(@RequestBody Note note) {
-        return noteService.saveNote(note);
+        return noteService.save(note);
+    }
+
+    @DeleteMapping(path = "/{noteId}")
+    public void deleteNote(@PathVariable int bookId, @PathVariable int noteId) {
+        noteService.delete(noteId, bookId);
     }
 
 }

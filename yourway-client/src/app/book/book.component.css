@@ -36,3 +36,11 @@
 .note-title {
 	font-size: 21px;
 }
+
+.delete-button {
+	position: absolute;
+	top: -13px;
+	right: -11px;
+	color: #778899;
+	z-index: 101;
+}

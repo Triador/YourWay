@@ -13,4 +13,8 @@ export class NoteService {
 	saveNote(note: Note) {
 		return this.http.post<Note>(bookUrl + note.bookId + '/notes', note);
 	}
+
+	deleteNote(note: Note) {
+		return this.http.delete(bookUrl + note.bookId + '/notes/' + note.id);
+	}
 }

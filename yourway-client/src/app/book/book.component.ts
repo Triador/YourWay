@@ -63,4 +63,13 @@ export class BookComponent implements OnInit {
 				this.book.notes.push(data);
 			});
 	}
+
+	deleteNote(index: number) {
+		const note: Note = this.book.notes[index];
+		this.noteService.deleteNote(note)
+			.subscribe(data => {
+				this.book.notes.splice(index, 1);
+			});
+	}
+
 }

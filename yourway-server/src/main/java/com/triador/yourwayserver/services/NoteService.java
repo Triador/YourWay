@@ -4,5 +4,7 @@ import com.triador.yourwayserver.dao.model.Note;
 
 public interface NoteService {
 
-    Note saveNote(Note note);
+    Note save(Note note);
+
+    int delete(int noteId, int bookId);
 }

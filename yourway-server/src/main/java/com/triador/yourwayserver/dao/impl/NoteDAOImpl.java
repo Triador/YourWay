@@ -24,7 +24,7 @@ public class NoteDAOImpl implements NoteDAO {
     }
 
     @Override
-    public Note saveNote(Note note) {
+    public Note save(Note note) {
         String sql = "INSERT INTO notes(book_id, user_id, text) VALUES(:book_id, :user_id, :text)";
 
         SqlParameterSource sqlParameterSource = new MapSqlParameterSource()
@@ -38,5 +38,12 @@ public class NoteDAOImpl implements NoteDAO {
         note.setId(keyHolder.getKey().intValue());
 
         return note;
+    }
+
+    @Override
+    public int delete(int noteId, int bookId) {
+        String sql = "DELETE FROM notes WHERE note_id = ? AND book_id = ?";
+
+        return jdbcTemplate.update(sql, noteId, bookId);
     }
 }
