@@ -25,6 +25,8 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AddNoteDialogComponent } from './add-note-dialog/add-note-dialog.component';
+import { MarathonComponent } from './marathon/marathon.component';
+import { AddMarathonDialogComponent } from './add-marathon-dialog/add-marathon-dialog.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,9 @@ import { AddNoteDialogComponent } from './add-note-dialog/add-note-dialog.compon
     HeaderComponent,
     FooterComponent,
     ProfileComponent,
-    AddNoteDialogComponent
+    AddNoteDialogComponent,
+    MarathonComponent,
+    AddMarathonDialogComponent
   ],
   imports: [
     BrowserModule,

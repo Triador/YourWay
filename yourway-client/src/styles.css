@@ -4,9 +4,10 @@ html, body {
 	margin: 0px;
 	padding: 0px;
 	height: 100%;
+	min-width: 735px;
 }
 
-.header-shadow {
-	box-shadow: 0px 0px 8px 2px #000000;
+app-header, app-footer {
+	min-width: 908px;
 }
 

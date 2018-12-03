@@ -8,15 +8,16 @@
 		</div>
 		<span class="example-spacer"></span>
 
-		<button mat-button>
-			<mat-icon>help</mat-icon>
+		<button mat-icon-button>
+			<mat-icon>info</mat-icon>
 		</button>
 
-		<button *ngIf="this.authService.getLoggedIn() === 'true'; else showSignUpOrLogin" mat-icon-button [matMenuTriggerFor]="profile">
-			<mat-icon>more_vert</mat-icon>
+		<button *ngIf="this.authService.getLoggedIn() === 'true'; else showSignUpOrLogin" mat-icon-button [matMenuTriggerFor]="menu">
+			<mat-icon>settings</mat-icon>
 		</button>
-		<mat-menu #profile="matMenu">
+		<mat-menu #menu="matMenu">
 			<button mat-menu-item (click)="openProfile()">Profile</button>
+			<a routerLink="marathon"><button mat-menu-item>Marathon</button></a>
 			<button mat-menu-item (click)="logout()">Sign Out</button>
 		</mat-menu>
 

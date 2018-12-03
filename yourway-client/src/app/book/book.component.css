@@ -1,5 +1,6 @@
 .book-container {
 	margin: 0 10% 0 10%;
+	min-width: 735px;
 }
 
 .inline-block {
@@ -21,7 +22,17 @@
 }
 
 .add-note {
-	margin-top: 25%;
+	position: absolute;
+	z-index: 1;
+	top: 20px;
+	left: 8px;
+}
+
+.add-note mat-icon {
+	line-height: 40px;
+	width: 40px;
+	height: 40px;
+	font-size: 40px;
 }
 
 .note {
