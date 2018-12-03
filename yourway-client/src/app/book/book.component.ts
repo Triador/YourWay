@@ -49,7 +49,9 @@ export class BookComponent implements OnInit {
 			const dialogRef = this.dialog.open(AddNoteDialogComponent);
 
 			dialogRef.afterClosed().subscribe(noteText => {
-				this.saveNote(noteText)
+				if (noteText) {
+					this.saveNote(noteText)
+				}
 			})
 	}
 
