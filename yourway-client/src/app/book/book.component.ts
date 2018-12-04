@@ -50,6 +50,7 @@ export class BookComponent implements OnInit {
 
 			dialogRef.afterClosed().subscribe(noteText => {
 				if (noteText) {
+					console.log(noteText);
 					this.saveNote(noteText)
 				}
 			})

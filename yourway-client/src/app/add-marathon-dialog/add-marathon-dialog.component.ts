@@ -1,15 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 
+import { Marathon } from '../models/marathon.model';
+
 @Component({
-  selector: 'app-add-marathon-dialog',
-  templateUrl: './add-marathon-dialog.component.html',
-  styleUrls: ['./add-marathon-dialog.component.css']
+	selector: 'app-add-marathon-dialog',
+	templateUrl: './add-marathon-dialog.component.html',
+	styleUrls: ['./add-marathon-dialog.component.css']
 })
 export class AddMarathonDialogComponent implements OnInit {
 
-  constructor() { }
+	marathon: Marathon = new Marathon();
 
-  ngOnInit() {
-  }
+	constructor() { }
+
+	ngOnInit() {
+	}
 
 }

@@ -1,8 +1,10 @@
 <h2 mat-dialog-title>Note</h2>
 
-<textarea matInput rows="20" cols="80" [(ngModel)]="data"></textarea>
+<mat-form-field appearance="outline" class="note">
+	<textarea matInput rows="12" [(ngModel)]="data"></textarea>
+</mat-form-field>
 
 <mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Add</button>
+	<button mat-button mat-dialog-close>Cancel</button>
+	<button mat-button [mat-dialog-close]="data" cdkFocusInitial>Add</button>
 </mat-dialog-actions>

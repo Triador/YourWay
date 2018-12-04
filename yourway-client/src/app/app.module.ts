@@ -54,10 +54,10 @@ import { AddMarathonDialogComponent } from './add-marathon-dialog/add-marathon-d
     MatListModule,
     FlexLayoutModule
   ],
-  entryComponents: [ErrorDialogComponent, AddNoteDialogComponent],
+  entryComponents: [ErrorDialogComponent, AddNoteDialogComponent, AddMarathonDialogComponent],
   providers: [ErrorDialogComponent, BookService, AuthService, TokenStorage, SignUpService,
     SearchComponent, HeaderComponent, BookComponent, ProfileService, AddNoteDialogComponent,
-    NoteService,
+    AddMarathonDialogComponent, NoteService,
     {provide: HTTP_INTERCEPTORS,
     useClass: Interceptor,
     multi : true}
