@@ -24,9 +24,9 @@ public class UserController {
         return userService.save(user);
     }
 
-    @GetMapping(path = {"/{id}"})
-    public User getUser(@PathVariable("id") int id) {
-        return userService.findById(id);
+    @GetMapping(path = {"/{userId}"})
+    public User getUser(@PathVariable("id") int userId) {
+        return userService.findById(userId);
     }
 
 }

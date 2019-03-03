@@ -1,0 +1,16 @@
+<div class="marathon-container">
+	<mat-card *ngFor="let marathon of marathons" (click)="openMarathon(marathon.marathonId)">
+		<mat-card-content>
+			<div>start date: {{marathon.startDate}}</div>
+			<div>end date: {{marathon.endDate}}</div>
+			<br>
+			<img src="../../assets/book_marathon.jpg" width="240px" height="200px">
+			<br><br>
+			<div>{{marathon.description}}</div>
+		</mat-card-content>
+	</mat-card>
+
+	<button mat-icon-button class="create-marathon-button" (click)="addMarathon()" matTooltip="create marathon" matTooltipPosition="left">
+		<mat-icon color="primary">add_circle</mat-icon>
+	</button>
+</div>

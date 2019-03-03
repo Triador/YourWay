@@ -3,6 +3,7 @@ package com.triador.yourwayserver.dao.model;
 import java.util.Objects;
 
 public class BookTitle {
+
     private int id;
     private String value;
 

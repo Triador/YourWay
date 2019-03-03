@@ -31,7 +31,7 @@ export class BookComponent implements OnInit {
 	ngOnInit() {
 		this.route.paramMap.pipe(
 			switchMap((params: ParamMap) => 
-				this.bookService.getBook(Number(params.get('id'))))
+				this.bookService.getBook((params.get('id'))))
 			).subscribe(data => {
 				console.log(data);
 				data.imageLink = "../../assets/book_images/big_" + data.imageLink;
@@ -50,7 +50,6 @@ export class BookComponent implements OnInit {
 
 			dialogRef.afterClosed().subscribe(noteText => {
 				if (noteText) {
-					console.log(noteText);
 					this.saveNote(noteText)
 				}
 			})
@@ -63,6 +62,7 @@ export class BookComponent implements OnInit {
 		note.text = noteText;
 		this.noteService.saveNote(note)
 			.subscribe(data => {
+				console.log(data);
 				this.book.notes.push(data);
 			});
 	}

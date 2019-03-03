@@ -7,6 +7,7 @@ import { LoginComponent } from '../login/login.component';
 import { SignupComponent} from '../signup/signup.component';
 import { SearchComponent} from '../search/search.component';
 import { ProfileComponent } from '../profile/profile.component';
+import { AllMarathonComponent } from '../marathon/all-marathon.component';
 import { MarathonComponent } from '../marathon/marathon.component';
 
 const routes: Routes = [
@@ -16,8 +17,9 @@ const routes: Routes = [
 	{ path: 'signup', component: SignupComponent },
 	{ path: '', redirectTo: '/login', pathMatch: 'full' },
 	{ path: 'search', component: SearchComponent },
-	{ path: 'profile/:id', component: ProfileComponent },
-	{ path: 'marathon', component: MarathonComponent }
+	{ path: 'profiles/:id', component: ProfileComponent },
+	{ path: 'marathons', component: AllMarathonComponent },
+	{ path: 'marathons/:id', component: MarathonComponent}
 ];
 
 @NgModule({

@@ -2,17 +2,17 @@ package com.triador.yourwayserver.dao.model;
 
 public class Note {
 
-    private int id;
+    private int noteId;
     private int bookId;
     private int userId;
     private String text;
 
-    public int getId() {
-        return id;
+    public int getNoteId() {
+        return noteId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setNoteId(int noteId) {
+        this.noteId = noteId;
     }
 
     public int getBookId() {

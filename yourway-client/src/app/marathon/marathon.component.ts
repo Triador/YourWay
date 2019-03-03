@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { switchMap } from 'rxjs/operators';
 
-import { AddMarathonDialogComponent } from '../add-marathon-dialog/add-marathon-dialog.component';
+import { MarathonService } from './marathon.service';
+import { Marathon } from '../models/marathon.model';
 
 @Component({
 	selector: 'app-marathon',
@@ -10,16 +12,18 @@ import { AddMarathonDialogComponent } from '../add-marathon-dialog/add-marathon-
 })
 export class MarathonComponent implements OnInit {
 
-	constructor(private dialog: MatDialog) { }
+	marathon: Marathon;
+
+	constructor(private route: ActivatedRoute,
+		private router: Router,
+		private marathonService: MarathonService) { }
 
 	ngOnInit() {
-	}
-
-	addMarathon() {
-		const dialogRef = this.dialog.open(AddMarathonDialogComponent);
-
-		dialogRef.afterClosed().subscribe(data => {
-			console.log(data);
-		})
+		this.route.paramMap.pipe(
+			switchMap((params: ParamMap) =>
+				this.marathonService.getMarathon(params.get('id')))
+			).subscribe(data => {
+				this.marathon = data;
+			})
 	}
 }

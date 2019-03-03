@@ -17,7 +17,7 @@ export class BookService {
 	constructor(private http: HttpClient,
 		private profileService: ProfileService) {}
 
-	public getBook(bookId: number) {
+	public getBook(bookId: string) {
 		const userId: number = this.profileService.getUserId();
 		return this.http.get<Book>(bookUrl + "/" + bookId, { 
 			params: new HttpParams().set('userId', userId.toString())

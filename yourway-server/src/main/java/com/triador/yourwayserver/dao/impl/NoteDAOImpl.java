@@ -35,7 +35,7 @@ public class NoteDAOImpl implements NoteDAO {
         KeyHolder keyHolder = new GeneratedKeyHolder();
         namedParameterJdbcTemplate.update(sql, sqlParameterSource, keyHolder, new String[]{"note_id"});
 
-        note.setId(keyHolder.getKey().intValue());
+        note.setNoteId(keyHolder.getKey().intValue());
 
         return note;
     }

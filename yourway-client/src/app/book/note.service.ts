@@ -15,6 +15,6 @@ export class NoteService {
 	}
 
 	deleteNote(note: Note) {
-		return this.http.delete(bookUrl + note.bookId + '/notes/' + note.id);
+		return this.http.delete(bookUrl + note.bookId + '/notes/' + note.noteId);
 	}
 }

@@ -34,3 +34,11 @@ CREATE TABLE notes
   user_id int REFERENCES users (user_id) ON UPDATE CASCADE ON DELETE CASCADE,
   text VARCHAR(255)
 );
+
+CREATE TABLE marathons
+(
+  marathon_id SERIAL PRIMARY KEY,
+  start_date date,
+  end_date date,
+  description VARCHAR(4096)
+);

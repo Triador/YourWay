@@ -35,6 +35,6 @@ export class HeaderComponent {
 
   	openProfile(): void {
   		const userId = this.profileService.getUserId();
-  		this.router.navigate(['profile/' + userId]);
+  		this.router.navigate(['profiles/' + userId]);
   	}
 }

@@ -9,6 +9,7 @@ import { BookComponent } from './book/book.component';
 import { AppRoutingModule } from './core/app.routing.module';
 import { BookService } from './book/book.service';
 import { NoteService } from './book/note.service';
+import { MarathonService } from './marathon/marathon.service';
 import { SignUpService } from './signup/signup.service';
 import { AllBookComponent } from './book/all-book.component';
 import { LoginComponent } from './login/login.component';
@@ -25,8 +26,9 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AddNoteDialogComponent } from './add-note-dialog/add-note-dialog.component';
-import { MarathonComponent } from './marathon/marathon.component';
+import { AllMarathonComponent } from './marathon/all-marathon.component';
 import { AddMarathonDialogComponent } from './add-marathon-dialog/add-marathon-dialog.component';
+import { MarathonComponent } from './marathon/marathon.component';
 
 @NgModule({
   declarations: [
@@ -41,8 +43,9 @@ import { AddMarathonDialogComponent } from './add-marathon-dialog/add-marathon-d
     FooterComponent,
     ProfileComponent,
     AddNoteDialogComponent,
+    AllMarathonComponent,
+    AddMarathonDialogComponent,
     MarathonComponent,
-    AddMarathonDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -57,7 +60,7 @@ import { AddMarathonDialogComponent } from './add-marathon-dialog/add-marathon-d
   entryComponents: [ErrorDialogComponent, AddNoteDialogComponent, AddMarathonDialogComponent],
   providers: [ErrorDialogComponent, BookService, AuthService, TokenStorage, SignUpService,
     SearchComponent, HeaderComponent, BookComponent, ProfileService, AddNoteDialogComponent,
-    AddMarathonDialogComponent, NoteService,
+    AddMarathonDialogComponent, NoteService, MarathonService,
     {provide: HTTP_INTERCEPTORS,
     useClass: Interceptor,
     multi : true}

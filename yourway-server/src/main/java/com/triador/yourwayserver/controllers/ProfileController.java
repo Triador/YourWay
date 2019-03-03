@@ -25,9 +25,9 @@ public class ProfileController {
         profileService.save(userBook);
     }
 
-    @GetMapping(path = {"/{bookId}"})
-    public Profile getProfile(@PathVariable String bookId) {
-        return profileService.findById(Integer.parseInt(bookId));
+    @GetMapping(path = {"/{userId}"})
+    public Profile getProfile(@PathVariable String userId) {
+        return profileService.findById(Integer.parseInt(userId));
     }
 
     @DeleteMapping()
