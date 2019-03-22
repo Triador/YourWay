@@ -34,7 +34,7 @@ public class BookService {
     }
 
     public List<ShortBookDescriptionResponse> getShortBookDescriptions() {
-        return bookDAO.findAll();
+        return bookRepository.retrieveShortBookDescriptions();
     }
 
     public BookResponse getBook(BookRequest bookRequest) {
@@ -42,7 +42,7 @@ public class BookService {
                 .orElseThrow(() -> new CommonException("book not found"));
 
         BookResponse bookResponse = new BookResponse();
-        BeanUtils.copyProperties(book,bookResponse);
+        BeanUtils.copyProperties(book, bookResponse);
 
         UserBookKey userBookKey = new UserBookKey(bookRequest.getUserId(), bookRequest.getBookId());
         Optional<UserBook> userBook = userBookRepository.findById(userBookKey);
@@ -57,10 +57,8 @@ public class BookService {
         return bookResponse;
     }
 
-    @Override
-    public List<BookTitleResponse> findMatchByTitlePiece(String titlePiece) {
-        System.out.println(bookDAO.findByTitleContaining(titlePiece));
-        return bookDAO.findByTitleContaining(titlePiece);
+    public List<BookTitleResponse> getBookTitles(String titlePart) {
+        return bookRepository.retrieveBookTitles(titlePart);
     }
 }
 

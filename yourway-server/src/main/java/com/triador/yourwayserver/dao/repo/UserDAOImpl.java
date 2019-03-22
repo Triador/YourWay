@@ -53,7 +53,7 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public int delete(int userId) {
-        String sql = "DELETE FROM "user" WHERE id = ?";
+        String sql = "DELETE FROM "user" WHERE bookId = ?";
 
         return jdbcTemplate.update(sql, userId);
     }
@@ -67,7 +67,7 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public User findById(int userId) {
-        String sql = "SELECT * FROM "user" WHERE id = ?";
+        String sql = "SELECT * FROM "user" WHERE bookId = ?";
 
         return jdbcTemplate.queryForObject(sql, new Object[]{userId}, BeanPropertyRowMapper.newInstance(User.class));
     }

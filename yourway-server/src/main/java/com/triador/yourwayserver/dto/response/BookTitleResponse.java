@@ -11,6 +11,6 @@ import lombok.ToString;
 @ToString
 public class BookTitleResponse {
 
-    private int id;
+    private int bookId;
     private String value;
 }

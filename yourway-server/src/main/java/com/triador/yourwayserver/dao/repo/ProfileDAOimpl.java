@@ -49,10 +49,10 @@ public class ProfileDAOimpl implements ProfileDAO {
 
     @Override
     public ProfileResponse buildProfile(int userId) {
-        String usersSql = "SELECT name, image_link FROM "user" WHERE id = ?";
+        String usersSql = "SELECT name, image_link FROM "user" WHERE bookId = ?";
         String booksSql = "SELECT * FROM book " +
                 "INNER JOIN user_book " +
-                "ON user_book.book_id = book.id " +
+                "ON user_book.book_id = book.bookId " +
                 "WHERE user_book.user_id = ?";
 
         ProfileResponse profile = jdbcTemplate.queryForObject(usersSql, new Object[]{userId}, (resultSet, i) -> {
