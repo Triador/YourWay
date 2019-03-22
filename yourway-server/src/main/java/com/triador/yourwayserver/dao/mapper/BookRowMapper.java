@@ -1,7 +1,6 @@
 package com.triador.yourwayserver.dao.mapper;
 
 import com.triador.yourwayserver.dao.model.Book;
-import com.triador.yourwayserver.dao.model.BookStatus;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
@@ -11,7 +10,7 @@ public class BookRowMapper implements RowMapper {
     @Override
     public Book mapRow(ResultSet resultSet, int i) throws SQLException {
         Book book = new Book();
-        book.setBookId(resultSet.getInt("book_id"));
+        book.setId(resultSet.getInt("book_id"));
         book.setTitle(resultSet.getString("title"));
         book.setAuthor(resultSet.getString("author"));
         book.setIsbn(resultSet.getString("isbn"));

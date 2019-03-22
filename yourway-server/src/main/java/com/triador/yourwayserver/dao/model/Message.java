@@ -4,23 +4,24 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Getter
 @Setter
 @Entity
 @Table
-public class User {
+public class Message {
 
     @Id
     @GeneratedValue
-    private int id;
+    private Integer id;
 
     @Column
-    private String name;
+    private LocalDate dateSent;
     @Column
-    private String password;
-    @Column
-    private String role;
-    @Column
-    private String imageLink;
+    private String text;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 }

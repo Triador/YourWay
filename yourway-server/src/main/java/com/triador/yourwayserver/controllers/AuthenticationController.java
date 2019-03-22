@@ -1,10 +1,10 @@
 package com.triador.yourwayserver.controllers;
 
 import com.triador.yourwayserver.config.JwtTokenUtil;
-import com.triador.yourwayserver.dao.model.AuthToken;
-import com.triador.yourwayserver.dao.model.LoginUser;
+import com.triador.yourwayserver.dto.response.AuthTokenResponse;
+import com.triador.yourwayserver.dto.request.LoginUserRequest;
 import com.triador.yourwayserver.dao.model.User;
-import com.triador.yourwayserver.services.UserService;
+import com.triador.yourwayserver.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -33,7 +33,7 @@ public class AuthenticationController {
     }
 
     @RequestMapping(value = "/generate-token", method = RequestMethod.POST)
-    public ResponseEntity<?> register(@RequestBody LoginUser loginUser) throws AuthenticationException {
+    public ResponseEntity<?> register(@RequestBody LoginUserRequest loginUser) throws AuthenticationException {
 
         final Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
@@ -44,7 +44,7 @@ public class AuthenticationController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
         final User user = userService.findByName(loginUser.getUsername());
         final String token = jwtTokenUtil.generateToken(user);
-        return ResponseEntity.ok(new AuthToken(token));
+        return ResponseEntity.ok(new AuthTokenResponse(token));
     }
 
 }

@@ -1,11 +1,9 @@
 package com.triador.yourwayserver.controllers;
 
 import com.triador.yourwayserver.dao.model.User;
-import com.triador.yourwayserver.services.UserService;
+import com.triador.yourwayserver.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
 @RestController

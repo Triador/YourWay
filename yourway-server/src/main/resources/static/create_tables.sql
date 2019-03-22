@@ -21,8 +21,8 @@ CREATE TABLE users
 
 CREATE TABLE users_books
 (
-  user_id int REFERENCES users (user_id) ON UPDATE CASCADE ON DELETE CASCADE,
-  book_id int REFERENCES books (book_id) ON UPDATE CASCADE ON DELETE CASCADE,
+  user_id int REFERENCES "user" (id) ON UPDATE CASCADE ON DELETE CASCADE,
+  book_id int REFERENCES book (id) ON UPDATE CASCADE ON DELETE CASCADE,
   status VARCHAR(255),
   CONSTRAINT users_books_pkey PRIMARY KEY (user_id, book_id)
 );
@@ -30,8 +30,8 @@ CREATE TABLE users_books
 CREATE TABLE notes
 (
   note_id SERIAL PRIMARY KEY,
-  book_id int REFERENCES books (book_id) ON UPDATE CASCADE ON DELETE CASCADE,
-  user_id int REFERENCES users (user_id) ON UPDATE CASCADE ON DELETE CASCADE,
+  book_id int REFERENCES book (id) ON UPDATE CASCADE ON DELETE CASCADE,
+  user_id int REFERENCES "user" (id) ON UPDATE CASCADE ON DELETE CASCADE,
   text VARCHAR(255)
 );
 

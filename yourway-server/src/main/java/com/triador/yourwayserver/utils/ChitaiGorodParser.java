@@ -1,6 +1,6 @@
 package com.triador.yourwayserver.utils;
 
-import com.triador.yourwayserver.dao.impl.BookDAO;
+import com.triador.yourwayserver.dao.repo.BookRepository;
 import com.triador.yourwayserver.dao.model.Book;
 import org.openqa.selenium.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,11 +23,11 @@ import java.util.Map;
 public class ChitaiGorodParser {
 
     private WebDriver driver = SeleniumUtils.getDriver();
-    private BookDAO bookDAO;
+    private BookRepository bookDAO;
     private Converter converter;
 
     @Autowired
-    public ChitaiGorodParser(BookDAO bookDAO, Converter converter) {
+    public ChitaiGorodParser(BookRepository bookDAO, Converter converter) {
         this.bookDAO = bookDAO;
         this.converter = converter;
     }

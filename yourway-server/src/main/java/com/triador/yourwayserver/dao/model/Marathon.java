@@ -1,43 +1,24 @@
 package com.triador.yourwayserver.dao.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.*;
 import java.time.LocalDate;
 
+@Getter
+@Setter
+@Entity
+@Table
 public class Marathon {
 
-    private int marathonId;
+    @Id
+    @GeneratedValue
+    private int id;
+    @Column
     private LocalDate startDate;
+    @Column
     private LocalDate endDate;
+    @Column
     private String description;
-
-    public int getMarathonId() {
-        return marathonId;
-    }
-
-    public void setMarathonId(int marathonId) {
-        this.marathonId = marathonId;
-    }
-
-    public LocalDate getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(LocalDate startDate) {
-        this.startDate = startDate;
-    }
-
-    public LocalDate getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(LocalDate endDate) {
-        this.endDate = endDate;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
 }

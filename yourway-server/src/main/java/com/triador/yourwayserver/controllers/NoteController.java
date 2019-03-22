@@ -1,7 +1,7 @@
 package com.triador.yourwayserver.controllers;
 
 import com.triador.yourwayserver.dao.model.Note;
-import com.triador.yourwayserver.services.NoteService;
+import com.triador.yourwayserver.service.NoteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

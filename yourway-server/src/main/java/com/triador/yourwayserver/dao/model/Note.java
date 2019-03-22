@@ -1,41 +1,24 @@
 package com.triador.yourwayserver.dao.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.*;
+
+@Getter
+@Setter
+@Entity
+@Table
 public class Note {
 
-    private int noteId;
+    @Id
+    @GeneratedValue
+    private int id;
+
+    @Column
     private int bookId;
+    @Column
     private int userId;
+    @Column
     private String text;
-
-    public int getNoteId() {
-        return noteId;
-    }
-
-    public void setNoteId(int noteId) {
-        this.noteId = noteId;
-    }
-
-    public int getBookId() {
-        return bookId;
-    }
-
-    public void setBookId(int bookId) {
-        this.bookId = bookId;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
 }

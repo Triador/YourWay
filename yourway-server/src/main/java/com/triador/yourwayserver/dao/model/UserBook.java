@@ -1,38 +1,28 @@
 package com.triador.yourwayserver.dao.model;
 
+import com.triador.yourwayserver.enumeration.BookStatus;
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.*;
+import java.util.List;
+
+@Getter
+@Setter
+@Entity
+@Table
 public class UserBook {
-    private int userId;
-    private int bookId;
-    private BookStatus bookStatus;
 
-    public UserBook(){}
+    @EmbeddedId
+    private UserBookKey id;
 
-    public UserBook(int userId, int bookId) {
-        this.userId = userId;
-        this.bookId = bookId;
-    }
+    @Column
+    private BookStatus status;
 
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
-    public int getBookId() {
-        return bookId;
-    }
-
-    public void setBookId(int bookId) {
-        this.bookId = bookId;
-    }
-
-    public BookStatus getBookStatus() {
-        return bookStatus;
-    }
-
-    public void setBookStatus(BookStatus bookStatus) {
-        this.bookStatus = bookStatus;
-    }
+    @ManyToOne
+    @JoinColumns({
+          @JoinColumn(name = "user_id", referencedColumnName = "user_id"),
+          @JoinColumn(name = "book_id", referencedColumnName = "book_id")
+    })
+    private List<Note> notes;
 }

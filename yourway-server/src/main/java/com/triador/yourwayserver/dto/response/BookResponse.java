@@ -1,32 +1,25 @@
 package com.triador.yourwayserver.dao.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import com.triador.yourwayserver.enumeration.BookStatus;
+import lombok.*;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.List;
 
 @Getter
 @Setter
-@Entity
-@Table(name = "book")
-public class Book {
+public class BookResponse {
 
-    @Id
-    @GeneratedValue
     private int id;
-    @Column
     private String title;
-    @Column
     private String author;
-    @Column
     private int pageAmount;
-    @Column
     private int publicationYear;
-    @Column
     private String isbn;
-    @Column
     private String description;
-    @Column
     private String imageLink;
+    private boolean disable;
+    private BookStatus status;
+    private List<Note> notes;
 }
