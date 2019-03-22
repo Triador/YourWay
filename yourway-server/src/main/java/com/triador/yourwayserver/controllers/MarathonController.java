@@ -1,7 +1,6 @@
 package com.triador.yourwayserver.controllers;
 
 import com.triador.yourwayserver.dao.model.Marathon;
-import com.triador.yourwayserver.service.MarathonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

@@ -1,14 +1,31 @@
 package com.triador.yourwayserver.service;
 
+import com.triador.yourwayserver.dao.repo.MarathonRepository;
 import com.triador.yourwayserver.dao.model.Marathon;
+import com.triador.yourwayserver.enumeration.ErrorMessage;
+import com.triador.yourwayserver.exception.CommonException;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-public interface MarathonService {
+@Service
+public class MarathonService {
 
-    Marathon saveMarathon(Marathon marathon);
+    private MarathonRepository marathonRepository;
 
-    Marathon getMarathon(int marathonId);
+    public MarathonService(MarathonRepository marathonRepository) {
+        this.marathonRepository = marathonRepository;
+    }
 
-    List<Marathon> getMarathons();
+    public Marathon saveMarathon(Marathon marathon) {
+        return marathonRepository.save(marathon);
+    }
+
+    public Marathon getMarathon(int id) {
+        return marathonRepository.findById(id).orElseThrow(() -> new CommonException(ErrorMessage.ERROR_NOT_FOUND.getMessage()));
+    }
+
+    public List<Marathon> getMarathons() {
+        return marathonRepository.findAll();
+    }
 }
