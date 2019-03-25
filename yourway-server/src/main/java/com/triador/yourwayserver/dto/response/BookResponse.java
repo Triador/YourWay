@@ -11,15 +11,15 @@ import java.util.List;
 @Setter
 public class BookResponse {
 
-    private int id;
+    private Integer id;
     private String title;
     private String author;
-    private int pageAmount;
-    private int publicationYear;
+    private Integer pageAmount;
+    private Integer publicationYear;
     private String isbn;
     private String description;
     private String imageLink;
-    private boolean disable;
+    private Boolean disable;
     private BookStatus status;
     private List<Note> notes;
 }

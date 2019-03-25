@@ -8,17 +8,17 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Entity
-@Table
+@Table(name = "note")
 public class Note {
 
     @Id
     @GeneratedValue
-    private int id;
+    private Integer id;
 
-    @Column
-    private int bookId;
-    @Column
-    private int userId;
+    @Column(name = "book_id")
+    private Integer bookId;
+    @Column(name = "user_id")
+    private Integer userId;
     @Column
     private String text;
 }

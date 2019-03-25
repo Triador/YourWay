@@ -9,14 +9,14 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @Entity
-@Table
+@Table(name = "message")
 public class Message {
 
     @Id
     @GeneratedValue
     private Integer id;
 
-    @Column
+    @Column(name = "date_sent")
     private LocalDate dateSent;
     @Column
     private String text;

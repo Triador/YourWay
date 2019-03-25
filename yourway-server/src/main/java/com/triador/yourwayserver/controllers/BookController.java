@@ -1,9 +1,9 @@
 package com.triador.yourwayserver.controllers;
 
-import com.triador.yourwayserver.dao.model.Book;
-import com.triador.yourwayserver.dto.request.BookRequest;
+import com.triador.yourwayserver.dao.model.BookResponse;
 import com.triador.yourwayserver.dto.response.BookTitleResponse;
 import com.triador.yourwayserver.dto.response.ShortBookDescriptionResponse;
+import com.triador.yourwayserver.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,17 +22,17 @@ public class BookController {
     }
 
     @GetMapping(path = {"/{bookId}"})
-    public Book getBook(@RequestBody BookRequest bookRequest) {
-        return bookService.getBook(bookRequest);
+    public BookResponse getBook(@PathVariable Integer bookId) {
+        return bookService.getBook(bookId);
     }
 
-    @GetMapping(path = {"/search/{titlePiece}"})
-    public List<BookTitleResponse> searchTitles(@PathVariable String titlePiece) {
-        return bookService.findMatchByTitlePiece(titlePiece);
+    @GetMapping(path = {"/search/{titlePart}"})
+    public List<BookTitleResponse> searchTitles(@PathVariable String titlePart) {
+        return bookService.getBookTitles(titlePart);
     }
 
     @GetMapping
     public List<ShortBookDescriptionResponse> getBooks() {
-        return bookService.findAll();
+        return bookService.getShortBookDescriptions();
     }
 }

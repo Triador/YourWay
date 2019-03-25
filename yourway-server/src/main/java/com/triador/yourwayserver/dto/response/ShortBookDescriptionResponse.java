@@ -1,17 +1,16 @@
 package com.triador.yourwayserver.dto.response;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 @Getter
 @Setter
-@EqualsAndHashCode
 @ToString
+@EqualsAndHashCode
+@NoArgsConstructor
+@AllArgsConstructor
 public class ShortBookDescriptionResponse {
 
-    private int bookId;
+    private Integer id;
     private String title;
     private String imageLink;
 }

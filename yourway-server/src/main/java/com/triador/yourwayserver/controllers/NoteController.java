@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
 @RestController
-@RequestMapping({"books/{bookId}/notes"})
+@RequestMapping({"/notes"})
 public class NoteController {
 
     private NoteService noteService;
@@ -23,8 +23,8 @@ public class NoteController {
     }
 
     @DeleteMapping(path = "/{noteId}")
-    public void deleteNote(@PathVariable int bookId, @PathVariable int noteId) {
-        noteService.delete(noteId, bookId);
+    public void deleteNote(@PathVariable Integer id) {
+        noteService.delete(id);
     }
 
 }

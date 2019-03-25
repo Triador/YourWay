@@ -9,15 +9,15 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @Entity
-@Table
+@Table(name = "marathon")
 public class Marathon {
 
     @Id
     @GeneratedValue
-    private int id;
-    @Column
+    private Integer id;
+    @Column(name = "start_date")
     private LocalDate startDate;
-    @Column
+    @Column(name = "end_date")
     private LocalDate endDate;
     @Column
     private String description;

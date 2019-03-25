@@ -3,6 +3,9 @@ package com.triador.yourwayserver.dao.repo;
 import com.triador.yourwayserver.dao.model.User;
 import org.springframework.data.repository.CrudRepository;
 
-public interface UserDAO extends CrudRepository<User, Integer> {
+import java.util.Optional;
 
+public interface UserRepository extends CrudRepository<User, Integer> {
+
+    Optional<User> findByName(String name);
 }

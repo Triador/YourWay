@@ -8,12 +8,12 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Entity
-@Table
+@Table(name = "\"User\"")
 public class User {
 
     @Id
     @GeneratedValue
-    private int id;
+    private Integer id;
 
     @Column
     private String name;
@@ -21,6 +21,6 @@ public class User {
     private String password;
     @Column
     private String role;
-    @Column
+    @Column(name = "image_link")
     private String imageLink;
 }

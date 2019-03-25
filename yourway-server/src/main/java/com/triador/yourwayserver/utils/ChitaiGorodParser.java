@@ -1,7 +1,7 @@
 package com.triador.yourwayserver.utils;
 
-import com.triador.yourwayserver.dao.repo.BookRepository;
 import com.triador.yourwayserver.dao.model.Book;
+import com.triador.yourwayserver.dao.repo.BookRepository;
 import org.openqa.selenium.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -59,10 +59,10 @@ public class ChitaiGorodParser {
         for (WebElement webElement : webElements) {
             String bookUrl = webElement.findElement(By.className("product-card__img")).getAttribute("href");
             System.out.println(++id + " -----------------------------------------------------------------------");
-            Book book = getBook(bookUrl);
+            Book bookResponse = getBook(bookUrl);
             sleep(1000);
-            bookDAO.save(book);
-            System.out.println("book " + book.getTitle() + " saved");
+            bookDAO.save(bookResponse);
+            System.out.println("book " + bookResponse.getTitle() + " saved");
         }
     }
 
@@ -75,21 +75,21 @@ public class ChitaiGorodParser {
         for (int i = 0; i < bookParameters.size(); i++) {
             parametersMap.put(bookParameters.get(i).getText(), bookParametersValues.get(i).getText());
         }
-        Book book = mapBook(parametersMap);
+        Book bookResponse = mapBook(parametersMap);
 
         String imageUrl = driver.findElement(By.cssSelector("img[itemprop='image']"))
                 .getAttribute("src");
         if (!imageUrl.isEmpty()) {
             String extension = getImageExtension(imageUrl);
-            book.setImageLink(converter.convert(book.getTitle()) + extension);
+            bookResponse.setImageLink(converter.convert(bookResponse.getTitle()) + extension);
 
-            downloadBookImage(imageUrl, "big_" + converter.convert(book.getTitle()), extension);
+            downloadBookImage(imageUrl, "big_" + converter.convert(bookResponse.getTitle()), extension);
         }
 
         driver.close();
         driver.switchTo().window(tabs.get(0));
 
-        return book;
+        return bookResponse;
     }
 
     private Book mapBook(Map<String, String> parametersMap) {
@@ -102,15 +102,15 @@ public class ChitaiGorodParser {
 
         String description = driver.findElement(By.cssSelector("div[itemprop='description']")).getText();
 
-        Book book = new Book();
-        book.setTitle(title);
-        book.setAuthor(author);
-        book.setPageAmount(pageAmount);
-        book.setPublicationYear(publicationYear);
-        book.setIsbn(isbns);
-        book.setDescription(description);
+        Book bookResponse = new Book();
+        bookResponse.setTitle(title);
+        bookResponse.setAuthor(author);
+        bookResponse.setPageAmount(pageAmount);
+        bookResponse.setPublicationYear(publicationYear);
+        bookResponse.setIsbn(isbns);
+        bookResponse.setDescription(description);
 
-        return book;
+        return bookResponse;
     }
 
     private void scrollDown() {

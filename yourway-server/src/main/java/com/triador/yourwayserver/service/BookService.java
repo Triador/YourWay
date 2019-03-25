@@ -1,12 +1,9 @@
 package com.triador.yourwayserver.service;
 
+import com.triador.yourwayserver.dao.model.*;
 import com.triador.yourwayserver.dao.model.BookResponse;
-import com.triador.yourwayserver.dao.model.UserBook;
-import com.triador.yourwayserver.dao.model.UserBookKey;
 import com.triador.yourwayserver.dao.repo.BookRepository;
-import com.triador.yourwayserver.dao.model.Book;
 import com.triador.yourwayserver.dao.repo.UserBookRepository;
-import com.triador.yourwayserver.dto.request.BookRequest;
 import com.triador.yourwayserver.dto.response.BookTitleResponse;
 import com.triador.yourwayserver.dto.response.ShortBookDescriptionResponse;
 import com.triador.yourwayserver.enumeration.BookStatus;
@@ -23,6 +20,9 @@ public class BookService {
     private BookRepository bookRepository;
     private UserBookRepository userBookRepository;
 
+    //todo delete this variable and retrieve token from jwt
+    private static final Integer ID_FROM_JWT_TOKEN = 1;
+
     public BookService(BookRepository bookRepository,
                        UserBookRepository userBookRepository) {
         this.bookRepository = bookRepository;
@@ -37,20 +37,19 @@ public class BookService {
         return bookRepository.retrieveShortBookDescriptions();
     }
 
-    public BookResponse getBook(BookRequest bookRequest) {
-        Book book = bookRepository.findById(bookRequest.getBookId())
-                .orElseThrow(() -> new CommonException("book not found"));
-
+    public BookResponse getBook(Integer bookId) {
+        UserBookKey userBookKey = new UserBookKey(ID_FROM_JWT_TOKEN, bookId);
+        Optional<UserBook> fullBookInfo = userBookRepository.findById(userBookKey);
         BookResponse bookResponse = new BookResponse();
-        BeanUtils.copyProperties(book, bookResponse);
-
-        UserBookKey userBookKey = new UserBookKey(bookRequest.getUserId(), bookRequest.getBookId());
-        Optional<UserBook> userBook = userBookRepository.findById(userBookKey);
-        if (userBook.isPresent()) {
+        if (fullBookInfo.isPresent()) {
+            BeanUtils.copyProperties(bookResponse, fullBookInfo.get().getBook());
             bookResponse.setDisable(true);
-            bookResponse.setStatus(userBook.get().getStatus());
-            bookResponse.setNotes(userBook.get().getNotes());
+            bookResponse.setStatus(fullBookInfo.get().getStatus());
+            bookResponse.setNotes(fullBookInfo.get().getNotes());
         } else {
+            Book book = bookRepository.findById(bookId)
+                    .orElseThrow(() -> new CommonException("book not found"));
+            BeanUtils.copyProperties(bookResponse, book);
             bookResponse.setStatus(BookStatus.UNLOCK);
         }
 
