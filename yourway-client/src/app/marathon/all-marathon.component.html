@@ -1,5 +1,5 @@
 <div class="marathon-container">
-	<mat-card *ngFor="let marathon of marathons" (click)="openMarathon(marathon.marathonId)">
+	<mat-card *ngFor="let marathon of marathons" (click)="openMarathon(marathon.id)">
 		<mat-card-content>
 			<div>start date: {{marathon.startDate}}</div>
 			<div>end date: {{marathon.endDate}}</div>

@@ -20,10 +20,10 @@ export class ProfileService {
 		return Number(window.localStorage.getItem(USER_ID));
 	}
 
-	addBookToProfile(bookId: number, bookStatus: string) {
+	addBookToProfile(id: number, bookStatus: string) {
 		const userBook: UserBook = new UserBook();
 		userBook.userId = this.getUserId();
-		userBook.bookId = bookId;
+		userBook.bookId = id;
 		userBook.bookStatus = bookStatus;
 		this.http.post(profileUrl, userBook).subscribe(response => console.log(response));
 	}
@@ -32,12 +32,12 @@ export class ProfileService {
 		return this.http.get<Profile>(profileUrl + '/' + userId);
 	}
 
-	deleteBook(bookId: number) {
+	deleteBook(id: number) {
 		const userId: number = this.getUserId();
 		return this.http.request('delete', profileUrl, { 
 			params: new HttpParams()
 				.set('userId', userId.toString())
-				.set('bookId', bookId.toString())
+				.set('bookId', id.toString())
 		});
 	}
 }

@@ -1,6 +1,6 @@
 <div class="books-container">
 	<!-- <mat-spinner mode="indeterminate"></mat-spinner> -->
-	<mat-card *ngFor="let book of books" (click)="openBook(book.bookId)">
+	<mat-card *ngFor="let book of books" (click)="openBook(book.id)">
 		<mat-card-content>
 			<div *ngIf="book.title" class="title">{{book.title}}</div>
 			<img src="{{book.imageLink}}" width="125px" height="200px">

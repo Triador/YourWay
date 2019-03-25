@@ -18,7 +18,7 @@ export class MarathonService {
 		return this.http.get<Marathon[]>(marathonUrl);
 	}
 
-	getMarathon(marathonId: string) {
-		return this.http.get<Marathon>(marathonUrl + '/' + marathonId);
+	getMarathon(id: string) {
+		return this.http.get<Marathon>(marathonUrl + '/' + id);
 	}
 }

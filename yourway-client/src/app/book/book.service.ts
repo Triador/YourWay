@@ -17,9 +17,9 @@ export class BookService {
 	constructor(private http: HttpClient,
 		private profileService: ProfileService) {}
 
-	public getBook(bookId: string) {
+	public getBook(id: string) {
 		const userId: number = this.profileService.getUserId();
-		return this.http.get<Book>(bookUrl + "/" + bookId, { 
+		return this.http.get<Book>(bookUrl + "/" + id, { 
 			params: new HttpParams().set('userId', userId.toString())
 		});
 	}
@@ -34,7 +34,7 @@ export class BookService {
 	}
 
 	public deleteBook(book) {
-		return this.http.delete(bookUrl + "/" + book.bookId);
+		return this.http.delete(bookUrl + "/" + book.id);
 	}
 
 	public createBook(book) {

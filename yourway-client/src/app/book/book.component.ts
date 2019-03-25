@@ -42,7 +42,7 @@ export class BookComponent implements OnInit {
 
 	addBookToProfile(bookStatus: string) {
 			this.isDisabled = true;
-			this.profileService.addBookToProfile(this.book.bookId, bookStatus);
+			this.profileService.addBookToProfile(this.book.id, bookStatus);
 	}
 
 	openNoteDialog() {
@@ -57,7 +57,7 @@ export class BookComponent implements OnInit {
 
 	saveNote(noteText: string) {
 		const note: Note = new Note();
-		note.bookId = this.book.bookId;
+		note.bookId = this.book.id;
 		note.userId = this.profileService.getUserId();
 		note.text = noteText;
 		this.noteService.saveNote(note)

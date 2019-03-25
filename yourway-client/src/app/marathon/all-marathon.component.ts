@@ -37,7 +37,7 @@ export class AllMarathonComponent implements OnInit {
 		})
 	}
 
-	openMarathon(marathonId: number) {
-		this.router.navigate(['marathons/' + marathonId]);
+	openMarathon(id: number) {
+		this.router.navigate(['marathons/' + id]);
 	}
 }
